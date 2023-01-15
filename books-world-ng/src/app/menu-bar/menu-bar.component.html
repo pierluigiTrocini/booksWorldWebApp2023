@@ -1,9 +1,8 @@
-
 <nav class="navbar bg-body-tertiary" data-bs-theme="dark">
 <div class="container-fluid">
-    <form class="d-inline-flex" action="post">
-      <input type="text" class="form-control"  placeholder="Search" aria-label="Search">
-      <button class="btn btn-outline-success" type="submit">Search</button>
+    <form class="d-inline-flex">
+      <input type="text" class="form-control mx-1"  placeholder="Search" aria-label="Search">
+      <button class="btn btn-outline-success mx-1" type="submit">Search</button>
     </form>
   </div>
 </nav>
@@ -27,15 +26,11 @@
   </div>
 </nav>
 
-<nav class="navbar bg-body-tertiary align-mid" data-bs-theme="dark">
+<nav class="navbar bg-body-tertiary align-left" data-bs-theme="dark">
   <div class="container-fluid">
-    <span class="navbar-brand align-middle mx-1">
-        <strong>Ricerca Avanzata:</strong>
-        <a href="#">
-            <span class="material-icons align-middle">
-                expand_more
-            </span>
-        </a>
-    </span>
+    <div class="navbar-brand mx-1 form-check form-check-reverse form-switch">
+      <input type="checkbox" class="btn-check" id="btn-check-outlined" autocomplete="off">
+      <label class="btn btn-outline-primary" for="btn-check-outlined">Ricerca Avanzata</label><br>
+    </div>
   </div>
 </nav>
