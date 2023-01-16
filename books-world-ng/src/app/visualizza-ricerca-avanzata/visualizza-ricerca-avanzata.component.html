@@ -1,8 +1,26 @@
-<form data-bs-theme="dark">
-  <div class="mb-3 mx-1">
-    <label for="nomeAutore">Nome Autore:</label>
+<div class="input-group row mx-1">
+
+  <p class="fs-8">
+    In questa sezione si può ricercare un libro tramite dei campi.
+    Almeno uno di essi deve essere riempito per eseguire la ricerca.
+  </p>
+
+  <div class="col-auto">
     <input type="text" class="form-control" id="nomeAutore" placeholder="Nome Autore">
-    <input type="text" class="form-control" id="editore" placeholder="Editore">
-    <input type="text" class="form-control" id="genere" placeholder="Genere">
   </div>
-</form>
+
+  <div class="col-auto">
+    <input type="text" class="form-control" id="nomeAutore" placeholder="Editore">
+  </div>
+
+  <div class="col-auto">
+    <input type="text" class="form-control" id="nomeAutore" placeholder="Genere">
+  </div>
+
+  <div class="col-auto">
+    <button type="submit" class="btn btn-success">
+      Cerca...
+    </button>
+  </div>
+
+</div>
