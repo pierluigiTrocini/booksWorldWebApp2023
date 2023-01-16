@@ -3,7 +3,7 @@
     <input type="text" class="form-control mx-1" placeholder="Search" aria-label="Search">
     <button class="btn btn-outline-success mx-1" type="submit">Search</button>
   </form>
-  
+
   <div class="d-flex flex-row">
     <button type="button" class="btn btn-outline-primary mx-2">
       <span class="material-icons">shopping_cart</span>
@@ -36,10 +36,13 @@
 <nav class="navbar bg-body-tertiary align-left" data-bs-theme="dark">
   <div class="container-fluid">
     <div class="navbar-brand mx-1 form-check form-check-reverse form-switch">
-      <input type="checkbox" class="btn-check" id="ricercaAvanzataButton">
-      <label class="btn btn-outline-primary" for="ricercaAvanzataButton" routerLink="visualizzaRicercaAvanzata">
+      <input type="checkbox" class="btn-check" id="ricercaAvanzataButton" (change)="changeStatus($event)">
+      <label class="btn btn-outline-primary" for="ricercaAvanzataButton">
         Ricerca Avanzata
       </label>
     </div>
+  </div>
+  <div *ngIf="ricercaAvanzataChecked">
+    <app-visualizza-ricerca-avanzata></app-visualizza-ricerca-avanzata>
   </div>
 </nav>

@@ -9,6 +9,10 @@ export class MenuBarComponent implements OnInit {
 
   @Input()ricercaAvanzataChecked: boolean = false;
 
+  changeStatus($event: any) {
+    this.ricercaAvanzataChecked = !this.ricercaAvanzataChecked;
+  }
+
   ngOnInit(): void {
   }
 
