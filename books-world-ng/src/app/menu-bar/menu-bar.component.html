@@ -1,5 +1,5 @@
 <nav class="navbar bg-body-tertiary" data-bs-theme="dark">
-<div class="container-fluid">
+  <div class="container-fluid">
     <form class="d-inline-flex">
       <input type="text" class="form-control mx-1"  placeholder="Search" aria-label="Search">
       <button class="btn btn-outline-success mx-1" type="submit">Search</button>
@@ -11,16 +11,16 @@
   <div class="collapse navbar-collapse" id="navbarNavDropdown">
     <ul class="navbar-nav">
         <li class="nav-item mx-3">
-            <a class="navbar-brand active fw-bold fs-3" aria-current="page" href="#">Books World</a>
+            <a class="navbar-brand active fw-bold fs-3" aria-current="page" href="/">Books World</a>
         </li>
         <li class="nav-item mx-1 fs-5">
-            <a class="nav-link" href="#">Novità</a>
+            <a class="nav-link" routerLink="visualizzaNovita">Novità</a>
         </li>
         <li class="nav-item mx-1 fs-5">
-            <a class="nav-link" href="#">Riviste</a>
+            <a class="nav-link" routerLink="visualizzaRiviste">Riviste</a>
         </li>
         <li class="nav-item mx-1 fs-5">
-            <a class="nav-link" href="#">Bestseller</a>
+            <a class="nav-link" routerLink="visualizzaBestseller">Bestseller</a>
         </li>
     </ul>
   </div>
@@ -29,8 +29,10 @@
 <nav class="navbar bg-body-tertiary align-left" data-bs-theme="dark">
   <div class="container-fluid">
     <div class="navbar-brand mx-1 form-check form-check-reverse form-switch">
-      <input type="checkbox" class="btn-check" id="btn-check-outlined" autocomplete="off">
-      <label class="btn btn-outline-primary" for="btn-check-outlined">Ricerca Avanzata</label><br>
+      <input type="checkbox" class="btn-check" id="ricercaAvanzataButton">
+      <label class="btn btn-outline-primary" for="ricercaAvanzataButton" routerLink="visualizzaRicercaAvanzata">
+        Ricerca Avanzata
+      </label>
     </div>
   </div>
 </nav>
