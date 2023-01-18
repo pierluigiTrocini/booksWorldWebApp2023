@@ -49,7 +49,7 @@ class UrlBuilder{
     }
 
 
-    build(): void{
+    build(): string{
         //Costruzione con parametri aggiuntivi query
 
         if( this.searchFromText !== undefined ){
@@ -83,7 +83,7 @@ class UrlBuilder{
         if( this.order_by !== "&orderBy=" ) this.link += this.order_by;
 
 
-        console.log( this.link );
+        return this.link;
     }
 }
 
