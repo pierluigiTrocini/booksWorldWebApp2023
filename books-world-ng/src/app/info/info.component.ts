@@ -10,7 +10,6 @@ export class InfoComponent {
   lista: String[] = [];
 
   autentica() {
-    return gapi.auth.signIn({scope: "https://www.googleapis.com/auth/books"});
   }
 
 }
