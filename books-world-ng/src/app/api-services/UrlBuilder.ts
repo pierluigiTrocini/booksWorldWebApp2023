@@ -1,4 +1,4 @@
-class UrlBuilder{
+export class UrlBuilder{
     private link: string = "https://www.googleapis.com/books/v1/volumes?q=";
 
     private searchFromText ?: string;
@@ -11,12 +11,12 @@ class UrlBuilder{
     private max_results: string = "&maxResults=";
     private order_by: string = "&orderBy=";
 
-    
+
     //Parametri aggiuntivi della ricerca con q
     text( content: string ): void{ if( content !== "") this.searchFromText = content; }
     author( content: string ): void{ if( content !== "") this.searchFromAuthor = content; }
     publisher( content: string ): void{ if( content !== "") this.searchFromPublisher = content; }
-    
+
     //Filtri
     partial(): void { this.filter += "partial"; }
     full(): void { this.filter += "full"; }
@@ -30,7 +30,7 @@ class UrlBuilder{
     magazines(): void { this.printType += "magazines"; }
 
     //Start index e max results
-    startIndex( value: number ): void { 
+    startIndex( value: number ): void {
         if( value < 0 ) value = 0;
         this.start_index += value as unknown as string;
     }
