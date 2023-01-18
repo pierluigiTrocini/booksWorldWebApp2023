@@ -87,10 +87,4 @@ class UrlBuilder{
     }
 }
 
-let api = new UrlBuilder();
-api.text("harry potter");
-api.publisher("");
-api.paidBooks();
-api.build();
-
 
