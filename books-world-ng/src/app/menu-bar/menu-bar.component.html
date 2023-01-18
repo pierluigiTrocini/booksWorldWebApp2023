@@ -1,7 +1,7 @@
 <nav class="navbar navbar-dark bg-dark">
   <form class="d-flex flex-row mx-1">
-    <input type="text" class="form-control mx-1" placeholder="Search" aria-label="Search">
-    <button class="btn btn-outline-success mx-1" type="submit">Search</button>
+    <input type="text" class="form-control mx-1" placeholder="Titolo..." aria-label="Search">
+    <button class="btn btn-outline-success mx-1" type="submit">Cerca</button>
   </form>
 
   <div class="d-flex flex-row">
@@ -33,16 +33,23 @@
   </div>
 </nav>
 
-<nav class="navbar bg-body-tertiary align-left" data-bs-theme="dark">
-  <div class="container-fluid">
-    <div class="navbar-brand mx-1 form-check form-check-reverse form-switch">
-      <input type="checkbox" class="btn-check" id="ricercaAvanzataButton" (change)="changeStatus($event)">
-      <label class="btn btn-outline-danger" for="ricercaAvanzataButton">
-        Ricerca Avanzata
-      </label>
-    </div>
-  </div>
-  <div *ngIf="ricercaAvanzataChecked">
-    <app-visualizza-ricerca-avanzata></app-visualizza-ricerca-avanzata>
-  </div>
-</nav>
+<ul class="nav bg-body-tertiary" data-bs-theme="dark">
+  <li class="nav-item mx-3 mb-2">
+    <input type="checkbox" class="btn-check" id="ricercaAvanzataButton" (change)="changeStatusRicerca($event)">
+    <label class="btn btn-outline-success" for="ricercaAvanzataButton">
+      Ricerca Avanzata
+    </label>
+  </li>
+  <li class="nav-item">
+    <input type="checkbox" class="btn-check" id="infoButton" (change)="changeStatusInfo($event)">
+    <label class="btn btn-outline-primary" for="infoButton">
+      Info
+    </label>
+  </li>
+</ul>
+<div *ngIf="infoChecked">
+  <app-info></app-info>
+</div>
+<div *ngIf="ricercaAvanzataChecked">
+  <app-visualizza-ricerca-avanzata></app-visualizza-ricerca-avanzata>
+</div>

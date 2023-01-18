@@ -8,11 +8,16 @@ import { Component, Input, OnInit } from '@angular/core';
 export class MenuBarComponent implements OnInit {
 
   @Input()ricercaAvanzataChecked: boolean = false;
+  @Input()infoChecked: boolean = false;
 
   libri: String[] = [];
 
-  changeStatus($event: any) {
+  changeStatusRicerca($event: any) {
     this.ricercaAvanzataChecked = !this.ricercaAvanzataChecked;
+  }
+
+  changeStatusInfo($event: any) {
+    this.infoChecked = !this.infoChecked;
   }
 
   ngOnInit(): void {
