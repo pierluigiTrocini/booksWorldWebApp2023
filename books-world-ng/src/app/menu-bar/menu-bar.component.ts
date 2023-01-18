@@ -12,8 +12,6 @@ export class MenuBarComponent implements OnInit {
   @Input()ricercaAvanzataChecked: boolean = false;
   @Input()infoChecked: boolean = false;
 
-  constructor(private api: ApiUtilsService) { }
-
   libri: Libro[] = [];
 
   changeStatusRicerca($event: any) {
