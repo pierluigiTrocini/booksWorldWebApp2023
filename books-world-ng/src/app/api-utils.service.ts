@@ -14,6 +14,8 @@ export class ApiUtilsService {
   initialize(): Observable<Libro[]> {
     let builder = new UrlBuilder();
     builder.maxResults(40);
+    builder.relevance();
+    builder.books();
     return this.http.get<GoogleBooksApis> (builder.build()).pipe(map((data: GoogleBooksApis) => data.items));
   }
 

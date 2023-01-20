@@ -55,7 +55,7 @@ export class UrlBuilder{
         if( this.searchFromText !== undefined ){
             //this.searchFromText = this.searchFromText.replace(" ", "+");
             this.link += this.searchFromText;
-        } else this.link += "*";
+        } else this.link += "1";
 
         if( this.searchFromAuthor !== undefined ){
             //this.searchFromAuthor = "onauthor:" + this.searchFromAuthor.replace(" ", "+");
