@@ -7,6 +7,7 @@ import { MenuBarComponent } from './menu-bar/menu-bar.component';
 import { VisualizzaRicercaAvanzataComponent } from './visualizza-ricerca-avanzata/visualizza-ricerca-avanzata.component';
 import { InfoComponent } from './info/info.component';
 import { VisualizzaLibriComponent } from './visualizza-libri/visualizza-libri.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { VisualizzaLibriComponent } from './visualizza-libri/visualizza-libri.co
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
