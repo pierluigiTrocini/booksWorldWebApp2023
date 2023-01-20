@@ -23,6 +23,15 @@ export interface Libro {
       identifier: string;
     }> 
   };
+
+  saleInfo: {
+    seleability: string;
+    listPrice: Array<{
+      amount: number,
+      currencyCode: string
+    }>
+  }
+
   accessInfo: {
     epub: {
       isAvailable: boolean;
