@@ -8,5 +8,7 @@ public interface RecensioneDao {
 	public void Save(Recensione recensione);
 	public void Delete(Recensione recensione);
 	public List<Recensione>AllBookReviews(String ISBN);
+	public void IncrementLikes(Recensione recensione);
+	public void IncrementDislikes(Recensione recensione);
 	
 }

@@ -131,4 +131,42 @@ public class RecensioneDaoPostgres implements RecensioneDao{
 		
 	}
 
+	
+	@Override
+	public void IncrementLikes(Recensione recensione) {
+		String updateStr = "UPDATE recensione set num_mi_piace=num_mi_piace+1 where id=?";
+		try {
+			PreparedStatement st = conn.prepareStatement(updateStr);
+			st.setLong(1,recensione.getId());
+			st.executeUpdate();
+			
+			
+			
+			
+		}catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+	@Override
+	public void IncrementDislikes(Recensione recensione) {
+		String updateStr = "UPDATE recensione set num_non_mi_piace=num_non_mi_piace+1 where id=?";
+		try {
+			PreparedStatement st = conn.prepareStatement(updateStr);
+			st.setLong(1,recensione.getId());
+			st.executeUpdate();
+			
+			
+			
+			
+		}catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
+	
+	
+
 }
