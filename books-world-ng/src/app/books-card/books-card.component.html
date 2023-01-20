@@ -1,13 +1,15 @@
 <div class="card border-dark m-2">
-    <img src="{{libro?.volumeInfo?.imageLinks?.smallThumbnail}}" class="card-img-top" 
-        width="50%" height="50%"
+    <br>
+    <img src="{{libro?.volumeInfo?.imageLinks?.smallThumbnail}}" class="rounded mx-auto d-block" 
+        width="75%" height="75%"
     alt="Anteprima non disponibile"/>
     <div class="card-body">
-        <h5 class="card-title text-sm-center fs-6">
+        <h5 class="card-title text-sm-center fs-7">
             {{libro?.volumeInfo?.title}}
         </h5>
-        <p class="card-text text-sm-center fs-6"><a href="#">
-            {{libro?.volumeInfo?.publisher}}
+        <p class="card-text text-sm-center">
+            <a href="#">
+                {{libro?.volumeInfo?.publisher}}
             </a>
         </p>
         <p *ngFor="let a of libro?.volumeInfo?.authors" class=" text-sm-center fs-6">
@@ -22,7 +24,7 @@
                 </font>
             </a>
         </p>
-        <div class="card-footer">
+        <div class="card-footer text-sm-center">
             <ng-container *ngIf="libro?.saleInfo?.saleability === 'FOR_SALE'; then showPrice; else showError"></ng-container>
             <ng-template #showPrice>
                 <font [size]="-1" class="text-success">
