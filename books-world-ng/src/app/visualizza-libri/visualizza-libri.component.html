@@ -1,4 +1,12 @@
-
-<div *ngFor="let libro of libri">
-  {{libro.volumeInfo.title}}
+<div class="row">
+  <div *ngFor="let libro of libri" class="col-md-4 col-sm-6 col-12">
+    <div routerLink="booksCard" [queryParams]="{libro: libro}">
+      <app-books-card [libro]="libro"></app-books-card>
+    </div>  
+  </div>
 </div>
+
+
+<!-- <div *ngFor="let libro of libri">
+  {{libro.volumeInfo.title}}
+</div> -->

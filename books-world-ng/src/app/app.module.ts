@@ -8,6 +8,7 @@ import { VisualizzaRicercaAvanzataComponent } from './visualizza-ricerca-avanzat
 import { InfoComponent } from './info/info.component';
 import { VisualizzaLibriComponent } from './visualizza-libri/visualizza-libri.component';
 import { HttpClientModule } from '@angular/common/http';
+import { BooksCardComponent } from './books-card/books-card.component';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,8 @@ import { HttpClientModule } from '@angular/common/http';
     MenuBarComponent,
     VisualizzaRicercaAvanzataComponent,
     InfoComponent,
-    VisualizzaLibriComponent
+    VisualizzaLibriComponent,
+    BooksCardComponent
   ],
   imports: [
     BrowserModule,
