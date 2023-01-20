@@ -15,7 +15,7 @@ export class VisualizzaLibriComponent implements OnInit {
   constructor(private api: ApiUtilsService) { }
 
   ngOnInit(): void {
-    this.api.cercaLibroPerAutore("tolkien").subscribe(response => this.libri = response);
+    this.api.initialize().subscribe(response => this.libri = response);
   }
 
 }
