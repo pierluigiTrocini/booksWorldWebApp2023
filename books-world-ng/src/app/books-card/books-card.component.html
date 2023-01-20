@@ -1,1 +1,39 @@
-<p>{{libro?.volumeInfo?.title}}</p>
+<div class="card border-dark m-2">
+    <img src="{{libro?.volumeInfo?.imageLinks?.smallThumbnail}}" class="card-img-top" 
+        width="50%" height="50%"
+    alt="Anteprima non disponibile"/>
+    <div class="card-body">
+        <h5 class="card-title text-sm-center fs-6">
+            {{libro?.volumeInfo?.title}}
+        </h5>
+        <p class="card-text text-sm-center fs-6"><a href="#">
+            {{libro?.volumeInfo?.publisher}}
+            </a>
+        </p>
+        <p *ngFor="let a of libro?.volumeInfo?.authors" class=" text-sm-center fs-6">
+            <a href="#"><font [size]="-1">
+                {{a}}
+                </font>
+            </a>
+        </p>
+        <p *ngFor="let c of libro?.volumeInfo?.categories" class=" text-sm-center fs-6">
+            <a href="#"><font [size]="-2">
+                {{c}}
+                </font>
+            </a>
+        </p>
+        <div class="card-footer">
+            <ng-container *ngIf="libro?.saleInfo?.saleability === 'FOR_SALE'; then showPrice; else showError"></ng-container>
+            <ng-template #showPrice>
+                <font [size]="-1" class="text-success">
+                    {{libro?.saleInfo?.listPrice?.amount}} {{libro?.saleInfo?.listPrice?.currencyCode}}
+                </font>
+            </ng-template>
+            <ng-template #showError>
+                <font [size]="-2" class="text-danger">Non disponibile</font>
+            </ng-template>
+        </div>
+    </div>
+</div>
+
+<!-- <p>{{libro?.volumeInfo?.title}}</p> -->

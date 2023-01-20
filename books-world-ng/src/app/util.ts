@@ -25,11 +25,11 @@ export interface Libro {
   };
 
   saleInfo: {
-    seleability: string;
-    listPrice: Array<{
+    saleability: string;
+    listPrice: {
       amount: number,
       currencyCode: string
-    }>
+    }
   }
 
   accessInfo: {
