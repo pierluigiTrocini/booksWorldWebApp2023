@@ -18,6 +18,10 @@ export interface Libro {
       smallThumbnail: string;
     };
     language: string;
+    industryIdentifiers: Array<{
+      type: string;
+      identifier: string;
+    }> 
   };
   accessInfo: {
     epub: {
