@@ -84,11 +84,11 @@ public class SegnalazioneDaoPostgres implements SegnalazioneDao {
     public List<Segnalazione> findAll(){
         	
         List<Segnalazione> segnalazioni = new ArrayList<Segnalazione>();
-    	String query = "select * from segnalazione";
+    	String query1 = "select * from segnalazione";
     		
         try {
     		Statement st = conn.createStatement();
-    	    ResultSet rs = st.executeQuery(query);
+    	    ResultSet rs = st.executeQuery(query1);
     			
     		while (rs.next()) {
     			Segnalazione segnalazione = new Segnalazione();
@@ -97,6 +97,26 @@ public class SegnalazioneDaoPostgres implements SegnalazioneDao {
     			segnalazione.setNum_segnalazioni(rs.getLong("num_segnalazioni"));
     			segnalazione.setVoti_favorevoli_eliminazione(rs.getLong("voti_favorevoli_eliminazione"));
     			segnalazione.setVoti_sfavorevoli_eliminazione(rs.getLong("voti_sfavorevoli_eliminazione"));
+
+				String query2 = "select * from recensione where id = ?";
+
+				try {
+			        PreparedStatement st2 = conn.prepareStatement(query2);
+			        st2.setLong(1, segnalazione.getRecensione());
+			        ResultSet rs2 = st2.executeQuery();
+
+					if(rs2.next()) {
+						segnalazione.setScrittore(rs2.getString("scrittore"));
+						segnalazione.setTitolo(rs2.getString("titolo"));
+						segnalazione.setTesto(rs2.getString("testo"));
+					}
+
+				}
+
+				catch (SQLException e) {
+			    // TODO Auto-generated catch block
+			    e.printStackTrace();
+		        }
     				
     			segnalazioni.add(segnalazione);	
     				
@@ -116,7 +136,7 @@ public class SegnalazioneDaoPostgres implements SegnalazioneDao {
     
     
     
-    // METODI DA IMPLEMENTARE A SECONDA DI SOLUZIONE TROVATA
+    // METODI DA IMPLEMENTARE A SECONDA DELLA SOLUZIONE TROVATA
     // RIGUARDANTE IL TRACCIAMENTO DEI VOTI
         
     public void voteAgainst(Segnalazione segnalazione) {

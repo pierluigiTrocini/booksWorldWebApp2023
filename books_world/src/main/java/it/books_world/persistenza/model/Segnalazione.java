@@ -3,6 +3,12 @@ package it.books_world.persistenza.model;
 public class Segnalazione {
 	
 	private Long recensione;
+
+	private String scrittore; // USERNAME
+
+	private String titolo;
+
+	private String testo;
 	
 	private Long num_segnalazioni;
 	
@@ -17,6 +23,30 @@ public class Segnalazione {
 
 	public void setRecensione(Long recensione) {
 		this.recensione = recensione;
+	}
+
+	public String getScrittore() {
+		return scrittore;
+	}
+
+	public void setScrittore(String scrittore) {
+		this.scrittore = scrittore;
+	}
+
+	public String getTitolo() {
+		return titolo;
+	}
+
+	public void setTitolo(String titolo) {
+		this.titolo = titolo;
+	}
+
+	public String getTesto() {
+		return testo;
+	}
+
+	public void setTesto(String testo) {
+		this.testo = testo;
 	}
 
 	public Long getNum_segnalazioni() {

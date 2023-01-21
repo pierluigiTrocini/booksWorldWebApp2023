@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import it.books_world.persistenza.dao.OrdineDao;
-import it.books_world.persistenza.dao.Utente;
+import it.books_world.persistenza.model.Utente;
 import it.books_world.persistenza.model.Ordine;
 
 public class OrdineDaoPostgres implements OrdineDao{
