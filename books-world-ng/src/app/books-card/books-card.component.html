@@ -1,8 +1,20 @@
 <div class="card border-dark m-2">
     <br>
-    <img src="{{libro?.volumeInfo?.imageLinks?.smallThumbnail}}" class="rounded mx-auto d-block"
-        width="75%" height="75%"
-    alt="Anteprima non disponibile"/>
+    <ng-container *ngIf="libro?.accessInfo?.epub?.isAvailable; then showPremiumMessage"></ng-container>
+    <ng-template #showPremiumMessage>
+        <a href="{{libro?.accessInfo?.webReaderLink}}" target="_blank">
+            <div class="card-header text-sm-center fw-bolder">
+                <font [size]="3" class="text-warning">Premium - </font>
+                <font [size]="-1" class="text-warning">Disponibile antemprima</font>
+            </div>
+        </a>
+    </ng-template>
+
+    <a href="localhost:8080/visualizzaInfo?isbn={{libro?.volumeInfo?.industryIdentifiers?.at(0)?.identifier}}">
+        <img src="{{libro?.volumeInfo?.imageLinks?.smallThumbnail}}" class="rounded mx-auto d-block"
+            width="75%" height="75%"
+        alt="Anteprima non disponibile"/>
+    </a>
     <div class="card-body">
         <h5 class="card-title text-sm-center text-light fs-7">
             {{libro?.volumeInfo?.title}}

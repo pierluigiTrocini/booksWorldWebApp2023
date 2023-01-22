@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Libro } from '../util';
 import { ApiUtilsService } from '../api-utils.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-menu-bar',
@@ -14,8 +15,13 @@ export class MenuBarComponent implements OnInit {
 
   libri: Libro[] = [];
 
+  constructor(private router: Router){}
+
   changeStatusRicerca($event: any) {
     this.ricercaAvanzataChecked = !this.ricercaAvanzataChecked;
+    if( !this.ricercaAvanzataChecked ){
+      this.router.navigateByUrl('#');
+    }
   }
 
   changeStatusInfo($event: any) {

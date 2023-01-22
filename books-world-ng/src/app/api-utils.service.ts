@@ -15,7 +15,7 @@ export class ApiUtilsService {
     let builder = new UrlBuilder();
     builder.maxResults(40);
     builder.relevance();
-    builder.books();
+    builder.paidBooks();
     return this.http.get<GoogleBooksApis> (builder.build()).pipe(map((data: GoogleBooksApis) => data.items));
   }
 

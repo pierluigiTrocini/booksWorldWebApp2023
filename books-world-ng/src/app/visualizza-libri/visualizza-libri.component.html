@@ -1,9 +1,12 @@
 <div class="card-group">
-  <div *ngFor="let libro of libri" class="col-2">
-    <div routerLink="booksCard" [queryParams]="{libro: libro}">
-      <app-books-card [libro]="libro"></app-books-card>
+  <ng-container *ngIf="libri.length !== 0; then showBooks"></ng-container>
+  <ng-template  #showBooks>
+    <div *ngFor="let libro of libri" class="col-2">
+      <div routerLink="booksCard" [queryParams]="{libro: libro}">
+        <app-books-card [libro]="libro"></app-books-card>
+      </div>
     </div>
-  </div>
+  </ng-template>
 </div>
 
 

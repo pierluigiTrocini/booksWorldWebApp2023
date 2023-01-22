@@ -23,7 +23,7 @@ export class UrlBuilder{
     partial(): void { this.filter += "partial"; }
     full(): void { this.filter += "full"; }
     freeBooks(): void { this.filter += "free-ebooks"; }
-    paidBooks(): void { this.filter += "ebooks"; }
+    paidBooks(): void { this.filter += "paid-ebooks"; }
     ebooks(): void { this.filter += "ebooks"; }
 
     //Tipo di stampa
