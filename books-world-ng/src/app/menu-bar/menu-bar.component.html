@@ -21,13 +21,9 @@
             <a class="navbar-brand active fw-bold fs-3" aria-current="page" href="/">Books World</a>
         </li>
         <li class="nav-item mx-1 fs-5">
-            <a class="nav-link" routerLink="visualizzaLibri">Novità</a>
-        </li>
-        <li class="nav-item mx-1 fs-5">
-            <a class="nav-link" routerLink="visualizzaRiviste">Riviste</a>
-        </li>
-        <li class="nav-item mx-1 fs-5">
-            <a class="nav-link" routerLink="visualizzaBestseller">Bestseller</a>
+            <a class="nav-link" routerLink="visualizzaLibri" (click)="scrollDown($event)">
+              Suggeriti da noi
+            </a>
         </li>
     </ul>
   </div>

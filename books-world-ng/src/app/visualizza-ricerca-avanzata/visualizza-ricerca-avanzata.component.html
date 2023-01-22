@@ -6,21 +6,24 @@
   </p>
 
   <div class="col-auto">
-    <input type="text" class="form-control" id="nomeAutore" placeholder="Nome Autore">
+    <input type="text" class="form-control" id="autore" placeholder="Nome Autore">
   </div>
 
   <div class="col-auto">
-    <input type="text" class="form-control" id="nomeAutore" placeholder="Editore">
+    <input type="text" class="form-control" id="editore" placeholder="Editore">
   </div>
 
   <div class="col-auto">
-    <input type="text" class="form-control" id="nomeAutore" placeholder="Genere">
+    <input type="text" class="form-control" id="genere" placeholder="Genere">
   </div>
 
   <div class="col-auto">
-    <button type="submit" class="btn btn-success">
-      Cerca...
+    <button type="submit" class="btn btn-success" (click)="cambiaCampi()"
+        routerLink="visualizzaLibri" [queryParams]="{autore: autore, editore: editore, genere: genere}">
+        Cerca...
     </button>
   </div>
-
 </div>
+<app-visualizza-libri [autore]="autore" [editore]="editore" [genere]="genere"></app-visualizza-libri>
+
+

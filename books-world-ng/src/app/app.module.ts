@@ -9,6 +9,7 @@ import { InfoComponent } from './info/info.component';
 import { VisualizzaLibriComponent } from './visualizza-libri/visualizza-libri.component';
 import { HttpClientModule } from '@angular/common/http';
 import { BooksCardComponent } from './books-card/books-card.component';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { BooksCardComponent } from './books-card/books-card.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
+    RouterModule.forRoot([]),
     HttpClientModule
   ],
   providers: [],

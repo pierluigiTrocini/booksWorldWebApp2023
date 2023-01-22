@@ -26,9 +26,12 @@ export class ApiUtilsService {
             .pipe(map((data: GoogleBooksApis) => data.items));
   }
 
-  cercaLibroPerAutore(autore: string): Observable<Libro[]> {
+  cercaLibriRicercaAvanzata(autore: string, editore: string, genere: string): Observable<Libro[]> {
     let builder = new UrlBuilder();
     builder.author(autore);
+    builder.publisher(editore);
+    builder.category(genere);
+    builder.maxResults(40);
     return this.http.get<GoogleBooksApis>(builder.build())
           .pipe(map((data: GoogleBooksApis) => data.items));
   }

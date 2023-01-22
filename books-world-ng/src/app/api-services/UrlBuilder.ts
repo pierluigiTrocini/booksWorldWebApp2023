@@ -4,6 +4,7 @@ export class UrlBuilder{
     private searchFromText ?: string;
     private searchFromAuthor ?: string;
     private searchFromPublisher ?: string;
+    private searchFromCategory ?: string;
 
     private filter: string = "&filter=";
     private printType: string = "&printType=";
@@ -16,6 +17,7 @@ export class UrlBuilder{
     text( content: string ): void{ if( content !== "") this.searchFromText = content; }
     author( content: string ): void{ if( content !== "") this.searchFromAuthor = content; }
     publisher( content: string ): void{ if( content !== "") this.searchFromPublisher = content; }
+    category( content: string ): void{ if( content !== "") this.searchFromCategory = content; }
 
     //Filtri
     partial(): void { this.filter += "partial"; }
@@ -59,14 +61,34 @@ export class UrlBuilder{
 
         if( this.searchFromAuthor !== undefined ){
             //this.searchFromAuthor = "onauthor:" + this.searchFromAuthor.replace(" ", "+");
-            if( this.searchFromText !== '' ) this.link += '+' + this.searchFromAuthor;
+            if( this.searchFromText !== '' ) {
+              if (this.link.endsWith("q=")) {
+                this.link += "inauthor:" + this.searchFromText;
+              }
+              else this.link += "+inauthor:" + this.searchFromAuthor;
+            }
             else this.link += this.searchFromAuthor;
         }
 
         if( this.searchFromPublisher !== undefined ){
             //this.searchFromPublisher = "onpublisher:" + this.searchFromPublisher.replace(" ", "+");
-            if( this.searchFromPublisher !== '' ) this.link += '+' + this.searchFromPublisher;
+            if( this.searchFromPublisher !== '' ) {
+              if (this.link.endsWith("q=")) {
+                this.link += "inpublisher:" + this.searchFromPublisher;
+              }
+              else this.link += "+inpublisher:" + this.searchFromPublisher;
+            }
             else this.link += this.searchFromPublisher;
+        }
+
+        if ( this.searchFromCategory !== undefined ){
+          if ( this.searchFromCategory !== '' ) {
+            if (this.link.endsWith("q=")) {
+              this.link += "subject:" + this.searchFromCategory;
+            }
+            else this.link += "+subject:" + this.searchFromCategory;
+          }
+          else this.link += this.searchFromCategory;
         }
 
         //Costruzione con filtri

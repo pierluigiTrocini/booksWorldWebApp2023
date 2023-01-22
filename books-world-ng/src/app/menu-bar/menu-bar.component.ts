@@ -22,6 +22,10 @@ export class MenuBarComponent implements OnInit {
     this.infoChecked = !this.infoChecked;
   }
 
+  scrollDown($event: any) {
+    document.querySelector(".card-group")?.scrollIntoView();
+  }
+
   ngOnInit(): void {
 
   }
