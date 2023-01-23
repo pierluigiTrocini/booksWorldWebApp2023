@@ -10,8 +10,8 @@ import { Router } from '@angular/router';
 })
 export class MenuBarComponent implements OnInit {
 
-  @Input()ricercaAvanzataChecked: boolean = false;
-  @Input()infoChecked: boolean = false;
+  ricercaAvanzataChecked: boolean = false;
+  infoChecked: boolean = false;
 
   libri: Libro[] = [];
 
