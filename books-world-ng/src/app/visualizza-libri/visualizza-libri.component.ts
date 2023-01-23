@@ -40,7 +40,8 @@ export class VisualizzaLibriComponent implements OnInit, OnChanges {
   }
 
   ngOnInit(): void {
-    this.api.initialize().subscribe(response => this.libri = response);
+    if( this.libri.splice(0) )
+      this.api.initialize().subscribe(response => this.libri = response);
   }
 
 
