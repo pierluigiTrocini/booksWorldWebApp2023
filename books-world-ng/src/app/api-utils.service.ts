@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
 import { Observable, map } from 'rxjs';
 import { UrlBuilder } from './api-services/UrlBuilder';
-import { GoogleBooksApis, Libro } from './util';
+import { GoogleBooksApis, Libro, NewYorkTimesApi, NyBook } from './util';
 
 @Injectable({
   providedIn: 'root'
@@ -34,6 +34,11 @@ export class ApiUtilsService {
     builder.maxResults(40);
     return this.http.get<GoogleBooksApis>(builder.build())
           .pipe(map((data: GoogleBooksApis) => data.items));
+  }
+
+  getNyTimesBestsellers( nyApiUrl: string ): Observable<NyBook[]>{
+    return this.http.get<NewYorkTimesApi>(nyApiUrl)
+      .pipe(map((data: NewYorkTimesApi) => data.results.books));
   }
 
 }

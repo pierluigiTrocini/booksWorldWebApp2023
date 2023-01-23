@@ -10,6 +10,7 @@ import { VisualizzaLibriComponent } from './visualizza-libri/visualizza-libri.co
 import { HttpClientModule } from '@angular/common/http';
 import { BooksCardComponent } from './books-card/books-card.component';
 import { RouterModule } from '@angular/router';
+import { VisualizzaBestsellerNytimesComponent } from './visualizza-bestseller-nytimes/visualizza-bestseller-nytimes.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { RouterModule } from '@angular/router';
     VisualizzaRicercaAvanzataComponent,
     InfoComponent,
     VisualizzaLibriComponent,
-    BooksCardComponent
+    BooksCardComponent,
+    VisualizzaBestsellerNytimesComponent
   ],
   imports: [
     BrowserModule,

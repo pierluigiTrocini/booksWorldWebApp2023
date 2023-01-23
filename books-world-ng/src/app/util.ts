@@ -40,3 +40,26 @@ export interface Libro {
   }
   prezzo: number;
 }
+
+
+//Interfaccia per API NewYork Times
+
+export interface NewYorkTimesApi{
+  status: string,
+  num_results: number,
+  results: {
+    books: NyBook[]
+  }
+}
+
+export interface NyBook {
+  primary_isbn10: string,
+  primary_isbn13: string,
+
+  publisher: string,
+  description: string,
+
+  title: string,
+  author: string,
+  book_image: string
+}

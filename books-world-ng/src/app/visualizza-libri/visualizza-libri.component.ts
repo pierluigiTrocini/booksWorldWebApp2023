@@ -46,4 +46,6 @@ export class VisualizzaLibriComponent implements OnInit, OnChanges {
     this.api.initialize().subscribe(response => this.libri = response);
   }
 
+
+
 }

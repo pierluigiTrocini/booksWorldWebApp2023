@@ -1,0 +1,30 @@
+
+<h4 class="text mx-5 my-2">Benvenuto, non perderti la lista dei bestseller di questa settimana</h4>
+<small class="text mx-5">
+    powered by <img src="https://upload.wikimedia.org/wikipedia/commons/7/77/The_New_York_Times_logo.png"
+        width="10%" height="10%">
+</small>
+<div *ngFor="let libro of libri" class="card-group">
+    <div class="card mb-3 mx-5">
+        <div class="row g-0">
+            <div class="col-auto">
+                <img src="{{libro.book_image}}" class="rounded mx-auto d-block">
+            </div>
+            <div class="col">
+                <div class="card-body">
+                    <h5 class="card-title">{{libro.title}}</h5>
+                    <p class="card-text">{{libro.author}}</p>
+                    <p class="card-text">Edited by: <strong>{{libro.publisher}}</strong></p>
+                    <p class="card-text">
+                        <small class="text-muted">{{libro.description}}</small>
+                    </p>
+                </div>
+                <footer>
+                    <a href="#" class="btn btn-warning mx-4">
+                        <strong>Cerca nel sito</strong>
+                    </a>
+                </footer>
+            </div>
+        </div>
+    </div>
+</div>
