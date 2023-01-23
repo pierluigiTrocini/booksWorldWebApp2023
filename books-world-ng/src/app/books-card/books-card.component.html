@@ -20,20 +20,22 @@
             {{libro?.volumeInfo?.title}}
         </h5>
         <p class="card-text text-sm-center">
-            <a href="#">
+            <a href="http://localhost:8080/visualizzaPerEditore">
                 {{libro?.volumeInfo?.publisher}}
             </a>
         </p>
         <p *ngFor="let a of libro?.volumeInfo?.authors" class=" text-sm-center fs-6">
-            <a href="#"><font [size]="-1">
+            <a href="http://localhost:8080/visualizzaPerAutore">
+              <font [size]="-1">
                 {{a}}
-                </font>
+              </font>
             </a>
         </p>
         <p *ngFor="let c of libro?.volumeInfo?.categories" class=" text-sm-center fs-6">
-            <a href="#"><font [size]="-2">
+            <a class="text-light">
+              <font [size]="-1">
                 {{c}}
-                </font>
+              </font>
             </a>
         </p>
         <div class="card-footer text-sm-center">
