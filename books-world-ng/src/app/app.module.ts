@@ -11,6 +11,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { BooksCardComponent } from './books-card/books-card.component';
 import { RouterModule } from '@angular/router';
 import { VisualizzaBestsellerNytimesComponent } from './visualizza-bestseller-nytimes/visualizza-bestseller-nytimes.component';
+import { RecensioniComponent } from './recensioni/recensioni.component';
+
 
 @NgModule({
   declarations: [
@@ -20,7 +22,8 @@ import { VisualizzaBestsellerNytimesComponent } from './visualizza-bestseller-ny
     InfoComponent,
     VisualizzaLibriComponent,
     BooksCardComponent,
-    VisualizzaBestsellerNytimesComponent
+    VisualizzaBestsellerNytimesComponent,
+    RecensioniComponent
   ],
   imports: [
     BrowserModule,

@@ -63,3 +63,24 @@ export interface NyBook {
   author: string,
   book_image: string
 }
+export class Utente{
+  username:string | undefined;
+	nome:string | undefined;
+	cognome:string | undefined;
+	password:string | undefined;
+	data_di_nascita:Date | undefined;
+	moderatore:boolean | undefined;
+	email:string | undefined;
+}
+export class Recensione {
+
+  id!: BigInt ; 
+  titolo!: string;
+  testo!: string;
+  numeroMiPiace!:number;
+  numeroNonMiPiace!:number;
+  scrittaDa!: Utente;
+  ISBN!: string;
+  NumeroStelle!: number;
+  Segnalabile!:boolean;
+}
