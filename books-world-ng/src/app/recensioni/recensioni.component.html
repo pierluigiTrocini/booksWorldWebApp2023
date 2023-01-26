@@ -25,7 +25,7 @@
   
       <div *ngIf="utente.username!=undefined &&  utente.username != recensione.scrittaDa.username && recensione.Segnalabile==true  "> 
         <strong  style="margin-left: 5px;" class="inline">{{recensione.titolo}}</strong>
-        <button id="bottone-segnalazione" class="btn btn-danger" (click)="segnalaRecensione(recensione.id)"> Segnala </button>
+        <button id="bottone-segnalazione" class="btn btn-danger bottone-segnalazione" (click)="segnalaRecensione(recensione.id)"> Segnala </button>
       </div>
 
       <div *ngIf="recensione.Segnalabile==false">
@@ -49,10 +49,15 @@
 
 
 <script>
-    var button=document.getElementById("bottone-segnalazione");
-    button.click(function(){
+    var buttons=document.querySelectorAll('.bottone-segnalazione');
+    buttons.forEach(function(button) {
+
+      button.addEventListener('click', function() {
         this.parentNode.removeChild(button);
+      
+      })
     });
+    
 
     
 </script>
