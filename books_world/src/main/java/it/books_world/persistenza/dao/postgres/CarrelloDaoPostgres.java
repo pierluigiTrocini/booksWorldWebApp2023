@@ -4,25 +4,19 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.HashMap;
 
-import it.books_world.persistenza.DBManager;
 import it.books_world.persistenza.dao.CarrelloDao;
 import it.books_world.persistenza.model.Carrello;
-import it.books_world.persistenza.model.Utente;
 
 
 public class CarrelloDaoPostgres implements CarrelloDao {
-	
-	
-Connection conn;
-	
-	
+
+	Connection conn;
 
 	public CarrelloDaoPostgres(Connection conn) {
-	this.conn = conn;
-}
+		this.conn = conn;
+	}
 
 	@Override
 	public Carrello UserChart(String username) {
@@ -38,27 +32,21 @@ Connection conn;
 					carrello.setUsername(rs.getString("username"));
 				}
 				String ISBN=rs.getString("isbn_libro");
-					
+
 				if(LibriInCarrello.containsKey(ISBN)) {
-						Integer Value=LibriInCarrello.get(ISBN);
-						Value++;
-						LibriInCarrello.put(ISBN, Value);
-					}
+					Integer Value=LibriInCarrello.get(ISBN);
+					Value++;
+					LibriInCarrello.put(ISBN, Value);
+				}
 				else {
 					LibriInCarrello.put(ISBN, 1);
 				}
-				}
-			
-			carrello.setLibriInCarrello(LibriInCarrello);
-				
-				
-			
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
 			}
-			
-		
+			carrello.setLibriInCarrello(LibriInCarrello);
+		}
+		catch (SQLException e) {
+			e.printStackTrace();
+		}
 		return carrello;
 	}
 
@@ -73,14 +61,13 @@ Connection conn;
 				st.setString(2,ISBN );
 				st.setInt(3, 1);
 				st.executeUpdate();
-			
-			
+
+
 			}
 			catch (SQLException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-		
+
 		}
 		else {
 			String updateStr = "UPDATE carrello set numero_dello_stesso_libro = numero_dello_stesso_libro+1  where username=? and isbn_libro=? ";
@@ -92,17 +79,16 @@ Connection conn;
 				st.executeUpdate();
 			}
 			catch (SQLException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			
+
 		}
-		
+
 	}
 
 	@Override
 	public void DeleteorUpdate(String username, String ISBN) {
-		
+
 		if(UserHasBook(username, ISBN)==1) {
 		    String delStr= "DELETE FROM carrello where username=? and isbn_libro=?";
 			PreparedStatement st;
@@ -110,16 +96,13 @@ Connection conn;
 				st = conn.prepareStatement(delStr);
 				st.setString(1,username );
 				st.setString(2,ISBN );
-				
+
 				st.executeUpdate();
-			
-			
 			}
 			catch (SQLException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-		
+
 		}
 		else if(UserHasBook(username, ISBN)>1) {
 			String updateStr = "UPDATE carrello set numero_dello_stesso_libro = numero_dello_stesso_libro-1  where username=? and isbn_libro=? ";
@@ -131,10 +114,9 @@ Connection conn;
 				st.executeUpdate();
 			}
 			catch (SQLException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			
+
 		}
 	}
 
@@ -147,25 +129,15 @@ Connection conn;
 			st.setString(1,username );
 			st.setString(2, ISBN);
 			ResultSet rs = st.executeQuery();
-			
+
 			if (rs.next()) {
-				 NumeroLibri=rs.getInt("numero_dello_stesso_libro");
-		        
-				}
-				
+				NumeroLibri=rs.getInt("numero_dello_stesso_libro");
 			}
-	
+		}
 		catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return NumeroLibri;
 	}
-	
-	
-	
-
-	
-	
 
 }
