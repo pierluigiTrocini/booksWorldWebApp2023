@@ -1,0 +1,8 @@
+body {
+    background-color: rgba(174, 214, 204, 0.764);
+}
+
+.card.text-bg-primary {
+    max-width: 18rem;
+    align-self: center;
+}

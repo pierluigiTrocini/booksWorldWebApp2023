@@ -13,23 +13,23 @@ import it.books_world.persistenza.dao.postgres.UtenteDaoPostgres;
 
 public class DBManager {
 private static DBManager instance = null;
-	
+
 	public static DBManager getInstance() {
 		if (instance == null) {
 			instance = new DBManager();
 		}
 		return instance;
 	}
-	
+
 	private DBManager() {
 	}
-	
+
 	Connection conn = null;
-	
+
 	public Connection getConnection() {
 		if (conn == null) {
 			try {
-				conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/", "postgres", "pasPOS99");
+				conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/libri", "postgres", "1234");
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
@@ -43,7 +43,7 @@ private static DBManager instance = null;
 	public RecensioneDao getRecensioneDao() {
 		return new RecensioneDaoPostgres(getConnection());
 	}
-	
+
 	public CarrelloDao getCarrelloDao() {
 		return new CarrelloDaoPostgres(getConnection());
 	}

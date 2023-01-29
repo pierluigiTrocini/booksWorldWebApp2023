@@ -29,7 +29,7 @@ public class CarrelloDaoPostgres implements CarrelloDao {
 			ResultSet rs = st.executeQuery();
 			while (rs.next()) {
 				if (carrello.getUsername()==null) {
-					carrello.setUsername(rs.getString("username"));
+					carrello.setUsername(rs.getString("utente"));
 				}
 				String ISBN=rs.getString("isbn_libro");
 
