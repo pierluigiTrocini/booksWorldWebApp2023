@@ -51,8 +51,8 @@ public class MostraCarrello extends HttpServlet {
         CarrelloDao carrelloDao = DBManager.getInstance().getCarrelloDao();
         HttpSession session = req.getSession();
         // if (session != null) {
-            // Utente utente = (Utente) session.getAttribute("user");
-            // Carrello carrello = carrelloDao.UserChart(utente.getUsername());
+        //     Utente utente = (Utente) session.getAttribute("user");
+        //     Carrello carrello = carrelloDao.UserChart(utente.getUsername());
             Carrello carrello = carrelloDao.UserChart("pit0500");
             Map<String, Integer> libri = carrello.getLibriInCarrello();
             ArrayList<VolumeQuantita> volumi = new ArrayList<>();

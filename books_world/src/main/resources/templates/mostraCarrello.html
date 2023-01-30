@@ -4,17 +4,33 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
-    <title>Mostra Carrello</title>
+    <script src="https://kit.fontawesome.com/368aa9f4c0.js" crossorigin="anonymous"></script>
+
+    <title>Carrello</title>
     <link rel="stylesheet" href="css/carrello.css">
     <script src="js/calcolaTotale.js"></script>
+
 </head>
 <body>
+
+  <header>
+    <nav class="navbar navbar-expand-lg bg-body-tertiary" data-bs-theme="dark">
+        <ul class="navbar-nav">
+            <li class="nav-item mx-3">
+                <a class="navbar-brand active fw-bold fs-3" aria-current="page" href="http://localhost:4200/#">
+                    Books World
+                </a>
+            </li>
+        </ul>
+    </nav>
+  </header>
 
   <section class="h-100 h-custom">
     <div class="container py-5 h-100">
       <div class="row d-flex justify-content-center align-items-center h-100">
         <div class="col">
           <div class="card">
+            <h3 class="mx-3">Acquista i tuoi libri</h3>
             <div class="card-body p-4">
               <div class="row">
 
@@ -35,8 +51,6 @@
                         <div class="ms-3">
                           <h5 th:text="${vq.volume.getVolumeInfo().getTitle()}"></h5>
                           <p class="small mb-0" th:text="${vq.volume.getVolumeInfo().getAuthors().get(0)}"></p>
-                          <br>
-                          <p th:text="${vq.volume.getVolumeInfo().getDescription()}"></p>
                         </div>
                       </div>
                         <div class="d-flex flex-row align-items-center mx-3">
@@ -56,51 +70,68 @@
                     </div>
                   </div>
 
-                  <div class="col-lg-5">
-                    <div class="card bg-primary text-white rounded-3">
-                      <div class="card-body">
-                        <div class="d-flex justify-content-between align-items-center mb-4">
-                          <h5 class="mb-0">Dettagli pagamento</h5>
-                        </div>
-                        <form method="post" action="/acquista" class="mt-4">
+                  <div class="row">
+                    <div class="col-75">
+                      <div class="container" id="acquisto">
+                        <form method="get" action="/acquista">
 
-                          <div class="form-outline form-white mb-4">
-                            <input type="text" id="typeName" class="form-control form-control-lg" size="17"
-                              placeholder="Es. Mario Rossi" />
-                          </div>
+                          <div class="row">
+                            <div class="col-50">
+                              <h3>Dettagli spedizione</h3>
+                              <label for="fname"><i class="fa fa-user"></i>Nome</label>
+                              <input type="text" id="fname" name="firstname" placeholder="Es. Mario Rossi">
+                              <label for="email"><i class="fa fa-envelope"></i>Email</label>
+                              <input type="text" id="email" name="email" placeholder="mario@rossi.com">
+                              <label for="adr"><i class="fa fa-address-card-o"></i>Indirizzo</label>
+                              <input type="text" id="adr" name="address" placeholder="Via Roma, 1">
+                              <label for="city"><i class="fa fa-institution"></i>Città</label>
+                              <input type="text" id="city" name="city" placeholder="Roma">
 
-                          <div class="form-outline form-white mb-4">
-                            <input type="text" id="typeText" class="form-control form-control-lg" siez="17"
-                              placeholder="1234 5678 9012 3457" minlength="19" maxlength="19" />
-                          </div>
-
-                          <div class="row mb-4">
-                            <div class="col-md-6">
-                              <div class="form-outline form-white">
-                                <input type="text" id="dataScadenza" class="form-control form-control lg" placeholder="MM/YY">
+                              <div class="row">
+                                <div class="col-50">
+                                  <label for="state">Nazione</label>
+                                  <input type="text" id="state" name="state" placeholder="IT">
+                                </div>
+                                <div class="col-50">
+                                  <label for="zip">CAP</label>
+                                  <input type="text" id="zip" name="zip" placeholder="00100">
+                                </div>
                               </div>
                             </div>
-                            <div class="col-md-6">
-                              <div class="form-outline form-white">
-                                <input type="text" id="numCVV" class="form-control form-control lg" placeholder="CVV">
+
+                            <div class="col-50">
+                              <h3>Pagamento</h3>
+                              <label for="fname">Carte accettate</label>
+                              <div class="icon-container">
+                                <i class="fa fa-cc-visa" style="color:navy;"></i>
+                                <i class="fa fa-cc-amex" style="color:blue;"></i>
+                                <i class="fa fa-cc-mastercard" style="color:red;"></i>
+                                <i class="fa fa-cc-discover" style="color:orange;"></i>
                               </div>
+                              <label for="cname">Nome Intestatario</label>
+                              <input type="text" id="cname" name="intestatario" placeholder="Mario Rossi">
+                              <label for="ccnum">Numero carta di credito</label>
+                              <input type="text" id="ccnum" name="numeroCarta" placeholder="1111-2222-3333-4444">
+
+                              <div class="row">
+                                <div class="col-50">
+                                  <label for="scadenza">Data di scadenza</label>
+                                  <input type="text" id="scadenza" name="meseScadenza" placeholder="mm/aa">
+                                </div>
+                                <div class="col-50">
+                                  <label for="cvv">CVV</label>
+                                  <input type="text" id="cvv" name="cvv" placeholder="352">
+                                </div>
+                              </div>
+                              <span id="totale">Totale: </span>
+                              <input type="submit" value="Acquista" class="btn btn-info">
                             </div>
+
                           </div>
-
-                          <hr>
-
-                          <h4 id="totale">Totale: </h4>
-
-                          <button type="button" class="btn btn-info btn-block btn-lg">
-                            <div class="d-flex justify-content-between">
-                              <span>Acquista</span>
-                            </div>
-                          </button>
                         </form>
                       </div>
                     </div>
 
-                  </div>
                 </div>
               </div>
             </div>
@@ -110,6 +141,7 @@
     </div>
   </section>
 
+  <footer class="text-center mb-3">Progetto Web Application 2023 [Astorino, Busiello, Macrì, Trocini]</footer>
 
 </body>
 </html>

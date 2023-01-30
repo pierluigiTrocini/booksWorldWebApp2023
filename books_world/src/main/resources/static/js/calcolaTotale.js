@@ -6,3 +6,5 @@ window.addEventListener('load', function(e) {
     });
     this.document.querySelector("#totale").innerHTML += totale + "€";
 });
+
+var butSubmit = document.querySelector()
