@@ -33,14 +33,16 @@ public class CarrelloDaoPostgres implements CarrelloDao {
 				}
 				String ISBN=rs.getString("isbn_libro");
 
-				if(LibriInCarrello.containsKey(ISBN)) {
-					Integer Value=LibriInCarrello.get(ISBN);
-					Value++;
-					LibriInCarrello.put(ISBN, Value);
-				}
-				else {
-					LibriInCarrello.put(ISBN, 1);
-				}
+				// if(LibriInCarrello.containsKey(ISBN)) {
+				// 	Integer Value=LibriInCarrello.get(ISBN);
+				// 	// Value++;
+				// 	LibriInCarrello.put(ISBN, Value);
+				// }
+				// else {
+				// 	LibriInCarrello.put(ISBN, 1);
+				// }
+
+				LibriInCarrello.put(ISBN, rs.getInt("numero_dello_stesso_libro"));
 			}
 			carrello.setLibriInCarrello(LibriInCarrello);
 		}
@@ -70,7 +72,7 @@ public class CarrelloDaoPostgres implements CarrelloDao {
 
 		}
 		else {
-			String updateStr = "UPDATE carrello set numero_dello_stesso_libro = numero_dello_stesso_libro+1  where username=? and isbn_libro=? ";
+			String updateStr = "UPDATE carrello set numero_dello_stesso_libro = numero_dello_stesso_libro+1  where utente=? and isbn_libro=? ";
 			PreparedStatement st;
 			try {
 				st = conn.prepareStatement(updateStr);
@@ -90,7 +92,7 @@ public class CarrelloDaoPostgres implements CarrelloDao {
 	public void DeleteorUpdate(String username, String ISBN) {
 
 		if(UserHasBook(username, ISBN)==1) {
-		    String delStr= "DELETE FROM carrello where username=? and isbn_libro=?";
+		    String delStr= "DELETE FROM carrello where utente=? and isbn_libro=?";
 			PreparedStatement st;
 			try {
 				st = conn.prepareStatement(delStr);
@@ -105,7 +107,7 @@ public class CarrelloDaoPostgres implements CarrelloDao {
 
 		}
 		else if(UserHasBook(username, ISBN)>1) {
-			String updateStr = "UPDATE carrello set numero_dello_stesso_libro = numero_dello_stesso_libro-1  where username=? and isbn_libro=? ";
+			String updateStr = "UPDATE carrello set numero_dello_stesso_libro = numero_dello_stesso_libro-1  where utente=? and isbn_libro=? ";
 			PreparedStatement st;
 			try {
 				st = conn.prepareStatement(updateStr);

@@ -14,6 +14,7 @@ import com.google.api.services.books.v1.Books.Volumes.List;
 import it.books_world.persistenza.DBManager;
 import it.books_world.persistenza.dao.CarrelloDao;
 import it.books_world.persistenza.model.Carrello;
+import it.books_world.persistenza.model.Utente;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -28,6 +29,7 @@ public class MostraCarrello extends HttpServlet {
     class VolumeQuantita {
         Volume volume;
         Integer quantita;
+        String isbn;
 
         public Volume getVolume() {
             return volume;
@@ -41,6 +43,13 @@ public class MostraCarrello extends HttpServlet {
         public void setQuantita(Integer quantita) {
             this.quantita = quantita;
         }
+        public String getIsbn() {
+            return isbn;
+        }
+        public void setIsbn(String isbn) {
+            this.isbn = isbn;
+        }
+
     }
 
     @Override
@@ -50,10 +59,9 @@ public class MostraCarrello extends HttpServlet {
                         .build();
         CarrelloDao carrelloDao = DBManager.getInstance().getCarrelloDao();
         HttpSession session = req.getSession();
-        // if (session != null) {
-        //     Utente utente = (Utente) session.getAttribute("user");
-        //     Carrello carrello = carrelloDao.UserChart(utente.getUsername());
-            Carrello carrello = carrelloDao.UserChart("pit0500");
+        if (session != null) {
+            Utente utente = (Utente) session.getAttribute("user");
+            Carrello carrello = carrelloDao.UserChart(utente.getUsername());
             Map<String, Integer> libri = carrello.getLibriInCarrello();
             ArrayList<VolumeQuantita> volumi = new ArrayList<>();
             for (String isbn : libri.keySet()) {
@@ -63,12 +71,16 @@ public class MostraCarrello extends HttpServlet {
                 VolumeQuantita vq = new VolumeQuantita();
                 vq.setVolume(volume);
                 vq.setQuantita(libri.get(isbn));
+                for (var id : volume.getVolumeInfo().getIndustryIdentifiers()) {
+                    if (id.getType().startsWith("ISBN"))
+                        vq.setIsbn(id.getIdentifier());
+                }
                 volumi.add(vq);
             }
             req.setAttribute("vQuantita", volumi);
             RequestDispatcher dispatcher = req.getRequestDispatcher("views/mostraCarrello.html");
             dispatcher.forward(req, resp);
-        // }
+        }
     }
 
 }
