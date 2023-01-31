@@ -57,29 +57,37 @@ public class MostraCarrello extends HttpServlet {
         Books service = new Books.Builder(new NetHttpTransport(), new GsonFactory(), null)
                         .setApplicationName("BooksWorldApplication")
                         .build();
-        CarrelloDao carrelloDao = DBManager.getInstance().getCarrelloDao();
-        HttpSession session = req.getSession();
-        if (session != null) {
-            Utente utente = (Utente) session.getAttribute("user");
-            Carrello carrello = carrelloDao.UserChart(utente.getUsername());
-            Map<String, Integer> libri = carrello.getLibriInCarrello();
-            ArrayList<VolumeQuantita> volumi = new ArrayList<>();
-            for (String isbn : libri.keySet()) {
-                List volumeList = service.volumes().list(isbn);
-                Volumes volumes = volumeList.execute();
-                Volume volume = volumes.getItems().get(0);
-                VolumeQuantita vq = new VolumeQuantita();
-                vq.setVolume(volume);
-                vq.setQuantita(libri.get(isbn));
-                for (var id : volume.getVolumeInfo().getIndustryIdentifiers()) {
-                    if (id.getType().startsWith("ISBN"))
-                        vq.setIsbn(id.getIdentifier());
+        if (req.getQueryString() != null) {
+            String [] sessionIdParam = req.getQueryString().split("&")[0].split("=");
+            String sessionId = sessionIdParam[1];
+            CarrelloDao carrelloDao = DBManager.getInstance().getCarrelloDao();
+            HttpSession session = (HttpSession) req.getServletContext().getAttribute(sessionId);
+            if (session != null) {
+                Utente utente = (Utente) session.getAttribute("user");
+                Carrello carrello = carrelloDao.UserChart(utente.getUsername());
+                // Carrello carrello = carrelloDao.UserChart("pit0500");
+                Map<String, Integer> libri = carrello.getLibriInCarrello();
+                ArrayList<VolumeQuantita> volumi = new ArrayList<>();
+                for (String isbn : libri.keySet()) {
+                    List volumeList = service.volumes().list(isbn);
+                    Volumes volumes = volumeList.execute();
+                    Volume volume = volumes.getItems().get(0);
+                    VolumeQuantita vq = new VolumeQuantita();
+                    vq.setVolume(volume);
+                    vq.setQuantita(libri.get(isbn));
+                    for (var id : volume.getVolumeInfo().getIndustryIdentifiers()) {
+                        if (id.getType().startsWith("ISBN"))
+                            vq.setIsbn(id.getIdentifier());
+                    }
+                    volumi.add(vq);
+                    req.setAttribute("vQuantita", volumi);
+                    RequestDispatcher dispatcher = req.getRequestDispatcher("views/mostraCarrello.html");
+                    dispatcher.forward(req, resp);
                 }
-                volumi.add(vq);
             }
-            req.setAttribute("vQuantita", volumi);
-            RequestDispatcher dispatcher = req.getRequestDispatcher("views/mostraCarrello.html");
-            dispatcher.forward(req, resp);
+        }
+        else {
+            resp.sendRedirect("/login.html");
         }
     }
 
