@@ -1,7 +1,8 @@
 <div class="container" style="margin-top:30px">
+   <h1>{{libri.at(0)}}</h1> 
     <div class="row">
         <div class="col-sm-4">
-            <img src="{{libro?.volumeInfo?.imageLinks?.smallThumbnail}}" class="rounded img-fluid" onerror="this.src='fotoMancante.png'"height="400" width="300"> 
+           <img src="{{libro?.volumeInfo?.imageLinks?.smallThumbnail}}" class="rounded img-fluid" onerror="this.src='fotoMancante.png'"height="400" width="300"> 
             <br>
             <br>
             <ng-container *ngIf="libro?.saleInfo?.saleability === 'FOR_SALE'; then showPrice; else showError"></ng-container>

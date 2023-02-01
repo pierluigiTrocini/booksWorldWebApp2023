@@ -19,9 +19,9 @@ export class MenuBarComponent implements OnInit {
 
   changeStatusRicerca($event: any) {
     this.ricercaAvanzataChecked = !this.ricercaAvanzataChecked;
-    if( !this.ricercaAvanzataChecked ){
-        this.router.navigateByUrl('#');
-    }
+   // if( !this.ricercaAvanzataChecked ){
+        //this.router.navigateByUrl('#');
+   // }
   }
 
   changeStatusInfo($event: any) {

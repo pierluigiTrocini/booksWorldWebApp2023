@@ -9,7 +9,7 @@ import { Recensione, Utente } from '../util';
   templateUrl: './recensioni.component.html',
   styleUrls: ['./recensioni.component.css']
 })
-export class RecensioniComponent {
+export class RecensioniComponent implements OnInit,OnChanges{
    
   @Input() ISBN: string = "";
   @Input() aggiorna: boolean = true;
@@ -38,7 +38,14 @@ export class RecensioniComponent {
     //Add '${implements OnChanges}' to the class.
     if(this.aggiorna){
       this.service.getRecensioni(this.ISBN).subscribe(recensioni => {
-        this.recensioni = recensioni;})
+        this.recensioni = recensioni;
+        this.media=0;
+        for(let recensione of this.recensioni){
+          this.media+=recensione.NumeroStelle;
+        }
+        this.media/=this.recensioni.length;
+
+      })
   }
 }
 
@@ -55,7 +62,14 @@ export class RecensioniComponent {
   eliminaRecensione(id: BigInt): void{
     this.service.rimuoviRecensione(id).subscribe(result => {
       if(result){
-        this.service.getRecensioni(this.ISBN).subscribe(recensioni => this.recensioni = recensioni);
+        this.service.getRecensioni(this.ISBN).subscribe(recensioni => {this.recensioni = recensioni;
+        this.media=0;
+        for(let recensione of this.recensioni){
+          this.media+=recensione.NumeroStelle;
+        }
+        this.media/=this.recensioni.length;
+          
+       } );
       }
     })
 

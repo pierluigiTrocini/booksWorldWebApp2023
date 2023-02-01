@@ -15,9 +15,12 @@
             width="75%" height="75%"
         alt="Anteprima non disponibile"/>
     </a>
-    <div class="card-body">
-        <h5 class="card-title text-sm-center text-light fs-7">
-            {{libro?.volumeInfo?.title}}
+    <div class="card-body" >
+        <h5  class="card-title text-sm-center text-light fs-7" (click)="NascondiRisultati()">
+            <a href="/book/{{libro?.volumeInfo?.industryIdentifiers?.at(0)?.identifier}}?sessionId={{getSessionId()}}" >  
+            {{libro?.volumeInfo?.title}}  
+            
+          </a> 
         </h5>
         <p class="card-text text-sm-center">
             <a href="http://localhost:8080/visualizzaPerEditore">

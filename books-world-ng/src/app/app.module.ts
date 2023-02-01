@@ -7,7 +7,7 @@ import { MenuBarComponent } from './menu-bar/menu-bar.component';
 import { VisualizzaRicercaAvanzataComponent } from './visualizza-ricerca-avanzata/visualizza-ricerca-avanzata.component';
 import { InfoComponent } from './info/info.component';
 import { VisualizzaLibriComponent } from './visualizza-libri/visualizza-libri.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientJsonpModule, HttpClientModule } from '@angular/common/http';
 import { BooksCardComponent } from './books-card/books-card.component';
 import { RouterModule } from '@angular/router';
 import { VisualizzaBestsellerNytimesComponent } from './visualizza-bestseller-nytimes/visualizza-bestseller-nytimes.component';
@@ -36,7 +36,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     RouterModule.forRoot([]),
     HttpClientModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientJsonpModule
   ],
   providers: [],
   bootstrap: [AppComponent]

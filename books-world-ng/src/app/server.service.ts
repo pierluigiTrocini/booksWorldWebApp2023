@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Recensione } from './util';
 import { Observable } from 'rxjs';
+import {Utente} from './util';
 
 @Injectable({
   providedIn: 'root'
@@ -53,6 +54,17 @@ export class ServerService {
   aggiungiRecensione(isbn: string, username: string, titolo: string, testo: string, numStelle: number): Observable<boolean>{
     return this.http.get<boolean>('http://localhost:8080/addToReviews', {params: {isbn: isbn, username: username, titolo: titolo, testo: testo, numStelle: numStelle}});
   }
+
+  getUserBySession(sessionId:string | null):Observable<Utente>{
+    if(sessionId==null){return new Observable<Utente>();}
+    return this.http.get<Utente>('http://localhost:8080/utente',{params:{sessionId: sessionId}})
+
+
+  }
+  checkisLogged(sessionId:string):Observable<boolean>{
+    return this.http.get<boolean>('http://localhost:8080/checkisLogged',{params:{sessionId:sessionId}});
+  }
+
 
 
 
