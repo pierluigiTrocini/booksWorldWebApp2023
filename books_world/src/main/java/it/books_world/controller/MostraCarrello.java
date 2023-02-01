@@ -57,16 +57,18 @@ public class MostraCarrello extends HttpServlet {
         Books service = new Books.Builder(new NetHttpTransport(), new GsonFactory(), null)
                         .setApplicationName("BooksWorldApplication")
                         .build();
-        if (req.getQueryString() != null) {
-            String [] sessionIdParam = req.getQueryString().split("&")[0].split("=");
-            String sessionId = sessionIdParam[1];
+        HttpSession session = req.getSession();
+        if (session != null) {
             CarrelloDao carrelloDao = DBManager.getInstance().getCarrelloDao();
-            HttpSession session = (HttpSession) req.getServletContext().getAttribute(sessionId);
-            if (session != null) {
-                Utente utente = (Utente) session.getAttribute("user");
+            Utente utente = (Utente) session.getAttribute("user");
+            if (utente != null) {
                 Carrello carrello = carrelloDao.UserChart(utente.getUsername());
-                // Carrello carrello = carrelloDao.UserChart("pit0500");
                 Map<String, Integer> libri = carrello.getLibriInCarrello();
+                if (libri.isEmpty()) {
+                    req.setAttribute("sessionid", session.getId());
+                    RequestDispatcher dispatcher = req.getRequestDispatcher("views/carrelloVuoto.html");
+                    dispatcher.forward(req, resp);
+                }
                 ArrayList<VolumeQuantita> volumi = new ArrayList<>();
                 for (String isbn : libri.keySet()) {
                     List volumeList = service.volumes().list(isbn);
@@ -85,9 +87,9 @@ public class MostraCarrello extends HttpServlet {
                     dispatcher.forward(req, resp);
                 }
             }
-        }
-        else {
-            resp.sendRedirect("/login.html");
+            else {
+                resp.sendRedirect("/login.html");
+            }
         }
     }
 
