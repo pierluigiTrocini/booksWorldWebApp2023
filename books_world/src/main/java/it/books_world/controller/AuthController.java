@@ -24,8 +24,11 @@ import jakarta.servlet.http.HttpSession;
 @RestController
 public class AuthController {
     @GetMapping("/login")
-    public void loginOrRedirect(HttpServletResponse resp) throws IOException{
-        resp.sendRedirect("login.html");
+    public void loginOrRedirect(HttpServletRequest req,HttpServletResponse resp) throws IOException{
+        if( req.getAttribute("user") == null )
+            resp.sendRedirect("login.html");
+        else
+            resp.sendRedirect("http:localhost:4200/profilo");
     }
 
     @GetMapping("/signin")
