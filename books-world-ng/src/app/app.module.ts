@@ -12,6 +12,10 @@ import { BooksCardComponent } from './books-card/books-card.component';
 import { RouterModule } from '@angular/router';
 import { VisualizzaBestsellerNytimesComponent } from './visualizza-bestseller-nytimes/visualizza-bestseller-nytimes.component';
 import { RecensioniComponent } from './recensioni/recensioni.component';
+import { DettagliLibriComponent } from './dettagli-libri/dettagli-libri.component';
+
+import { FormsModule, ReactiveFormsModule } from '@angular/forms'; 
+
 
 
 @NgModule({
@@ -23,13 +27,16 @@ import { RecensioniComponent } from './recensioni/recensioni.component';
     VisualizzaLibriComponent,
     BooksCardComponent,
     VisualizzaBestsellerNytimesComponent,
-    RecensioniComponent
+    RecensioniComponent,
+    DettagliLibriComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     RouterModule.forRoot([]),
-    HttpClientModule
+    HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

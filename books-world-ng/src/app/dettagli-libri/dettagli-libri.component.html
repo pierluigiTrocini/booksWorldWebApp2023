@@ -1,0 +1,125 @@
+<div class="container" style="margin-top:30px">
+    <div class="row">
+        <div class="col-sm-4">
+            <img src="{{libro?.volumeInfo?.imageLinks?.smallThumbnail}}" class="rounded img-fluid" onerror="this.src='fotoMancante.png'"height="400" width="300"> 
+            <br>
+            <br>
+            <ng-container *ngIf="libro?.saleInfo?.saleability === 'FOR_SALE'; then showPrice; else showError"></ng-container>
+            <ng-template #showPrice>
+                <h4><span style="color:darkred">Prezzo a {{libro?.saleInfo?.listPrice?.amount}} {{libro?.saleInfo?.listPrice?.currencyCode}}</span></h4>
+            </ng-template>
+            <ng-template #showError>
+                <h4><span style="color:darkred">Prodotto non disponibile.</span></h4>
+            </ng-template>
+            <ng-container *ngIf="username !== ''; then redirectToCart; else redirectToLogin"></ng-container>
+            <ng-template #redirectToCart>
+                <a href="localhost:8080/visualizzaCarrello?username={{username}}"><button type="button" class="btn btn-success mt-1" (click)="aggiungiAlCarrello()">Aggiungi al carrello</button></a>
+            </ng-template>
+            <ng-template #redirectToLogin>
+                <a href="localhost:8080/login"><button type="button" class="btn btn-success mt-1">Aggiungi al carrello</button></a>
+            </ng-template>
+            <ng-container *ngIf="libro?.accessInfo?.epub?.isAvailable; then showPremiumAvailable; else showPremiumNotAvailable"></ng-container>
+            <ng-template #showPremiumAvailable>
+                <a href="{{libro?.accessInfo?.webReaderLink}}" target="_blank"><button type="button" class="btn btn-warning mt-1">Anteprima disponibile</button></a>
+            </ng-template>
+            <ng-template #showPremiumNotAvailable>
+                <button type="button" disabled class="btn btn-warning mt-1">Anteprima non disponibile</button>
+            </ng-template>
+
+        </div>
+        <div class="col-sm-8">
+            <h1><span style="color:rgb(130,114,6)"><b>{{libro?.volumeInfo?.title}}</b></span></h1>
+            <h5>Trama</h5>
+            <p>{{libro?.volumeInfo?.description}}</p>
+            <br>
+            <h2>Informazioni sul prodotto</h2>
+
+            <span class="fw-bold">  Genere: </span>
+            <span *ngFor="let genere of libro?.volumeInfo?.categories">{{genere}} . </span>
+            <br>
+            <span class="fw-bold">  Data Pubblicazione: </span>
+            <span>{{libro?.volumeInfo?.publishDate}}</span>
+            <br>
+            <span class="fw-bold">  Autori: </span>
+            <span *ngFor="let autore of libro?.volumeInfo?.authors">{{autore}} . </span>
+            <br>
+            <span class="fw-bold">  Editori: </span>
+            <span>{{libro?.volumeInfo?.publisher}}</span>
+            <br>
+            <span class="fw-bold">  Numero pagine: </span>
+            <span>{{libro?.volumeInfo?.pageCount}}</span>
+            <br>
+            <span class="fw-bold">  Lingua: </span>
+            <span>{{libro?.volumeInfo?.language}}</span>
+            <br>
+            <span class="fw-bold">  ISBN: </span>
+            <span>{{libro?.volumeInfo?.industryIdentifiers?.[1]}}</span>
+            <br>
+
+        </div>
+    </div>
+
+    <ng-container *ngIf="utentePossiedeLibro !== false && utenteHaPostatoRecensione === false; then showReview"></ng-container>
+    <ng-template #showReview>
+        <div class="row mt-6">
+            <h3> Hai già acquistato questo libro, se vuoi puoi aggiungere una recensione! </h3>
+            <form [formGroup]="formRecensione">
+                <div class="form-group row mt-3">
+                    <div class="col-sm-6">
+                        <input type="text" class="form-control" formControlName="titolo" id="titoloRecensione" placeholder="Inserisci un titolo">
+                    </div>   
+                    <div *ngIf="formRecensione.get('titolo')?.invalid && formRecensione.get('titolo')?.touched "> 
+                        <span style="color:red"> Il titolo della recensione deve contenere dai 20 ai 100 caratteri e non può iniziare con un numero. </span>
+                   </div>
+                </div>
+                <div class="form-group row mt-3">
+                    <div class="col-sm-7">
+                        <textarea class="form-control" formControlName="corpo" id="testoRecensione" placeholder="Descrivi quello che pensi di questo libro" rows="7"></textarea>
+                    </div>
+                    <div *ngIf="formRecensione.get('corpo')?.invalid && formRecensione.get('corpo')?.touched "> 
+                        <span style="color:red"> Il Testo della recensione deve contenere dai 50 ai 2000 caratteri. </span>
+                   </div>
+                </div>
+                <div class="form-group row mt-3" id="aggiungiRecensione">
+                    <h5> Quante stelle assegneresti a questo libro? </h5>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="valutazioneLibro" id="valutazioneUno" value="option1" formControlName="option">
+                        <label class="form-check-label" for="valutazioneUno"> <span class="fa fa-star checked"></span> <span class="fa fa-star checked"></span> <span class="fa fa-star checked"></span> <span class="fa fa-star checked"></span> <span class="fa fa-star checked"></span></label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="valutazioneLibro" id="valutazioneDue" value="option2" formControlName="option">
+                        <label class="form-check-label" for="valutazioneDue"> <span class="fa fa-star checked"></span> <span class="fa fa-star checked"></span> <span class="fa fa-star checked"></span> <span class="fa fa-star checked"></span> </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="valutazioneLibro" id="valutazioneTre" value="option3" formControlName="option">
+                        <label class="form-check-label" for="valutazioneTre"> <span class="fa fa-star checked"></span> <span class="fa fa-star checked"></span> <span class="fa fa-star checked"></span> </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="valutazioneLibro" id="valutazioneQuattro" value="option4" formControlName="option">
+                        <label class="form-check-label" for="valutazioneQuattro"> <span class="fa fa-star checked"></span> <span class="fa fa-star checked"></span> </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="valutazioneLibro" id="valutazioneCinque" value="option5" formControlName="option">
+                        <label class="form-check-label" for="valutazioneCinque"> <span class="fa fa-star checked"></span> </label>
+                    </div>
+                    <div *ngIf="formRecensione.get('option')?.invalid && formRecensione.get('option')?.touched "> 
+                        <span style="color:red"> Devi selezionare il numero di stelle da assegnare alla recensione. </span>
+                   </div>
+                    <button type="button" class="btn btn-primary mt-4" (click)="invioRecensione()">Pubblica la recensione</button>
+                </div>
+                
+            </form>
+        </div>
+    </ng-template>
+    <ng-container *ngIf="utentePossiedeLibro !== false && utenteHaPostatoRecensione === true; then showMessage"></ng-container>
+    <ng-template #showMessage>
+        <div class="row mt-6">
+            <h3> Hai già scritto una recensione per questo libro! </h3>
+        </div>
+    </ng-template>
+
+    <div class="row mt-6">
+        <app-recensioni></app-recensioni>
+    </div>
+
+</div>

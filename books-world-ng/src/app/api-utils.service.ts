@@ -36,6 +36,14 @@ export class ApiUtilsService {
           .pipe(map((data: GoogleBooksApis) => data.items));
   }
 
+  cercaLibriPerIsbn(isbn: string): Observable<Libro[]>{
+    let builder = new UrlBuilder();
+    builder.isbn(isbn);
+    builder.maxResults(1);
+    return this.http.get<GoogleBooksApis>(builder.build())
+          .pipe(map((data: GoogleBooksApis) => data.items));
+  }
+
   getNyTimesBestsellers( nyApiUrl: string ): Observable<NyBook[]>{
     return this.http.get<NewYorkTimesApi>(nyApiUrl)
       .pipe(map((data: NewYorkTimesApi) => data.results.books));

@@ -34,4 +34,27 @@ export class ServerService {
   }
 
 
+
+
+
+
+  aggiungiProdottoCarrello(username: string, isbn: string): Observable<boolean>{
+    return this.http.get<boolean>('http://localhost:8080/addToCart', {params: {username: username, isbn: isbn}});
+  }
+
+  proprietaLibro(isbn: string, username: string): Observable<boolean>{
+    return this.http.get<boolean>('http://localhost:8080/proprietaLibro', {params: {isbn: isbn, username: username}});
+  }
+
+  postataRecensione(isbn: string, username: string): Observable<boolean>{
+    return this.http.get<boolean>('http://localhost:8080/postataRecensione', {params: {isbn: isbn, username: username}});
+  }
+
+  aggiungiRecensione(isbn: string, username: string, titolo: string, testo: string, numStelle: number): Observable<boolean>{
+    return this.http.get<boolean>('http://localhost:8080/addToReviews', {params: {isbn: isbn, username: username, titolo: titolo, testo: testo, numStelle: numStelle}});
+  }
+
+
+
+  
 }

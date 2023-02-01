@@ -5,6 +5,7 @@ export class UrlBuilder{
     private searchFromAuthor ?: string;
     private searchFromPublisher ?: string;
     private searchFromCategory ?: string;
+    private searchFromIsbn ?: string;
 
     private filter: string = "&filter=";
     private printType: string = "&printType=";
@@ -18,6 +19,7 @@ export class UrlBuilder{
     author( content: string ): void{ if( content !== "") this.searchFromAuthor = content; }
     publisher( content: string ): void{ if( content !== "") this.searchFromPublisher = content; }
     category( content: string ): void{ if( content !== "") this.searchFromCategory = content; }
+    isbn( content: string): void{ if( content !== "") this.searchFromCategory = content; }
 
     //Filtri
     partial(): void { this.filter += "partial"; }
@@ -90,6 +92,18 @@ export class UrlBuilder{
           }
           else this.link += this.searchFromCategory;
         }
+
+        if ( this.searchFromIsbn !== undefined ){
+          if ( this.searchFromIsbn !== '' ) {
+            if (this.link.endsWith("q=")) {
+              this.link += "subject:" + this.searchFromIsbn;
+            }
+            else this.link += "+subject:" + this.searchFromIsbn;
+          }
+          else this.link += this.searchFromIsbn;
+        }
+
+        
 
         //Costruzione con filtri
         if( this.filter !== "&filter="  ) this.link += this.filter;

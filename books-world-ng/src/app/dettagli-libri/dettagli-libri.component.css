@@ -1,0 +1,38 @@
+body {
+    background-color: rgba(174, 214, 204, 0.764);
+}
+  
+.bottoneRecensioni{
+    height:38px;
+    width:163px;
+    background-color: darkturquoise;
+      
+}
+  
+p {
+    overflow-wrap: break-word;
+  
+}
+  
+h1 {
+  
+     overflow-wrap: break-word;
+  
+  
+}
+  
+  
+.mt-6 {
+    margin-top: 5rem;
+  
+}
+  
+body {
+    padding-bottom: 300px;
+}
+  
+.fa-star{
+    color: yellow;
+    text-shadow: 0 0 3px black;
+}
+
