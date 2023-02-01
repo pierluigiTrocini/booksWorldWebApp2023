@@ -4,8 +4,12 @@
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css">
         <meta charset="utf-8">
         <title>BooksWorld - Registrazione</title>
-        
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.0.4/popper.js"></script>
+
         <script src="js/pwdStrength.js"></script>
+        <script src="js/validate.js"></script>
     </head>
     <body>
         <header>
@@ -18,7 +22,7 @@
             </nav>
         </header>
 
-        <form method="post" action="login">
+        <form method="post" action="confirmRegistration" id="registrazione">
 
             <div class="container mt-5">
                 <div class="row d-flex justify-content-center">
@@ -30,23 +34,27 @@
                             <div class="row g-3">
                                 <div class="col-md-6">
                                     <label for="nameField" class="form-label">Nome</label>
-                                    <input type="text" class="form-control" id="nameField">
+                                    <input type="text" class="form-control" id="name" value="Pietro">
                                 </div>
                                 <div class="col-md-6">
                                     <label for="surnameField" class="form-label">Cognome</label>
-                                    <input type="text" class="form-control" id="surnameField">
+                                    <input type="text" class="form-control" id="surname" value="Macri">
+                                </div>
+                                <div class="row-12">
+                                    <label for="dateField" class="form-label">Data di nascita</label>
+                                    <input type="date" class="form-control" id="date" value="2000-01-05">
                                 </div>
                                 <div class="col-12">
                                     <label for="usernameField" class="form-label">Username</label>
-                                    <input type="text" class="form-control" id="usernameField">
+                                    <input type="text" class="form-control" id="username" value="pit0500">
                                 </div>
                                 <div class="col-12">
                                     <label for="emailField" class="form-label">Email</label>
-                                    <input type="text" class="form-control" id="emailField">
+                                    <input type="text" class="form-control" id="email" value="pietro.macri@gmail.com">
                                 </div>
                                 <div class="col-12">
                                     <label for="pwd" class="form-label" >Password</label>
-                                    <input type="password" class="form-control" id="pwd" oninput="pwdStrength()">
+                                    <input type="password" class="form-control" id="pwd" value="1234"oninput="pwdStrength()">
                                 </div>
                                 <div class="col-12">
                                     <input type="checkbox" onclick="showPassword()"><span class="text-muted"> mostra password</span>
@@ -54,8 +62,9 @@
 
                                 <hr id="strengthLine" style="border-width: 5px;">
 
-                                <div class="col-12">
+                                <div class="col-md-6">
                                     <button type="submit" class="btn btn-primary">Registrati</button>
+                                    <a class="btn btn-warning" href="http://localhost:8080/login">Indietro</a>
                                 </div>
                             </div>
 

@@ -17,6 +17,31 @@ public class UtenteDaoPostgres implements  UtenteDao{
 	}
 
 	@Override
+	public Utente findByEmail(String email){
+		Utente utente = null;
+		String query = "select * from utente where email = ?";
+		try{
+			PreparedStatement st = conn.prepareStatement(query);
+			st.setString(1, email);
+			ResultSet rs = st.executeQuery();
+
+			if (rs.next()) {
+				utente = new Utente();
+				utente.setUsername(rs.getString("username"));
+				utente.setNome(rs.getString("nome"));
+				utente.setCognome(rs.getString("cognome"));
+				utente.setPassword(rs.getString("password"));
+				long secs = rs.getDate("data_di_nascita").getTime();
+				utente.setData_di_nascita(new java.util.Date(secs));
+				utente.setModeratore(rs.getBoolean("privilegi_moderatore"));
+				utente.setEmail(rs.getString("email"));
+			}
+		}catch(SQLException exception){ exception.printStackTrace(); }
+
+		return utente;
+	}
+
+	@Override
 	public Utente FindByUsername(String username) {
 
 		Utente utente = null;
@@ -30,14 +55,12 @@ public class UtenteDaoPostgres implements  UtenteDao{
 				utente = new Utente();
 				utente.setUsername(rs.getString("username"));
 				utente.setNome(rs.getString("nome"));
-				utente.setCognome(rs.getString("Cognome"));
+				utente.setCognome(rs.getString("cognome"));
 				utente.setPassword(rs.getString("password"));
-				long secs = rs.getDate("data_nascita").getTime();
+				long secs = rs.getDate("data_di_nascita").getTime();
 				utente.setData_di_nascita(new java.util.Date(secs));
-				utente.setModeratore(rs.getBoolean("privilegi_oderatore"));
+				utente.setModeratore(rs.getBoolean("privilegi_moderatore"));
 				utente.setEmail(rs.getString("email"));
-
-
 			}
 
 		} catch (SQLException e) {
