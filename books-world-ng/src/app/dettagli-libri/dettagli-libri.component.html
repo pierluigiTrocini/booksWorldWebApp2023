@@ -1,8 +1,7 @@
-<div class="container" style="margin-top:30px">
-   <h1>{{libri.at(0)}}</h1> 
+<div *ngFor="let libro of libri" class="container" style="margin-top:30px">
     <div class="row">
         <div class="col-sm-4">
-           <img src="{{libro?.volumeInfo?.imageLinks?.smallThumbnail}}" class="rounded img-fluid" onerror="this.src='fotoMancante.png'"height="400" width="300"> 
+           <img src="{{libro?.volumeInfo?.imageLinks?.smallThumbnail}}" class="rounded img-fluid" onerror="this.src='https://i.imgur.com/UG8hCfb.png'"height="400" width="300"> 
             <br>
             <br>
             <ng-container *ngIf="libro?.saleInfo?.saleability === 'FOR_SALE'; then showPrice; else showError"></ng-container>
@@ -36,13 +35,13 @@
             <h2>Informazioni sul prodotto</h2>
 
             <span class="fw-bold">  Genere: </span>
-            <span *ngFor="let genere of libro?.volumeInfo?.categories">{{genere}} . </span>
+            <span *ngFor="let genere of libro?.volumeInfo?.categories">{{genere}}. </span>
             <br>
             <span class="fw-bold">  Data Pubblicazione: </span>
             <span>{{libro?.volumeInfo?.publishDate}}</span>
             <br>
             <span class="fw-bold">  Autori: </span>
-            <span *ngFor="let autore of libro?.volumeInfo?.authors">{{autore}} . </span>
+            <span *ngFor="let autore of libro?.volumeInfo?.authors">{{autore}}. </span>
             <br>
             <span class="fw-bold">  Editori: </span>
             <span>{{libro?.volumeInfo?.publisher}}</span>
@@ -54,7 +53,7 @@
             <span>{{libro?.volumeInfo?.language}}</span>
             <br>
             <span class="fw-bold">  ISBN: </span>
-            <span>{{libro?.volumeInfo?.industryIdentifiers?.[1]}}</span>
+            <span>{{libro?.volumeInfo?.industryIdentifiers?.at(0)?.identifier}}</span>
             <br>
 
         </div>
@@ -120,7 +119,7 @@
     </ng-template>
 
     <div class="row mt-6">
-        <app-recensioni></app-recensioni>
+        <!-- <app-recensioni></app-recensioni> -->
     </div>
 
 </div>

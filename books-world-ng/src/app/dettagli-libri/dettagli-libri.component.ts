@@ -3,7 +3,7 @@ import { Libro, Utente} from '../util';
 import { ServerService } from '../server.service';
 import { ActivatedRoute } from '@angular/router';
 import { ApiUtilsService } from '../api-utils.service';
-import { HttpClient, HttpHandler } from '@angular/common/http';
+import { HttpClient} from '@angular/common/http';
 import {FormControl, FormGroup, Validators} from '@angular/forms'
 
 @Component({
@@ -28,7 +28,6 @@ export class DettagliLibriComponent implements OnInit {
   sessionId: string = "";
 
   libri: Libro[] = [];
-  libro?: Libro;
 
   username: string = "";
 
@@ -58,7 +57,7 @@ export class DettagliLibriComponent implements OnInit {
     if (sessionId != null){
       this.sessionId = sessionId;
     }
-
+    console.log(this.isbn);
 
     if (this.username !== ""){
         this.service.proprietaLibro(this.isbn, this.username).subscribe( utentePossiedeLibro => {
@@ -73,7 +72,8 @@ export class DettagliLibriComponent implements OnInit {
 
     this.api.cercaLibriPerIsbn(this.isbn)
               .subscribe(response => this.libri = response);
-    this.libro = this.libri[0];
+              console.log(this.libri.length);
+
 
 
 
