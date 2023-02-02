@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.google.api.client.http.javanet.NetHttpTransport;
 import com.google.api.client.json.gson.GsonFactory;
 import com.google.api.services.books.v1.Books;
-import com.google.api.services.books.v1.model.Volume;
 import com.google.api.services.books.v1.model.Volumes;
 import com.google.api.services.books.v1.Books.Volumes.List;
 
@@ -31,7 +30,7 @@ public class RisultatiController {
         Volumes volumes = resulList.execute();
 
         req.setAttribute("volumes", volumes.getItems());
-        req.setAttribute("totalItems", volumes.getTotalItems());
+        req.setAttribute("searchText", req.getParameter("searchText"));
         RequestDispatcher dispatcher = req.getRequestDispatcher("views/risultatiRicerca.html");
         dispatcher.forward(req, res);
     }   
