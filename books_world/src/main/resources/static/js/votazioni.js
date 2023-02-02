@@ -1,20 +1,23 @@
 window.addEventListener('load', function(e) {
 
-    var segnalazioni = document.querySelectorAll(".segnalazione");
+    var recensioni = document.querySelectorAll(".recensione");
 
-    segnalazioni.forEach( segnalazione => {
+    recensioni.forEach( recensione => {
 
-        var idSegnalazione = segnalazione.getAttribute("value");
-        var buttonAFavore = document.getElementById("votaAFavore"+idSegnalazione);
-        var buttonContro = document.getElementById("votaContro"+idSegnalazione);
+        var idRecensione = recensione.getAttribute("value");
+        var buttonAFavore = document.getElementById("votaAFavore_"+idRecensione);
+        var buttonContro = document.getElementById("votaContro_"+idRecensione);
 
         buttonAFavore.addEventListener("click", function(e){
+            e.preventDefault();
             $.ajax({
                 type: "post",
                 url: "/votaAFavore",
-                data: {"idSegnalazione": idSegnalazione},
+                data: {"idRecensione": idRecensione},
                 success: function(risposta) {
-                    document.getElementById("")
+                    if (risposta === true) {
+                        document.getElementById(idRecensione).parentNode.remove();
+                    }
                 }
             });
         });
@@ -23,9 +26,11 @@ window.addEventListener('load', function(e) {
             $.ajax({
                 type: "post",
                 url: "/votaContro",
-                data: {"idSegnalazione": idSegnalazione},
+                data: {"idRecensione": idRecensione},
                 success: function(risposta) {
-                    alert("La votazione è andata a buon fine");
+                    if (risposta === true) {
+                        document.getElementById(idRecensione).parentNode.remove();
+                    }
                 }
             });
         });

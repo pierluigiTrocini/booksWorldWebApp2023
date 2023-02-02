@@ -35,7 +35,7 @@
                             <div class="card-body p-4">
                                 <div class="row">
 
-                                    <div class="card mb-3" th:each="recensione : ${recensioni}">
+                                    <div class="card mb-3" th:each="recensione : ${recensioni}" th:id="${recensione.getId()}">
                                         <div class="card-body recensione" th:value="${recensione.getId()}">
                                             <div class="d-flex justify-content-between">
                                                 <div class="d-flex flex-row align-items-center">

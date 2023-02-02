@@ -20,7 +20,7 @@ import jakarta.servlet.http.HttpServletResponse;
 
 @RestController
 public class RisultatiController {
-    
+
     @GetMapping("/risultati")
     @CrossOrigin("http://localhost:4200/")
     public void risultatiRedirect(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException{
@@ -33,5 +33,5 @@ public class RisultatiController {
         req.setAttribute("searchText", req.getParameter("searchText"));
         RequestDispatcher dispatcher = req.getRequestDispatcher("views/risultatiRicerca.html");
         dispatcher.forward(req, res);
-    }   
+    }
 }

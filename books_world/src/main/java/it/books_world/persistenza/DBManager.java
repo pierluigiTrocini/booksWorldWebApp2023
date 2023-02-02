@@ -31,7 +31,7 @@ private static DBManager instance = null;
 	public Connection getConnection() {
 		if (conn == null) {
 			try {
-				conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/", "postgres", "1234");
+				conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/libri", "postgres", "1234");
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
