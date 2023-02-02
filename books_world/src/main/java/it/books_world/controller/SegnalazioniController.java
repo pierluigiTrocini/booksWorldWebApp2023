@@ -1,11 +1,10 @@
 package it.books_world.controller;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 
 import it.books_world.persistenza.DBManager;
@@ -13,16 +12,12 @@ import it.books_world.persistenza.dao.RecensioneDao;
 import it.books_world.persistenza.dao.SegnalazioneDao;
 import it.books_world.persistenza.model.Recensione;
 import it.books_world.persistenza.model.Segnalazione;
-import jakarta.servlet.RequestDispatcher;
-import jakarta.servlet.ServletException;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
 
-@RestController
+@Controller
 public class SegnalazioniController {
 
     @GetMapping("/segnalazioni")
-    public void getSegnalazioni(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
+    public String getSegnalazioni(Model model) {
         SegnalazioneDao segnalazioneDao = DBManager.getInstance().getSegnalazioneDao();
         List<Segnalazione> segnalazioni = segnalazioneDao.findAll();
         List<Recensione> recensioni = new ArrayList<>();
@@ -31,9 +26,8 @@ public class SegnalazioniController {
             Recensione recensione = recensioneDao.FindByPrimaryKey(segnalazione.getRecensione());
             recensioni.add(recensione);
         }
-        req.setAttribute("recensioni", recensioni);
-        RequestDispatcher dispatcher = req.getRequestDispatcher("views/segnalazioni.html");
-        dispatcher.forward(req, resp);
+        model.addAttribute("recensioni", recensioni);
+        return "segnalazioni.html";
     }
 
 }
