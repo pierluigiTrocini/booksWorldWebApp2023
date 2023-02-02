@@ -62,8 +62,8 @@
                           </div>
                           <div style="width: 200px;">
                             <div th:if="${vq.volume.getSaleInfo().getListPrice()} != null">
-                              <h5 class="mb-0" th:id="prezzo"
-                              th:text="|(${vq.volume.getSaleInfo().getListPrice().getAmount()} * ${vq.quantita})€|"></h5>
+                              <h5 class="mb-0" th:id="|prezzo_${vq.isbn}|"
+                              th:text="|${vq.volume.getSaleInfo().getListPrice().getAmount()}€|"></h5>
                             </div>
                             <div th:if="${vq.volume.getSaleInfo().getListPrice()} == null">
                               <div class="mb-0 fw-bold">0€</div>

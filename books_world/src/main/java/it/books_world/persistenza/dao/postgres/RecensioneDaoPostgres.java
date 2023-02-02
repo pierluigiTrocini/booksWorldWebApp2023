@@ -46,7 +46,7 @@ public class RecensioneDaoPostgres implements RecensioneDao{
 			PreparedStatement st;
 			try {
 				st = conn.prepareStatement(insertStr);
-				
+
 				recensione.setId(getId());
 
 				st.setLong(1, recensione.getId());
@@ -137,12 +137,38 @@ public class RecensioneDaoPostgres implements RecensioneDao{
 		try {
 			PreparedStatement st = conn.prepareStatement(updateStr);
 			st.setLong(1,recensione.getId());
-			st.executeUpdate();
 
 		}catch (SQLException e) {
 			e.printStackTrace();
 		}
 
+	}
+
+	@Override
+	public Recensione FindByPrimaryKey(Long id) {
+		Recensione rec = null;
+		String query = "select * from recensione where id = ?";
+		try {
+			PreparedStatement st = conn.prepareStatement(query);
+			st.setLong(1, id);
+			ResultSet rs = st.executeQuery();
+			if (rs.next()) {
+				rec = new Recensione();
+				rec.setId(rs.getLong("id"));
+				Utente utente = DBManager.getInstance().getUtenteDao().FindByUsername(rs.getString("scrittore"));
+				rec.setScrittaDa(utente);
+				rec.setSegnalabile(rs.getBoolean("segnalabile"));
+				rec.setIBSN(rs.getString("isbn_libro"));
+				rec.setTitolo(rs.getString("titolo"));
+				rec.setTesto(rs.getString("testo"));
+				rec.setNumeroStelle(rs.getInt("num_stelle"));
+				rec.setNumeroMiPiace(rs.getInt("num_mi_piace"));
+				rec.setNumeroNonMiPiace(rs.getInt("num_non_mi_piace"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return rec;
 	}
 
 }

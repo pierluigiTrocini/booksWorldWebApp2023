@@ -16,7 +16,6 @@ public class QuantitaController {
     public Integer aumenta(HttpServletRequest req, String isbn) {
         HttpSession session = req.getSession();
         Utente utente = (Utente) session.getAttribute("user");
-        DBManager.getInstance().getCarrelloDao().InsertorUpdate(utente.getUsername(), isbn);
         CarrelloDao carrelloDao = DBManager.getInstance().getCarrelloDao();
         carrelloDao.InsertorUpdate(utente.getUsername(), isbn);
         return carrelloDao.UserChart(utente.getUsername()).getLibriInCarrello().get(isbn);

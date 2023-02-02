@@ -70,7 +70,7 @@ public class Recensione {
 	public void setSegnalabile(Boolean segnalabile) {
 		Segnalabile = segnalabile;
 	}
-	
-	
-	
+
+
+
 }

@@ -6,9 +6,11 @@ import java.sql.SQLException;
 
 import it.books_world.persistenza.dao.CarrelloDao;
 import it.books_world.persistenza.dao.RecensioneDao;
+import it.books_world.persistenza.dao.SegnalazioneDao;
 import it.books_world.persistenza.dao.UtenteDao;
 import it.books_world.persistenza.dao.postgres.CarrelloDaoPostgres;
 import it.books_world.persistenza.dao.postgres.RecensioneDaoPostgres;
+import it.books_world.persistenza.dao.postgres.SegnalazioneDaoPostgres;
 import it.books_world.persistenza.dao.postgres.UtenteDaoPostgres;
 
 public class DBManager {
@@ -47,4 +49,9 @@ private static DBManager instance = null;
 	public CarrelloDao getCarrelloDao() {
 		return new CarrelloDaoPostgres(getConnection());
 	}
+
+	public SegnalazioneDao getSegnalazioneDao() {
+		return new SegnalazioneDaoPostgres(getConnection());
+	}
+
 }

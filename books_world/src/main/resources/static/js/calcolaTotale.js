@@ -1,11 +1,11 @@
 window.addEventListener('load', function(e) {
+
     var totale = 0;
     var listaPrezzi = document.querySelectorAll("#prezzo");
     listaPrezzi.forEach(function(prezzo) {
         totale += prezzo;
     });
     this.document.querySelector("#totale").innerHTML += totale + "€";
-
     var libri = this.document.querySelectorAll(".libro");
 
     libri.forEach(function(libro) {
@@ -23,6 +23,9 @@ window.addEventListener('load', function(e) {
                 data: {"isbn": isbnLibro},
                 success: function(risposta) {
                     document.getElementById("quantita_"+isbnLibro).innerHTML = risposta;
+                    var quantita = parseInt(risposta);
+                    var prezzo = parseFloat(document.getElementById("prezzo_"+isbnLibro).innerHTML);
+                    document.getElementById("prezzo_"+isbnLibro).innerHTML = (prezzo/(quantita-1))*quantita;
                 }
             });
         });
@@ -34,6 +37,9 @@ window.addEventListener('load', function(e) {
                 data: {"isbn": isbnLibro},
                 success: function(risposta) {
                     document.getElementById("quantita_"+isbnLibro).innerHTML = risposta;
+                    var quantita = parseInt(risposta);
+                    var prezzo = parseFloat(document.getElementById("prezzo_"+isbnLibro).innerHTML);
+                    document.getElementById("prezzo_"+isbnLibro).innerHTML = (prezzo/(quantita+1))*quantita;
                 }
             });
         });
