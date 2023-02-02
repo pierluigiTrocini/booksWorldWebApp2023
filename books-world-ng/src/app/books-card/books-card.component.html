@@ -10,7 +10,7 @@
         </a>
     </ng-template>
 
-    <a href="localhost:8080/visualizzaInfo?isbn={{libro?.volumeInfo?.industryIdentifiers?.at(0)?.identifier}}">
+    <a href="/book/{{libro?.volumeInfo?.industryIdentifiers?.at(0)?.identifier}}?sessionId={{getSessionId()}}" (click)="NascondiRisultati()" > 
         <img src="{{libro?.volumeInfo?.imageLinks?.smallThumbnail}}" class="rounded mx-auto d-block"
             width="75%" height="75%"
         alt="Anteprima non disponibile"/>

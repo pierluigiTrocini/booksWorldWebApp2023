@@ -11,11 +11,11 @@
             <ng-template #showError>
                 <h4><span style="color:darkred">Prodotto non disponibile.</span></h4>
             </ng-template>
-            <ng-container *ngIf="libro?.saleInfo?.saleability === 'FOR_SALE' && (utente.username !== '' && utente.username !== null); then showButtonToCart"></ng-container>
+            <ng-container *ngIf="libro?.saleInfo?.saleability === 'FOR_SALE' && (utente.username != '' && utente.username != null); then showButtonToCart"></ng-container>
             <ng-template #showButtonToCart>
                 <a href="localhost:8080/visualizzaCarrello?username={{utente.username}}"><button type="button" class="btn btn-success mt-1" (click)="aggiungiAlCarrello()">Aggiungi al carrello</button></a>
             </ng-template>
-            <ng-container *ngIf="libro?.saleInfo?.saleability === 'FOR_SALE' && (utente.username === '' || utente.username === null); then showButtonToLogin"></ng-container>
+            <ng-container *ngIf="libro?.saleInfo?.saleability === 'FOR_SALE' && (utente.username === '' || utente.username == null); then showButtonToLogin"></ng-container>
             <ng-template #showButtonToLogin>
                 <a href="localhost:8080/login"><button type="button" class="btn btn-success mt-1">Aggiungi al carrello</button></a>
             </ng-template>
@@ -124,9 +124,8 @@
     </ng-template>
 
     <div class="row mt-6">
-        <!-- <app-recensioni></app-recensioni> -->
+        <app-recensioni [ISBN]="isbn" [aggiorna]="utenteHaPostatoRecensione" [utente]="utente"></app-recensioni>
     </div>
 
 </div>
 
-<app-recensioni [ISBN]="isbn" [aggiorna]="utenteHaPostatoRecensione" [utente]="utente"></app-recensioni>

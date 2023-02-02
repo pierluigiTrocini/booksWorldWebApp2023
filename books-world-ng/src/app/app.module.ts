@@ -14,7 +14,8 @@ import { VisualizzaBestsellerNytimesComponent } from './visualizza-bestseller-ny
 import { RecensioniComponent } from './recensioni/recensioni.component';
 import { DettagliLibriComponent } from './dettagli-libri/dettagli-libri.component';
 
-import { FormsModule, ReactiveFormsModule } from '@angular/forms'; 
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ProfiloComponent } from './profilo/profilo.component'; 
 
 
 
@@ -28,7 +29,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     BooksCardComponent,
     VisualizzaBestsellerNytimesComponent,
     RecensioniComponent,
-    DettagliLibriComponent
+    DettagliLibriComponent,
+    ProfiloComponent
   ],
   imports: [
     BrowserModule,
