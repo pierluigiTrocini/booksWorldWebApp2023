@@ -29,9 +29,7 @@ export class DettagliLibriComponent implements OnInit {
 
   libri: Libro[] = [];
 
-  username: string = "";
-
-  utente?: Utente;
+  utente: Utente = new Utente();
 
 
 
@@ -56,14 +54,23 @@ export class DettagliLibriComponent implements OnInit {
     let sessionId = url.searchParams.get("sessionId")
     if (sessionId != null){
       this.sessionId = sessionId;
-    }
-    console.log(this.isbn);
+      this.service.getUserBySession(this.sessionId).subscribe( Utente => {
+        this.utente = Utente;});
+      }
+    
 
-    if (this.username !== ""){
-        this.service.proprietaLibro(this.isbn, this.username).subscribe( utentePossiedeLibro => {
+
+
+
+
+
+
+
+    if (this.utente.username !== "" && this.utente.username != null){
+        this.service.proprietaLibro(this.isbn, this.utente.username).subscribe( utentePossiedeLibro => {
           this.utentePossiedeLibro = utentePossiedeLibro;});
         
-        this.service.postataRecensione(this.isbn, this.username).subscribe( utenteHaPostatoRecensione => {
+        this.service.postataRecensione(this.isbn, this.utente.username).subscribe( utenteHaPostatoRecensione => {
           this.utenteHaPostatoRecensione = utenteHaPostatoRecensione;});
     }
       
@@ -83,10 +90,12 @@ export class DettagliLibriComponent implements OnInit {
 
 
   aggiungiAlCarrello(): void{
-    this.service.aggiungiProdottoCarrello(this.username, this.isbn).subscribe(result => {
-      if(result){
-        console.log("aggiuntoConSuccesso");
-      }})
+    if (this.utente.username != null){
+      this.service.aggiungiProdottoCarrello(this.utente.username, this.isbn).subscribe(result => {
+        if(result){
+          console.log("aggiuntoConSuccesso");
+        }})
+    }
 
   }
 
@@ -117,8 +126,8 @@ export class DettagliLibriComponent implements OnInit {
             numStelle = 1;
         }
 
-        if (titolo != null && testo != null && numStelle != null){
-            this.service.aggiungiRecensione(this.isbn, this.username, titolo , testo, numStelle ).subscribe(result =>{
+        if (titolo != null && testo != null && numStelle != null && this.utente.username != null){
+            this.service.aggiungiRecensione(this.isbn, this.utente.username, titolo , testo, numStelle ).subscribe(result =>{
                 if(result){
                   console.log("recensioneInseritaConSuccesso");
                 }

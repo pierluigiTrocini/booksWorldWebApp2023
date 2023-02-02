@@ -9,7 +9,7 @@ export interface Libro {
     title: string;
     authors: string[];
     publisher: string;
-    publishDate: string;
+    publishedDate: string;
     description: string;
     pageCount: number;
     categories: string[];

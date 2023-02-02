@@ -11,25 +11,30 @@
             <ng-template #showError>
                 <h4><span style="color:darkred">Prodotto non disponibile.</span></h4>
             </ng-template>
-            <ng-container *ngIf="username !== ''; then redirectToCart; else redirectToLogin"></ng-container>
-            <ng-template #redirectToCart>
-                <a href="localhost:8080/visualizzaCarrello?username={{username}}"><button type="button" class="btn btn-success mt-1" (click)="aggiungiAlCarrello()">Aggiungi al carrello</button></a>
+            <ng-container *ngIf="libro?.saleInfo?.saleability === 'FOR_SALE' && (utente.username !== '' && utente.username !== null); then showButtonToCart"></ng-container>
+            <ng-template #showButtonToCart>
+                <a href="localhost:8080/visualizzaCarrello?username={{utente.username}}"><button type="button" class="btn btn-success mt-1" (click)="aggiungiAlCarrello()">Aggiungi al carrello</button></a>
             </ng-template>
-            <ng-template #redirectToLogin>
+            <ng-container *ngIf="libro?.saleInfo?.saleability === 'FOR_SALE' && (utente.username === '' || utente.username === null); then showButtonToLogin"></ng-container>
+            <ng-template #showButtonToLogin>
                 <a href="localhost:8080/login"><button type="button" class="btn btn-success mt-1">Aggiungi al carrello</button></a>
             </ng-template>
-            <ng-container *ngIf="libro?.accessInfo?.epub?.isAvailable; then showPremiumAvailable; else showPremiumNotAvailable"></ng-container>
+            <ng-container *ngIf="libro?.saleInfo?.saleability !== 'FOR_SALE'; then showButtonDisabled"></ng-container>
+            <ng-template #showButtonDisabled>
+                <button type="button" disabled class="btn btn-success mt-1">Non disponibile</button>
+            </ng-template>
+            <ng-container *ngIf="libro?.accessInfo?.epub?.isAvailable; then showPremiumAvailable; else showPremiumNotAvailable"></ng-container> 
             <ng-template #showPremiumAvailable>
-                <a href="{{libro?.accessInfo?.webReaderLink}}" target="_blank"><button type="button" class="btn btn-warning mt-1">Anteprima disponibile</button></a>
+                <a href="{{libro?.accessInfo?.webReaderLink}}" target="_blank"><button type="button" class="btn btn-warning mt-1 pulsanteAnteprima">Anteprima disponibile</button></a>
             </ng-template>
             <ng-template #showPremiumNotAvailable>
-                <button type="button" disabled class="btn btn-warning mt-1">Anteprima non disponibile</button>
+                <button type="button" disabled class="btn btn-warning mt-1 pulsanteAnteprima">Anteprima non disponibile</button> 
             </ng-template>
 
         </div>
         <div class="col-sm-8">
             <h1><span style="color:rgb(130,114,6)"><b>{{libro?.volumeInfo?.title}}</b></span></h1>
-            <h5>Trama</h5>
+            <h5>Descrizione</h5>
             <p>{{libro?.volumeInfo?.description}}</p>
             <br>
             <h2>Informazioni sul prodotto</h2>
@@ -38,19 +43,19 @@
             <span *ngFor="let genere of libro?.volumeInfo?.categories">{{genere}}. </span>
             <br>
             <span class="fw-bold">  Data Pubblicazione: </span>
-            <span>{{libro?.volumeInfo?.publishDate}}</span>
+            <span>{{libro?.volumeInfo?.publishedDate}}</span>
             <br>
             <span class="fw-bold">  Autori: </span>
             <span *ngFor="let autore of libro?.volumeInfo?.authors">{{autore}}. </span>
             <br>
             <span class="fw-bold">  Editori: </span>
-            <span>{{libro?.volumeInfo?.publisher}}</span>
+            <span>{{libro?.volumeInfo?.publisher}}.</span>
             <br>
             <span class="fw-bold">  Numero pagine: </span>
             <span>{{libro?.volumeInfo?.pageCount}}</span>
             <br>
             <span class="fw-bold">  Lingua: </span>
-            <span>{{libro?.volumeInfo?.language}}</span>
+            <span>{{libro?.volumeInfo?.language}}.</span>
             <br>
             <span class="fw-bold">  ISBN: </span>
             <span>{{libro?.volumeInfo?.industryIdentifiers?.at(0)?.identifier}}</span>
@@ -123,3 +128,5 @@
     </div>
 
 </div>
+
+<app-recensioni [ISBN]="isbn" [aggiorna]="utenteHaPostatoRecensione" [utente]="utente"></app-recensioni>
