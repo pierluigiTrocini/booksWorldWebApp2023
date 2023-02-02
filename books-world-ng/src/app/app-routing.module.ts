@@ -7,6 +7,7 @@ import { MenuBarComponent } from './menu-bar/menu-bar.component';
 const routes: Routes = [
   {path: '#', component: MenuBarComponent},
   {path: 'book/:ISBN', component: DettagliLibriComponent},
+  {path: 'profilo'}
 ];
 
 @NgModule({

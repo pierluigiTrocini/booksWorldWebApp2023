@@ -2,7 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Libro } from '../util';
 import { ApiUtilsService } from '../api-utils.service';
 import { Router } from '@angular/router';
-
+import { AppComponent } from '../app.component';
 @Component({
   selector: 'app-menu-bar',
   templateUrl: './menu-bar.component.html',
@@ -15,7 +15,7 @@ export class MenuBarComponent implements OnInit {
 
   libri: Libro[] = [];
 
-  constructor(private router: Router){}
+  constructor(private router: Router,private app:AppComponent){}
 
   changeStatusRicerca($event: any) {
     this.ricercaAvanzataChecked = !this.ricercaAvanzataChecked;
@@ -31,5 +31,15 @@ export class MenuBarComponent implements OnInit {
   ngOnInit(): void {
 
   }
+  public NascondiRisultati():void{
+    
+    this.router.navigateByUrl('#');
+  }
+
+  public getSessionId():string{
+    return this.app.getSessionId();
+
+  }
+  
 
 }
