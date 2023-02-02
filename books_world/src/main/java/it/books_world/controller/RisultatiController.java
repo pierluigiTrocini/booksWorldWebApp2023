@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.google.api.client.http.javanet.NetHttpTransport;
 import com.google.api.client.json.gson.GsonFactory;
 import com.google.api.services.books.v1.Books;
-import com.google.api.services.books.v1.model.Volume;
 import com.google.api.services.books.v1.model.Volumes;
 import com.google.api.services.books.v1.Books.Volumes.List;
 
@@ -21,7 +20,7 @@ import jakarta.servlet.http.HttpServletResponse;
 
 @RestController
 public class RisultatiController {
-    
+
     @GetMapping("/risultati")
     @CrossOrigin("http://localhost:4200/")
     public void risultatiRedirect(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException{
@@ -34,5 +33,5 @@ public class RisultatiController {
         req.setAttribute("totalItems", volumes.getTotalItems());
         RequestDispatcher dispatcher = req.getRequestDispatcher("views/risultatiRicerca.html");
         dispatcher.forward(req, res);
-    }   
+    }
 }

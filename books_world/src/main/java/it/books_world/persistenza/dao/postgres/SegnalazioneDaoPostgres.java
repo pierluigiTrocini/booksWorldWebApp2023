@@ -158,5 +158,27 @@ public class SegnalazioneDaoPostgres implements SegnalazioneDao {
 		}
 	}
 
+
+	@Override
+	public Segnalazione FindByPrimaryKey(Long id) {
+		Segnalazione segnalazione = null;
+		String query = "select * from segnalazione where recensione = ?";
+		try {
+			PreparedStatement st = conn.prepareStatement(query);
+			st.setLong(1, id);
+			ResultSet rs = st.executeQuery();
+			if (rs.next()) {
+				segnalazione = new Segnalazione();
+				segnalazione.setRecensione(id);
+				segnalazione.setNum_segnalazioni(rs.getLong("num_segnalazioni"));
+				segnalazione.setVoti_favorevoli_eliminazione(rs.getLong("voti_favorevoli_eliminazione"));
+				segnalazione.setVoti_sfavorevoli_eliminazione(rs.getLong("voti_sfavorevoli_eliminazione"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return segnalazione;
+	}
+
 }
 
