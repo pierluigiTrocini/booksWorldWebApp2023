@@ -21,11 +21,11 @@ export class AppComponent {
     const urlParams=new URLSearchParams(window.location.search);
     let session=urlParams.get("jsessionid");
     if(session!=null && session != ""){
-      this.sessionId=session;
       this.service.checkisLogged(session).subscribe(isLogged=>this.isLogged=this.isLogged).add(()=>{
         if(this.isLogged && session!=null && session!=""){
           this.service.getUserBySession(session).subscribe(utente=>this.utente=utente).add(()=>{
             if(this.isLogged && session!=null && session!=""){
+              this.sessionId=session;
               if(this.utente.username == undefined){
                 this.isLogged=false;
                 window.location.replace("http://localhost4200/");
