@@ -54,10 +54,10 @@ public class RisultatiController {
     }
 
     @PostMapping("/ordineAlfabetico")
-    public void ordineAlfabetico( @RequestBody JsonResponse response ) throws IOException{
+    public void ordineAlfabetico( @RequestBody JsonResponse response, HttpServletRequest req, HttpServletResponse res) throws IOException{
         Volumes volumes = getVolumes(response.getContent());
         if( response.getValue() ){
-            
+            //ordine alfabetico
         }
         else{
             //ordine inverso
@@ -67,19 +67,28 @@ public class RisultatiController {
     }
 
     @PostMapping("/googleRating")
-    public void googleRating ( @RequestBody JsonResponse response ) throws IOException{
+    public void googleRating ( @RequestBody JsonResponse response, HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException{
         Volumes volumes = getVolumes(response.getContent());
         if( response.getValue() ){
-
+            //visualizza solo i votati da google
+            volumes.getItems().removeIf((volume) -> {
+                return volume.getVolumeInfo().getAverageRating() == null;
+            });
         }
         else{
-            
+            volumes.getItems().removeIf((volume) -> {
+                return volume.getVolumeInfo().getAverageRating() != null;
+            });
         }
+
+        req.setAttribute("volumes", volumes.getItems());
+        RequestDispatcher dispatcher = req.getRequestDispatcher("views/risultatiRicerca.html");
+        dispatcher.forward(req, res);
 
     }
 
     @PostMapping("/filtroLingua")
-    public void filtroLingua( @RequestBody JsonResponse response ) throws IOException{
+    public void filtroLingua( @RequestBody JsonResponse response, HttpServletRequest req, HttpServletResponse res) throws IOException{
         Volumes volumes = getVolumes(response.getContent());
 
     }
