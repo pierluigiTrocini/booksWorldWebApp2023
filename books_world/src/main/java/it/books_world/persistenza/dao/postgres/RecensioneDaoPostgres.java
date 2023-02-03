@@ -16,41 +16,39 @@ import it.books_world.persistenza.model.Utente;
 public class RecensioneDaoPostgres implements RecensioneDao{
 
 	Connection conn;
-	
+
 	private static final String sequence = "SELECT nextval('recensine_id_seq') AS id";
-	
+
 	public RecensioneDaoPostgres(Connection conn) {
 		this.conn = conn;
 	}
-	
+
 	private  Long getId(){
 		Long id = null;
 		try {
 			PreparedStatement statement = conn.prepareStatement(sequence);
-			
+
 			ResultSet result = statement.executeQuery();
 			result.next();
 			id = result.getLong("id");
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 		return id;
 	}
-	
+
 	@Override
 	public void Save(Recensione recensione) {
 		if (recensione.getId() == null) {
 			String insertStr = "INSERT INTO recensione VALUES (?, ?, ?, ?, ?, ?, ? , ?, ?)";
-			
+
 			PreparedStatement st;
 			try {
 				st = conn.prepareStatement(insertStr);
-				
-				
+
 				recensione.setId(getId());
-				
+
 				st.setLong(1, recensione.getId());
 				st.setString(2, recensione.getScrittaDa().getUsername());
 				st.setBoolean(3, recensione.getSegnalabile());
@@ -60,35 +58,29 @@ public class RecensioneDaoPostgres implements RecensioneDao{
 				st.setInt(7, recensione.getNumeroStelle());
 				st.setInt(8, recensione.getNumeroMiPiace());
 				st.setInt(9, recensione.getNumeroNonMiPiace());
-				
-				
-				
+
 				st.executeUpdate();
-				
+
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-		}else {System.out.println("Id deve essere null");}
-	
-		
-		
+		}
+		else {System.out.println("Id deve essere null");}
 	}
 
 	@Override
 	public void Delete(Recensione recensione) {
-		String query = "DELETE FROM recensione WHERE id = ?";		
+		String query = "DELETE FROM recensione WHERE id = ?";
 		try {
 			PreparedStatement st = conn.prepareStatement(query);
 			st.setLong(1, recensione.getId());
 			st.executeUpdate();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
-		
-	
+
+
 
 	@Override
 	public List<Recensione> AllBookReviews(String ISBN) {
@@ -98,16 +90,14 @@ public class RecensioneDaoPostgres implements RecensioneDao{
 			PreparedStatement st = conn.prepareStatement(query);
 			st.setString(1,ISBN );
 			ResultSet rs = st.executeQuery();
-			
+
 			while (rs.next()) {
 				Recensione recensione = new Recensione();
 				recensione.setId(rs.getLong("id"));
-				
+
 				Utente utente = DBManager.getInstance().
 						getUtenteDao().FindByUsername(rs.getString("scrittore"));
-				
-				
-				
+
 				recensione.setScrittaDa(utente);
 				recensione.setSegnalabile(rs.getBoolean("segnalabile"));
 				recensione.setIBSN(rs.getString("isbn_libro"));
@@ -116,22 +106,18 @@ public class RecensioneDaoPostgres implements RecensioneDao{
 				recensione.setNumeroStelle(rs.getInt("num_stelle"));
 				recensione.setNumeroMiPiace(rs.getInt("num_mi_piace"));
 				recensione.setNumeroNonMiPiace(rs.getInt("num_non_mi_piace"));
-				
-				
-				
 
 				recensioni.add(recensione);
 			}
-	}
+		}
 		catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return recensioni;
-		
+
 	}
 
-	
+
 	@Override
 	public void IncrementLikes(Recensione recensione) {
 		String updateStr = "UPDATE recensione set num_mi_piace=num_mi_piace+1 where id=?";
@@ -139,12 +125,8 @@ public class RecensioneDaoPostgres implements RecensioneDao{
 			PreparedStatement st = conn.prepareStatement(updateStr);
 			st.setLong(1,recensione.getId());
 			st.executeUpdate();
-			
-			
-			
-			
+
 		}catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -155,18 +137,38 @@ public class RecensioneDaoPostgres implements RecensioneDao{
 		try {
 			PreparedStatement st = conn.prepareStatement(updateStr);
 			st.setLong(1,recensione.getId());
-			st.executeUpdate();
-			
-			
-			
-			
+
 		}catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 	}
-	
-	
+
+	@Override
+	public Recensione FindByPrimaryKey(Long id) {
+		Recensione rec = null;
+		String query = "select * from recensione where id = ?";
+		try {
+			PreparedStatement st = conn.prepareStatement(query);
+			st.setLong(1, id);
+			ResultSet rs = st.executeQuery();
+			if (rs.next()) {
+				rec = new Recensione();
+				rec.setId(rs.getLong("id"));
+				Utente utente = DBManager.getInstance().getUtenteDao().FindByUsername(rs.getString("scrittore"));
+				rec.setScrittaDa(utente);
+				rec.setSegnalabile(rs.getBoolean("segnalabile"));
+				rec.setIBSN(rs.getString("isbn_libro"));
+				rec.setTitolo(rs.getString("titolo"));
+				rec.setTesto(rs.getString("testo"));
+				rec.setNumeroStelle(rs.getInt("num_stelle"));
+				rec.setNumeroMiPiace(rs.getInt("num_mi_piace"));
+				rec.setNumeroNonMiPiace(rs.getInt("num_non_mi_piace"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return rec;
+	}
 
 }

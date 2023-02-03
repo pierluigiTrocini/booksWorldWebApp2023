@@ -1,0 +1,86 @@
+<html>
+    <head>
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css">
+        <meta charset="utf-8">
+        <title>BooksWorld - Registrazione</title>
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.0.4/popper.js"></script>
+
+        <script src="js/pwdStrength.js"></script>
+        <script src="js/validate.js"></script>
+    </head>
+    <body>
+        <header>
+            <nav class="navbar navbar-expand-lg bg-body-tertiary" data-bs-theme="dark">
+                <ul class="navbar-nav">
+                    <li class="nav-item mx-3">
+                        <a class="navbar-brand active fw-bold fs-3" aria-current="page" href="http://localhost:4200/#">Books World</a>
+                    </li>
+                </ul>
+            </nav>
+        </header>
+
+        <form method="post" action="confirmRegistration" id="registrazione">
+
+            <div class="container mt-5">
+                <div class="row d-flex justify-content-center">
+                    <div class="col-md-6">
+                        <div class="card px-5 py-5">
+                            <div class="bg-transparent text-center">
+                                <font class="fw-bold fs-4">BooksWorld</font> - Registrati
+                            </div>
+                            <div class="row g-3">
+                                <div class="col-md-6">
+                                    <label for="nameField" class="form-label">Nome</label>
+                                    <input type="text" class="form-control" id="name" >
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="surnameField" class="form-label">Cognome</label>
+                                    <input type="text" class="form-control" id="surname" >
+                                </div>
+                                <div class="row-12">
+                                    <label for="dateField" class="form-label">Data di nascita</label>
+                                    <input type="date" class="form-control" id="date">
+                                </div>
+                                <div class="col-12">
+                                    <label for="usernameField" class="form-label">Username</label>
+                                    <input type="text" class="form-control" id="username" >
+                                </div>
+                                <div class="col-12">
+                                    <label for="emailField" class="form-label">Email</label>
+                                    <input type="text" class="form-control" id="email" macri@gmail.com">
+                                </div>
+                                <div class="col-12">
+                                    <label for="pwd" class="form-label" >Password</label>
+                                    <input type="password" class="form-control" id="pwd" oninput="pwdStrength()">
+                                </div>
+                                <div class="col-12">
+                                    <input type="checkbox" onclick="showPassword()"><span class="text-muted"> mostra password</span>
+                                </div>
+
+                                <hr id="strengthLine" style="border-width: 5px;">
+
+                                <div class="col-md-6">
+                                    <button type="submit" class="btn btn-primary">Registrati</button>
+                                    <a class="btn btn-warning" href="http://localhost:8080/login">Indietro</a>
+                                </div>
+                            </div>
+
+                        </div>                        
+                    </div>
+                </div>
+            </div>
+
+        </form>
+
+        <p style="position: fixed;
+        text-align: center;
+        bottom: 0px;
+        width: 100%" class="text-muted">
+            Progetto Web Application 2023 [Astorino, Busiello, Macrì, Trocini]      
+        </p>
+    </body>
+
+</html>

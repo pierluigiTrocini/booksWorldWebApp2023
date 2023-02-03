@@ -1,6 +1,6 @@
 <nav class="navbar navbar-dark bg-dark">
-  <form class="d-flex flex-row mx-1">
-    <input type="text" class="form-control mx-1" placeholder="Titolo..." aria-label="Search">
+  <form class="d-flex flex-row mx-1" method="get" action="http://localhost:8080/risultati">
+    <input type="text" class="form-control mx-1" placeholder="Titolo..." aria-label="Search" id="searchText" name="searchText">
     <button class="btn btn-outline-success mx-1" type="submit">Cerca</button>
   </form>
 
@@ -26,6 +26,7 @@
 
 <ng-template #Login>
   <div class="d-flex flex-row">
+<<<<<<< HEAD
     <a href="localhost:8080/login">
     <button type="button" class="btn btn-outline-primary mx-2">
       <span class="material-icons">shopping_cart</span>
@@ -38,6 +39,17 @@
       </button>
     </a>
 
+=======
+    <a type="button" class="btn btn-outline-primary mx-2" href="http://localhost:8080/mostraCarrello">
+      <span class="material-icons">shopping_cart</span>
+    </a>
+    <a type="button" class="btn btn-outline-primary mx-2" href="http://localhost:8080/login">
+      <span class="material-icons">person</span>
+      <span *ngIf="false">
+        username
+      </span>
+    </a>
+>>>>>>> backend_pages
   </div>
     
 </ng-template>
@@ -52,6 +64,11 @@
     <ul class="navbar-nav">
         <li class="nav-item mx-3">
             <a class="navbar-brand active fw-bold fs-3" aria-current="page" href="/">Books World</a>
+        </li>
+        <li class="nav-item mx-3">
+          <a class="nav-link active fw-bold fs-5" aria-current="page" href="http://localhost:8080/chi_siamo.html">
+            Chi Siamo
+          </a>
         </li>
     </ul>
   </div>

@@ -10,5 +10,5 @@ public interface RecensioneDao {
 	public List<Recensione>AllBookReviews(String ISBN);
 	public void IncrementLikes(Recensione recensione);
 	public void IncrementDislikes(Recensione recensione);
-	
+	public Recensione FindByPrimaryKey(Long id);
 }
