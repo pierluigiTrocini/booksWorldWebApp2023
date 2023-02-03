@@ -4,13 +4,10 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.HashMap;
-
-import it.books_world.persistenza.DBManager;
 import it.books_world.persistenza.dao.CarrelloDao;
 import it.books_world.persistenza.model.Carrello;
-import it.books_world.persistenza.model.Utente;
+
 
 
 public class CarrelloDaoPostgres implements CarrelloDao {
