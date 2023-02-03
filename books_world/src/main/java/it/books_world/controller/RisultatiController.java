@@ -34,7 +34,15 @@ public class RisultatiController {
             List resultList = service.volumes().list(content).setStartIndex(i + 1).setMaxResults((long)40);
             Volumes volumes = resultList.execute();
 
-            if( volumes.getItems() != null ) list.addAll( volumes.getItems() );
+            if( volumes.getItems() != null ){
+                ArrayList<Volume> vol = (ArrayList<Volume>) volumes.getItems();
+                vol.removeIf((v) -> {
+                    return v.getVolumeInfo().getIndustryIdentifiers() == null ||
+                        !v.getVolumeInfo().getIndustryIdentifiers().get(0).getType().contains("ISBN");
+                });
+
+                list.addAll(vol);
+            }
         }
 
         return list;
