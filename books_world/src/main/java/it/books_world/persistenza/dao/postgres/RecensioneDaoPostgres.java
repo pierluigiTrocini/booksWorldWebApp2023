@@ -17,7 +17,7 @@ public class RecensioneDaoPostgres implements RecensioneDao{
 
 	Connection conn;
 
-	private static final String sequence = "SELECT nextval('recensine_id_seq') AS id";
+	private static final String sequence = "SELECT nextval('recensione_id_seq') AS id";
 
 	public RecensioneDaoPostgres(Connection conn) {
 		this.conn = conn;
