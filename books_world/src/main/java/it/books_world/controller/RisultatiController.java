@@ -5,6 +5,8 @@ import java.io.IOException;
 
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.google.api.client.http.javanet.NetHttpTransport;
@@ -21,13 +23,23 @@ import jakarta.servlet.http.HttpServletResponse;
 @RestController
 public class RisultatiController {
 
+    private Volumes getVolumes(String content) throws IOException{
+        Books service = new Books.Builder(new NetHttpTransport(), new GsonFactory(), null).build();
+        List resulList = service.volumes().list(content).setMaxResults((long) 40);
+        Volumes volumes = resulList.execute();
+
+        volumes.getItems().removeIf((volume) -> {
+            return !volume.getVolumeInfo().getIndustryIdentifiers().get(0).getType().contains("ISBN");
+        });
+
+        return volumes;
+    }
+
     @GetMapping("/risultati")
     @CrossOrigin("http://localhost:4200/")
     public void risultatiRedirect(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException{
-        Books service = new Books.Builder(new NetHttpTransport(), new GsonFactory(), null).build();
 
-        List resulList = service.volumes().list(req.getParameter("searchText")).setMaxResults((long) 40);
-        Volumes volumes = resulList.execute();
+        Volumes volumes = getVolumes(req.getParameter("searchText"));
 
         req.setAttribute("volumes", volumes.getItems());
         if(volumes.getItems() == null)
@@ -39,4 +51,36 @@ public class RisultatiController {
         RequestDispatcher dispatcher = req.getRequestDispatcher("views/risultatiRicerca.html");
         dispatcher.forward(req, res);
     }
+
+    @PostMapping("/ordineAlfabetico")
+    public void ordineAlfabetico( @RequestBody JsonResponse response ) throws IOException{
+        Volumes volumes = getVolumes(response.getContent());
+        if( response.getValue() ){
+            
+        }
+        else{
+            //ordine inverso
+        }
+
+
+    }
+
+    @PostMapping("/googleRating")
+    public void googleRating ( @RequestBody JsonResponse response ) throws IOException{
+        Volumes volumes = getVolumes(response.getContent());
+        if( response.getValue() ){
+
+        }
+        else{
+            
+        }
+
+    }
+
+    @PostMapping("/filtroLingua")
+    public void filtroLingua( @RequestBody JsonResponse response ) throws IOException{
+        Volumes volumes = getVolumes(response.getContent());
+
+    }
+
 }
