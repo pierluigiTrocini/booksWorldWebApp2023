@@ -3,19 +3,19 @@ package it.books_world.persistenza.model;
 import java.util.Date;
 
 public class Utente {
-	private String username;
-	private String nome;
-	private String cognome;
-	private String password;
-	private Date data_di_nascita;
-	private Boolean moderatore;
-	private String email;
-	
-	
+	public String username;
+	public String nome;
+	public String cognome;
+	public String password;
+	public Date data_di_nascita;
+	public Boolean moderatore;
+	public String email;
+
+
 	public Utente() {
 		moderatore=false;
 	}
-	
+
 	public String getUsername() {
 		return username;
 	}
@@ -58,7 +58,7 @@ public class Utente {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	
-	
+
+
 
 }

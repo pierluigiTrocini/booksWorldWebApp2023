@@ -42,7 +42,7 @@ export class DettagliLibriComponent implements OnInit {
   constructor(private service: ServerService, private http: HttpClient, private api: ApiUtilsService, private activatedRoute: ActivatedRoute){}
 
 
-  
+
 
   ngOnInit(): void {
 
@@ -50,14 +50,14 @@ export class DettagliLibriComponent implements OnInit {
     this.url = url.href;
     this.isbn = url.pathname.split("/")[2];
 
-    
-    let sessionId = url.searchParams.get("sessionId")
+
+    let sessionId = url.searchParams.get("jsessionid");
     if (sessionId != null){
       this.sessionId = sessionId;
       this.service.getUserBySession(this.sessionId).subscribe( Utente => {
         this.utente = Utente;});
       }
-    
+
 
 
 
@@ -69,11 +69,11 @@ export class DettagliLibriComponent implements OnInit {
     if (this.utente.username !== "" && this.utente.username != null){
         this.service.proprietaLibro(this.isbn, this.utente.username).subscribe( utentePossiedeLibro => {
           this.utentePossiedeLibro = utentePossiedeLibro;});
-        
+
         this.service.postataRecensione(this.isbn, this.utente.username).subscribe( utenteHaPostatoRecensione => {
           this.utenteHaPostatoRecensione = utenteHaPostatoRecensione;});
     }
-      
+
 
 
 
@@ -86,7 +86,7 @@ export class DettagliLibriComponent implements OnInit {
 
 
   }
-  
+
 
 
   aggiungiAlCarrello(): void{

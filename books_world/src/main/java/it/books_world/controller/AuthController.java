@@ -23,7 +23,7 @@ public class AuthController {
         if( req.getAttribute("user") == null )
             resp.sendRedirect("login.html");
         else
-            resp.sendRedirect("http:localhost:4200/profilo");
+            resp.sendRedirect("http://localhost:4200/profilo");
     }
 
     @GetMapping("/signin")
@@ -56,18 +56,18 @@ public class AuthController {
 
         Utente utente = DBManager.getInstance().getUtenteDao().findByEmail(email);
         boolean login;
+        HttpSession session = req.getSession();
         if( utente == null ) login = false;
         else{
             if( BCrypt.checkpw(password, utente.getPassword() ) ){
                 login = true;
-                HttpSession session = req.getSession();
                 session.setAttribute("user", utente);
             }
             else login = false;
         }
 
         if(login){
-            res.sendRedirect("http://localhost:4200/");
+            res.sendRedirect("http://localhost:4200/?jsessionid="+session.getId());
         }
         else{
             res.sendRedirect("http://localhost:8080/invalid.html");

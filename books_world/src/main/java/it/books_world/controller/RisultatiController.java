@@ -59,7 +59,7 @@ public class RisultatiController {
             req.setAttribute("lenght", 0);
         else
             req.setAttribute("lenght", volumes.size());
-            
+
         req.setAttribute("searchText", req.getParameter("searchText"));
         RequestDispatcher dispatcher = req.getRequestDispatcher("views/risultatiRicerca.html");
         dispatcher.forward(req, res);

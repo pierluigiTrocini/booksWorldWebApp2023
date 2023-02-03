@@ -5,15 +5,16 @@
   </form>
 
   <ng-container *ngIf="getSessionId()!=null && getSessionId()!=''; then Azione; else Login" ></ng-container>
-  
+
   <ng-template #Azione>
     <div class="d-flex flex-row">
-      <a href="localhost:8080/visualizzaCarrello"></a>
-      <button type="button" class="btn btn-outline-primary mx-2">
-        <span class="material-icons">shopping_cart</span>
-      </button>
+      <a href="http://localhost:8080/mostraCarrello">
+        <button type="button" class="btn btn-outline-primary mx-2">
+          <span class="material-icons">shopping_cart</span>
+        </button>
+      </a>
 
-      <a href="/profilo/?sessionId={{getSessionId()}}" (click)="NascondiRisultati()" >
+      <a href="/profilo/?jsessionId={{getSessionId()}}" (click)="NascondiRisultati()" >
         <button type="button" class="btn btn-outline-primary mx-2">
           <span class="material-icons">person</span>
         </button>
@@ -21,42 +22,29 @@
 
     </div>
 
-     
+
   </ng-template>
 
 <ng-template #Login>
   <div class="d-flex flex-row">
-<<<<<<< HEAD
-    <a href="localhost:8080/login">
+    <a href="http://localhost:8080/login">
     <button type="button" class="btn btn-outline-primary mx-2">
       <span class="material-icons">shopping_cart</span>
     </button>
     </a>
 
-    <a href="localhost:8080/login"  >
+    <a href="http://localhost:8080/login"  >
       <button type="button" class="btn btn-outline-primary mx-2">
         <span class="material-icons">person</span>
       </button>
     </a>
-
-=======
-    <a type="button" class="btn btn-outline-primary mx-2" href="http://localhost:8080/mostraCarrello">
-      <span class="material-icons">shopping_cart</span>
-    </a>
-    <a type="button" class="btn btn-outline-primary mx-2" href="http://localhost:8080/login">
-      <span class="material-icons">person</span>
-      <span *ngIf="false">
-        username
-      </span>
-    </a>
->>>>>>> backend_pages
   </div>
-    
+
 </ng-template>
 
-   
-   
-    
+
+
+
 </nav>
 
 <nav class="navbar navbar-expand-lg bg-body-tertiary" data-bs-theme="dark">

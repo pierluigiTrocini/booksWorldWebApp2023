@@ -2,15 +2,15 @@ package it.books_world.persistenza.model;
 
 
 public class Recensione {
-	private Long id;
-	private String titolo;
-	private String testo;
-	private Integer numeroMiPiace;
-	private Integer numeroNonMiPiace;
-	private  Utente scrittaDa;
-	private String IBSN;
-	private Integer NumeroStelle;
-	private Boolean Segnalabile;
+	public Long id;
+	public String titolo;
+	public String testo;
+	public Integer numeroMiPiace;
+	public Integer numeroNonMiPiace;
+	public  Utente scrittaDa;
+	public String IBSN;
+	public Integer NumeroStelle;
+	public Boolean Segnalabile;
 	public Recensione() {
 		numeroMiPiace=0;
 		numeroNonMiPiace=0;
