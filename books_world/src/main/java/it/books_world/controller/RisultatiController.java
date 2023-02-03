@@ -29,7 +29,8 @@ public class RisultatiController {
         Volumes volumes = resulList.execute();
 
         volumes.getItems().removeIf((volume) -> {
-            return !volume.getVolumeInfo().getIndustryIdentifiers().get(0).getType().contains("ISBN");
+            return volume.getVolumeInfo().getIndustryIdentifiers() == null ||
+                !volume.getVolumeInfo().getIndustryIdentifiers().get(0).getType().contains("ISBN");
         });
 
         return volumes;
