@@ -5,15 +5,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashMap;
-<<<<<<< HEAD
-import it.books_world.persistenza.dao.CarrelloDao;
-import it.books_world.persistenza.model.Carrello;
-
-=======
 
 import it.books_world.persistenza.dao.CarrelloDao;
 import it.books_world.persistenza.model.Carrello;
->>>>>>> backend_pages
+
 
 
 public class CarrelloDaoPostgres implements CarrelloDao {
