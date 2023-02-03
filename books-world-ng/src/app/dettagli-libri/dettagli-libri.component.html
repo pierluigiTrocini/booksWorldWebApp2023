@@ -6,7 +6,7 @@
             <br>
             <ng-container *ngIf="libro?.saleInfo?.saleability === 'FOR_SALE'; then showPrice; else showError"></ng-container>
             <ng-template #showPrice>
-                <h4><span style="color:darkred">Prezzo a {{libro?.saleInfo?.listPrice?.amount}} {{libro?.saleInfo?.listPrice?.currencyCode}}</span></h4>
+                <h4><span style="color:darkred">Prezzo a <strong style="font-size: larger;">{{libro?.saleInfo?.listPrice?.amount}} {{libro?.saleInfo?.listPrice?.currencyCode}}</strong></span></h4>
             </ng-template>
             <ng-template #showError>
                 <h4><span style="color:darkred">Prodotto non disponibile.</span></h4>

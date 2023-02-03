@@ -1,6 +1,25 @@
-  <div style="padding-bottom: 10px">
-    <div style="margin-top: 4px;">{{recensioni.length}} Recensioni totali </div>
+  <div *ngIf="media!=0 && media>=3">
+    <h1><span style="color:darkgreen darkered" class="fw-bold">{{media}}/5</span></h1>
+    <div style="padding-bottom: 10px " class="text-center">
+      <div style="margin-top: 4px;">{{recensioni.length}} Recensioni totali </div>
+    </div>
   </div>
+
+  <div *ngIf="media===0">
+    <h1><span style="color:rgb(248, 161, 0);font-size:large ;"class="fw-bold " >Nessuna valutazione </span></h1>
+    
+  </div>
+
+
+  <div *ngIf="media!=0 && media<3">
+    <h1><span style="color:rgb(245, 4, 4) darkered" class="fw-bold">{{media}}/5</span></h1>
+    <div style="padding-bottom: 10px " class="text-center">
+      <div style="margin-top: 4px;">{{recensioni.length}} Recensioni totali </div>
+    </div>
+  </div>
+  
+  
+ 
 
   
   <div *ngFor="let recensione of recensioni" class="container-fluid m-3 p-3">
@@ -37,8 +56,8 @@
       </div>
       <div *ngIf="utente.username!=undefined &&  utente.username != recensione.scrittaDa.username">
         
-        <button id="like-b" style="margin-left:10px padding-right-4px"class="btn btn-success" (click)="IncrementaLike(recensione.id)">{{recensione.numeroMiPiace}} Mi Piace</button>
-        <button id="dislike-b" class="btn btn-danger" (click)="IncrementaDislike(recensione.id)">{{recensione.numeroNonMiPiace}} Non Mi Piace</button>
+        <button  style="margin-left:10px padding-right-4px ;display:inline-block "class="btn btn-success " (click)="IncrementaLike(recensione.id)">{{recensione.numeroMiPiace}} Mi Piace</button>
+        <button  class="btn btn-danger" (click)="IncrementaDislike(recensione.id)">{{recensione.numeroNonMiPiace}} Non Mi Piace</button>
 
 
 
@@ -48,6 +67,8 @@
 
     
   </div>
+
+<div style="padding-bottom:480px"></div>
 
 
 <script>
