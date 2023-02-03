@@ -30,6 +30,11 @@ public class RisultatiController {
         Volumes volumes = resulList.execute();
 
         req.setAttribute("volumes", volumes.getItems());
+        if(volumes.getItems() == null)
+            req.setAttribute("lenght", 0);
+        else
+            req.setAttribute("lenght", volumes.getItems().size());
+            
         req.setAttribute("searchText", req.getParameter("searchText"));
         RequestDispatcher dispatcher = req.getRequestDispatcher("views/risultatiRicerca.html");
         dispatcher.forward(req, res);
