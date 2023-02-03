@@ -14,8 +14,7 @@ public class VotiRestController {
     public Boolean votaAFavore(Long idRecensione) {
         SegnalazioneDao segnalazioneDao = DBManager.getInstance().getSegnalazioneDao();
         Segnalazione segnalazione = segnalazioneDao.FindByPrimaryKey(idRecensione);
-        segnalazione.setVoti_sfavorevoli_eliminazione(segnalazione.getVoti_sfavorevoli_eliminazione()+1);
-        segnalazioneDao.saveOrUpdate(segnalazione);
+        segnalazioneDao.voteFor(segnalazione);
         return true;
     }
 
@@ -23,8 +22,7 @@ public class VotiRestController {
     public Boolean votaContro(Long idRecensione) {
         SegnalazioneDao segnalazioneDao = DBManager.getInstance().getSegnalazioneDao();
         Segnalazione segnalazione = segnalazioneDao.FindByPrimaryKey(idRecensione);
-        segnalazione.setVoti_favorevoli_eliminazione(segnalazione.getVoti_favorevoli_eliminazione()+1);
-        segnalazioneDao.saveOrUpdate(segnalazione);
+        segnalazioneDao.voteAgainst(segnalazione);
         return true;
     }
 

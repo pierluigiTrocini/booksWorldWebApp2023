@@ -1,11 +1,7 @@
 window.addEventListener('load', function(e) {
 
-    var totale = 0;
-    var listaPrezzi = document.querySelectorAll("#prezzo");
-    listaPrezzi.forEach(function(prezzo) {
-        totale += prezzo;
-    });
-    this.document.querySelector("#totale").innerHTML += totale + "€";
+    calcolaTotale();
+
     var libri = this.document.querySelectorAll(".libro");
 
     libri.forEach(function(libro) {
@@ -25,7 +21,9 @@ window.addEventListener('load', function(e) {
                     document.getElementById("quantita_"+isbnLibro).innerHTML = risposta;
                     var quantita = parseInt(risposta);
                     var prezzo = parseFloat(document.getElementById("prezzo_"+isbnLibro).innerHTML);
-                    document.getElementById("prezzo_"+isbnLibro).innerHTML = (prezzo/(quantita-1))*quantita;
+                    document.getElementById("prezzo_"+isbnLibro).innerHTML =
+                                parseFloat((prezzo/(quantita-1))*quantita).toFixed(2)+"€";
+                    calcolaTotale();
                 }
             });
         });
@@ -39,7 +37,9 @@ window.addEventListener('load', function(e) {
                     document.getElementById("quantita_"+isbnLibro).innerHTML = risposta;
                     var quantita = parseInt(risposta);
                     var prezzo = parseFloat(document.getElementById("prezzo_"+isbnLibro).innerHTML);
-                    document.getElementById("prezzo_"+isbnLibro).innerHTML = (prezzo/(quantita+1))*quantita;
+                    document.getElementById("prezzo_"+isbnLibro).innerHTML =
+                                parseFloat((prezzo/(quantita+1))*quantita).toFixed(2)+"€";
+                    calcolaTotale();
                 }
             });
         });
@@ -49,3 +49,12 @@ window.addEventListener('load', function(e) {
 });
 
 
+function calcolaTotale() {
+    var libri = this.document.querySelectorAll(".libro");
+    var totale = 0;
+    libri.forEach( libro => {
+        var isbn = libro.getAttribute("value");
+        totale += parseFloat(document.getElementById("prezzo_"+isbn).innerHTML.valueOf());
+    });
+    this.document.querySelector("#totale").innerHTML = "Totale: " + totale + "€";
+}

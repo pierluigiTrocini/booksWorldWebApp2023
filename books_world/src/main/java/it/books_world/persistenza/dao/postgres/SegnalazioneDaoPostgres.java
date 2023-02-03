@@ -135,11 +135,26 @@ public class SegnalazioneDaoPostgres implements SegnalazioneDao {
     // RIGUARDANTE IL TRACCIAMENTO DEI VOTI
 
     public void voteAgainst(Segnalazione segnalazione) {
+		String query = "update segnalazione set voti_favorevoli_eliminazione = voti_favorevoli_eliminazione+1 where recensione = ?";
+		try {
+			PreparedStatement st = conn.prepareStatement(query);
+			st.setLong(1, segnalazione.getRecensione());
+			st.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 
     }
 
     public void voteFor(Segnalazione segnalazione) {
-
+		String query = "update segnalazione set voti_sfavorevoli_eliminazione = voti_sfavorevoli_eliminazione+1 where recensione = ?";
+		try {
+			PreparedStatement st = conn.prepareStatement(query);
+			st.setLong(1, segnalazione.getRecensione());
+			st.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
     }
 
 

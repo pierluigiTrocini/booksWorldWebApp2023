@@ -24,7 +24,11 @@ public class AcquistaServlet extends HttpServlet {
         String username = utente.getUsername();
         Map<String, Integer> libri = DBManager.getInstance().getCarrelloDao()
                                     .UserChart(username).getLibriInCarrello();
-        for (String isbn : libri.keySet()) DBManager.getInstance().getCarrelloDao().DeleteorUpdate(username, isbn);
+        for (String isbn : libri.keySet()) {
+            for (int i = 0; i < libri.get(isbn); ++i) {
+                DBManager.getInstance().getCarrelloDao().DeleteorUpdate(username, isbn);
+            }
+        }
         req.setAttribute("username", username);
         RequestDispatcher dispatcher = req.getRequestDispatcher("views/ringraziamenti.html");
         dispatcher.forward(req, resp);

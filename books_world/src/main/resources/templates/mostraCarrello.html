@@ -63,7 +63,7 @@
                           <div style="width: 200px;">
                             <div th:if="${vq.volume.getSaleInfo().getListPrice()} != null">
                               <h5 class="mb-0" th:id="|prezzo_${vq.isbn}|"
-                              th:text="|${vq.volume.getSaleInfo().getListPrice().getAmount()}€|"></h5>
+                              th:text="|${vq.volume.getSaleInfo().getListPrice().getAmount() * vq.quantita}€|"></h5>
                             </div>
                             <div th:if="${vq.volume.getSaleInfo().getListPrice()} == null">
                               <div class="mb-0 fw-bold">0€</div>
@@ -77,7 +77,7 @@
                   <div class="row">
                     <div class="col-75">
                       <div class="container" id="acquisto">
-                        <form method="get" action="/acquista">
+                        <form method="get" action="/acquista" id="form">
 
                           <div class="row">
                             <div class="col-50">
@@ -97,8 +97,8 @@
                                   <input type="text" id="state" name="state" placeholder="IT">
                                 </div>
                                 <div class="col-50">
-                                  <label for="zip">CAP</label>
-                                  <input type="text" id="zip" name="zip" placeholder="00100">
+                                  <label for="cap">CAP</label>
+                                  <input type="text" id="cap" name="cap" placeholder="00100">
                                 </div>
                               </div>
                             </div>
@@ -119,8 +119,8 @@
 
                               <div class="row">
                                 <div class="col-50">
-                                  <label for="scadenza">Data di scadenza</label>
-                                  <input type="text" id="scadenza" name="meseScadenza" placeholder="mm/aa">
+                                  <label for="meseAnnoScadenza">Data di scadenza</label>
+                                  <input type="text" id="scadenza" name="meseAnnoScadenza" placeholder="mm/aa">
                                 </div>
                                 <div class="col-50">
                                   <label for="cvv">CVV</label>
@@ -128,7 +128,7 @@
                                 </div>
                               </div>
                               <span id="totale">Totale: </span>
-                              <input type="submit" value="Acquista" class="btn btn-info">
+                              <input type="submit" value="Acquista" id="butAcquista" class="btn btn-info">
                             </div>
 
                           </div>
