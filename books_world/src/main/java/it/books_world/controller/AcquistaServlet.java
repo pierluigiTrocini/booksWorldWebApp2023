@@ -29,6 +29,7 @@ public class AcquistaServlet extends HttpServlet {
                 DBManager.getInstance().getCarrelloDao().DeleteorUpdate(username, isbn);
             }
         }
+        req.setAttribute("sessionid", session.getId());
         req.setAttribute("username", username);
         RequestDispatcher dispatcher = req.getRequestDispatcher("views/ringraziamenti.html");
         dispatcher.forward(req, resp);

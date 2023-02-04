@@ -70,7 +70,7 @@ public class MostraCarrello extends HttpServlet {
                     dispatcher.forward(req, resp);
                 }
                 ArrayList<VolumeQuantita> volumi = new ArrayList<>();
-                 for (String isbn : libri.keySet()) {
+                for (String isbn : libri.keySet()) {
                     List volumeList = service.volumes().list(isbn);
                     Volumes volumes = volumeList.execute();
                     Volume volume = volumes.getItems().get(0);
@@ -82,6 +82,7 @@ public class MostraCarrello extends HttpServlet {
                             vq.setIsbn(id.getIdentifier());
                     }
                     volumi.add(vq);
+                    req.setAttribute("sessionid", req.getSession().getId());
                     req.setAttribute("vQuantita", volumi);
                     RequestDispatcher dispatcher = req.getRequestDispatcher("views/mostraCarrello.html");
                     dispatcher.forward(req, resp);
