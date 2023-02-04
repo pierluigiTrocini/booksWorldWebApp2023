@@ -42,3 +42,11 @@ body {
     margin-left: 5px;
 
 }
+
+input:invalid{
+    border-color:tomato;
+}
+
+textarea:invalid{
+    border-color:tomato;
+}

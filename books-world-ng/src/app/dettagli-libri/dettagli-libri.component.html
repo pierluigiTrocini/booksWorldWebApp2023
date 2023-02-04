@@ -13,11 +13,11 @@
             </ng-template>
             <ng-container *ngIf="libro?.saleInfo?.saleability === 'FOR_SALE' && (utente.username != '' && utente.username != null); then showButtonToCart"></ng-container>
             <ng-template #showButtonToCart>
-                <a href="localhost:8080/visualizzaCarrello?username={{utente.username}}"><button type="button" class="btn btn-success mt-1" (click)="aggiungiAlCarrello()">Aggiungi al carrello</button></a>
+                <a href="http://localhost:8080/visualizzaCarrello?username={{utente.username}}"><button type="button" class="btn btn-success mt-1" (click)="aggiungiAlCarrello()">Aggiungi al carrello</button></a>
             </ng-template>
             <ng-container *ngIf="libro?.saleInfo?.saleability === 'FOR_SALE' && (utente.username === '' || utente.username == null); then showButtonToLogin"></ng-container>
             <ng-template #showButtonToLogin>
-                <a href="localhost:8080/login"><button type="button" class="btn btn-success mt-1">Aggiungi al carrello</button></a>
+                <a href="http://localhost:8080/login"><button type="button" class="btn btn-success mt-1">Aggiungi al carrello</button></a>
             </ng-template>
             <ng-container *ngIf="libro?.saleInfo?.saleability !== 'FOR_SALE'; then showButtonDisabled"></ng-container>
             <ng-template #showButtonDisabled>
@@ -68,49 +68,42 @@
     <ng-template #showReview>
         <div class="row mt-6">
             <h3> Hai già acquistato questo libro, se vuoi puoi aggiungere una recensione! </h3>
-            <form [formGroup]="formRecensione">
+            <form id="formRecensione">
                 <div class="form-group row mt-3">
                     <div class="col-sm-6">
-                        <input type="text" class="form-control" formControlName="titolo" id="titoloRecensione" placeholder="Inserisci un titolo">
+                        <input type="text" class="form-control" id="titoloRecensione" placeholder="Inserisci un titolo" pattern="^[A-Za-z ]+$" minlength="15" maxlength="100" required >
                     </div>   
-                    <div *ngIf="formRecensione.get('titolo')?.invalid && formRecensione.get('titolo')?.touched "> 
-                        <span style="color:red"> Il titolo della recensione deve contenere dai 20 ai 100 caratteri e non può iniziare con un numero. </span>
-                   </div>
                 </div>
                 <div class="form-group row mt-3">
                     <div class="col-sm-7">
-                        <textarea class="form-control" formControlName="corpo" id="testoRecensione" placeholder="Descrivi quello che pensi di questo libro" rows="7"></textarea>
+                        <textarea class="form-control" id="testoRecensione" placeholder="Descrivi quello che pensi di questo libro" rows="7" pattern="^[A-Za-z ]+$" minlength="50" maxlength="2000" required ></textarea>
                     </div>
-                    <div *ngIf="formRecensione.get('corpo')?.invalid && formRecensione.get('corpo')?.touched "> 
-                        <span style="color:red"> Il Testo della recensione deve contenere dai 50 ai 2000 caratteri. </span>
-                   </div>
                 </div>
                 <div class="form-group row mt-3" id="aggiungiRecensione">
                     <h5> Quante stelle assegneresti a questo libro? </h5>
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="valutazioneLibro" id="valutazioneUno" value="option1" formControlName="option">
+                        <input class="form-check-input" type="radio" name="valutazioneLibro" id="valutazioneUno" value="option1" >
                         <label class="form-check-label" for="valutazioneUno"> <span class="fa fa-star checked"></span> <span class="fa fa-star checked"></span> <span class="fa fa-star checked"></span> <span class="fa fa-star checked"></span> <span class="fa fa-star checked"></span></label>
                     </div>
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="valutazioneLibro" id="valutazioneDue" value="option2" formControlName="option">
+                        <input class="form-check-input" type="radio" name="valutazioneLibro" id="valutazioneDue" value="option2" >
                         <label class="form-check-label" for="valutazioneDue"> <span class="fa fa-star checked"></span> <span class="fa fa-star checked"></span> <span class="fa fa-star checked"></span> <span class="fa fa-star checked"></span> </label>
                     </div>
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="valutazioneLibro" id="valutazioneTre" value="option3" formControlName="option">
+                        <input class="form-check-input" type="radio" name="valutazioneLibro" id="valutazioneTre" value="option3" >
                         <label class="form-check-label" for="valutazioneTre"> <span class="fa fa-star checked"></span> <span class="fa fa-star checked"></span> <span class="fa fa-star checked"></span> </label>
                     </div>
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="valutazioneLibro" id="valutazioneQuattro" value="option4" formControlName="option">
+                        <input class="form-check-input" type="radio" name="valutazioneLibro" id="valutazioneQuattro" value="option4" >
                         <label class="form-check-label" for="valutazioneQuattro"> <span class="fa fa-star checked"></span> <span class="fa fa-star checked"></span> </label>
                     </div>
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="valutazioneLibro" id="valutazioneCinque" value="option5" formControlName="option">
+                        <input class="form-check-input" type="radio" name="valutazioneLibro" id="valutazioneCinque" value="option5" >
                         <label class="form-check-label" for="valutazioneCinque"> <span class="fa fa-star checked"></span> </label>
                     </div>
-                    <div *ngIf="formRecensione.get('option')?.invalid && formRecensione.get('option')?.touched "> 
-                        <span style="color:red"> Devi selezionare il numero di stelle da assegnare alla recensione. </span>
-                   </div>
                     <button type="button" class="btn btn-primary mt-4" (click)="invioRecensione()">Pubblica la recensione</button>
+                    <br>
+                    <span id="messaggioErrore" style="color:red" class="mt-1"></span>
                 </div>
                 
             </form>

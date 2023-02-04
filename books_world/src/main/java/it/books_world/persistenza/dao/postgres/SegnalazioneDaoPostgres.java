@@ -130,10 +130,6 @@ public class SegnalazioneDaoPostgres implements SegnalazioneDao {
 
 
 
-
-    // METODI DA IMPLEMENTARE A SECONDA DELLA SOLUZIONE TROVATA
-    // RIGUARDANTE IL TRACCIAMENTO DEI VOTI
-
     public void voteAgainst(Segnalazione segnalazione) {
 		String query = "update segnalazione set voti_favorevoli_eliminazione = voti_favorevoli_eliminazione+1 where recensione = ?";
 		try {

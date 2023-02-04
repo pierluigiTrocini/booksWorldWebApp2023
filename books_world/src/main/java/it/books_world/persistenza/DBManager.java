@@ -5,10 +5,12 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 import it.books_world.persistenza.dao.CarrelloDao;
+import it.books_world.persistenza.dao.OrdineDao;
 import it.books_world.persistenza.dao.RecensioneDao;
 import it.books_world.persistenza.dao.SegnalazioneDao;
 import it.books_world.persistenza.dao.UtenteDao;
 import it.books_world.persistenza.dao.postgres.CarrelloDaoPostgres;
+import it.books_world.persistenza.dao.postgres.OrdineDaoPostgres;
 import it.books_world.persistenza.dao.postgres.RecensioneDaoPostgres;
 import it.books_world.persistenza.dao.postgres.SegnalazioneDaoPostgres;
 import it.books_world.persistenza.dao.postgres.UtenteDaoPostgres;
@@ -38,8 +40,13 @@ private static DBManager instance = null;
 		}
 		return conn;
 	}
+	
 	public UtenteDao getUtenteDao() {
 		return new UtenteDaoPostgres(getConnection());
+	}
+	
+	public OrdineDao getOrdineDao() {
+		return new OrdineDaoPostgres(getConnection());
 	}
 
 	public RecensioneDao getRecensioneDao() {

@@ -94,6 +94,27 @@ public class OrdineDaoPostgres implements OrdineDao{
 		return ordini;
 
 	}
+	
+	public boolean userOwnsBook(String username, String isbn){
+		
+		String query = "select * from ordine where utente = ? and isbn_libro = ?";
+		try {
+			PreparedStatement st = conn.prepareStatement(query);
+			st.setString(1, username);
+			st.setString(2, isbn);
+			ResultSet rs = st.executeQuery();
+			if (rs.next()) {
+				return true;
+			}
+		}
+			
+		catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return false;
+		
+	}
 
 
 

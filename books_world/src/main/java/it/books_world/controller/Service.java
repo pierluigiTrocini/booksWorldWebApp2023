@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import it.books_world.persistenza.DBManager;
 import it.books_world.persistenza.dao.CarrelloDao;
+import it.books_world.persistenza.dao.OrdineDao;
 import it.books_world.persistenza.dao.RecensioneDao;
 import it.books_world.persistenza.dao.SegnalazioneDao;
 import it.books_world.persistenza.dao.UtenteDao;
@@ -92,12 +93,12 @@ public class Service {
 		
 	}
 	
-	//@GetMapping("/proprietaLibro")
-	//public boolean proprietaLibro(@RequestParam String ISBN,@RequestParam String Username){
-		//TODO: modificare ordine dao per controllare proprieta libro
-		
-		
-	//}
+	@GetMapping("/proprietaLibro")
+	public boolean proprietaLibro(@RequestParam String ISBN,@RequestParam String username){
+		OrdineDao dao = DBManager.getInstance().getOrdineDao();
+		return dao.userOwnsBook(username, ISBN);
+	}
+	
 	
 	@GetMapping("/postataRecensione")
 	public boolean postataRecensione(@RequestParam String ISBN,@RequestParam String username){

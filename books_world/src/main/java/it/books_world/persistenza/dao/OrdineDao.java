@@ -11,9 +11,11 @@ public interface OrdineDao {
 	
 	public List<Ordine> findAll();
 	
+	public boolean userOwnsBook(String username, String isbn);
+	
 	public List<Ordine> findByUser(Utente utente);
 	
 	public void delete(Ordine ordine);
 	
-
+    
 }

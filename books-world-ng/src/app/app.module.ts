@@ -14,7 +14,6 @@ import { VisualizzaBestsellerNytimesComponent } from './visualizza-bestseller-ny
 import { RecensioniComponent } from './recensioni/recensioni.component';
 import { DettagliLibriComponent } from './dettagli-libri/dettagli-libri.component';
 
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ProfiloComponent } from './profilo/profilo.component'; 
 
 
@@ -37,8 +36,6 @@ import { ProfiloComponent } from './profilo/profilo.component';
     AppRoutingModule,
     RouterModule.forRoot([]),
     HttpClientModule,
-    FormsModule,
-    ReactiveFormsModule,
     HttpClientJsonpModule
   ],
   providers: [],

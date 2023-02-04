@@ -4,7 +4,7 @@ import { ServerService } from '../server.service';
 import { ActivatedRoute } from '@angular/router';
 import { ApiUtilsService } from '../api-utils.service';
 import { HttpClient} from '@angular/common/http';
-import {FormControl, FormGroup, Validators} from '@angular/forms'
+
 
 @Component({
   selector: 'app-dettagli-libri',
@@ -12,13 +12,6 @@ import {FormControl, FormGroup, Validators} from '@angular/forms'
   styleUrls: ['./dettagli-libri.component.css']
 })
 export class DettagliLibriComponent implements OnInit {
-
-  formRecensione = new FormGroup({
-    titolo: new FormControl('', [Validators.required, Validators.minLength(15), Validators.maxLength(100), Validators.pattern("([a-zA-Z]*)([a-zA-z0-9 ]*)")]),
-    corpo: new FormControl('', [Validators.required, Validators.minLength(50), Validators.maxLength(2000), Validators.pattern("([a-zA-Z0-9]*)([a-zA-z0-9 ]*)")]),
-    option: new FormControl('', Validators.required)
-
-  })
 
   url : string = "";
 
@@ -30,6 +23,10 @@ export class DettagliLibriComponent implements OnInit {
   libri: Libro[] = [];
 
   utente: Utente = new Utente();
+
+  titolo?: string;
+  testo?: string;
+  numStelle?: number;
 
 
 
@@ -102,51 +99,51 @@ export class DettagliLibriComponent implements OnInit {
 
   invioRecensione(): void{
 
-    this.formRecensione.markAllAsTouched();
 
-    if (this.formRecensione.valid){
+    if (((document.getElementById("formRecensione") as HTMLInputElement).checkValidity()) ){
 
-      let titolo = this.formRecensione.get('titolo')?.value;
-      let testo = this.formRecensione.get('corpo')?.value;
-      let option = this.formRecensione.get('option')?.value;
+      (document.getElementById("messaggioErrore") as HTMLInputElement).innerHTML = "";
 
-      let numStelle;
+      this.titolo = (document.getElementById("titoloRecensione") as HTMLInputElement).value;
+      this.testo = (document.getElementById("testoRecensione") as HTMLInputElement).value;
 
+      if ((document.getElementById("valutazioneUno") as HTMLInputElement).checked){
+          this.numStelle = 5;
+      }
+      else if ((document.getElementById("valutazioneDue") as HTMLInputElement).checked){
+        this.numStelle = 4;
+      }
+      else if ((document.getElementById("valutazioneTre") as HTMLInputElement).checked){
+        this.numStelle = 3;
+      }
+      else if ((document.getElementById("valutazioneQuattro") as HTMLInputElement).checked){
+        this.numStelle = 2;
+      }
+      else if ((document.getElementById("valutazioneCinque") as HTMLInputElement).checked){
+        this.numStelle = 1;
+      }
+      if (this.numStelle != null && this.utente.username != null){
 
-        if (option != null){
-          if (option === "option1")
-            numStelle = 5;
-          else if (option === "option2")
-            numStelle = 4;
-          else if (option === "option3")
-            numStelle = 3;
-          else if (option === "option4")
-            numStelle = 2;
-          else if (option === "option5")
-            numStelle = 1;
-        }
+        this.service.aggiungiRecensione(this.isbn, this.utente.username, this.titolo , this.testo, this.numStelle ).subscribe(result =>{
+          if(result){
+            console.log("recensioneInseritaConSuccesso");
+          }
+        })
+      }
 
-        if (titolo != null && testo != null && numStelle != null && this.utente.username != null){
-            this.service.aggiungiRecensione(this.isbn, this.utente.username, titolo , testo, numStelle ).subscribe(result =>{
-                if(result){
-                  console.log("recensioneInseritaConSuccesso");
-                }
-              })
-
-        }
-
-        this.utenteHaPostatoRecensione = true;
+      this.utenteHaPostatoRecensione = true;
+  
     }
 
     else{
-      alert("I campi non sono stati riempiti in maniera corretta");
+
+      (document.getElementById("messaggioErrore") as HTMLInputElement).innerHTML = "Riempi tutti i campi in maniera corretta.";
+
     }
 
+
+
   }
-
-
-
-
 
 
 
