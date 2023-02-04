@@ -3,13 +3,17 @@ package it.books_world.controller;
 
 import java.io.IOException;
 import org.mindrot.jbcrypt.BCrypt;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import it.books_world.persistenza.DBManager;
 import it.books_world.persistenza.model.Utente;
+import jakarta.servlet.ServletContext;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
@@ -74,6 +78,18 @@ public class AuthController {
         }
     }
 
+    
+    @GetMapping("/checkisLogged")
+    @ResponseBody
+    @CrossOrigin("http://localhost:4200/")
+    public boolean checkLoggedIn(HttpServletRequest req, HttpServletResponse resp, @RequestParam String sessionId){
+        ServletContext context = req.getServletContext();
+        Object utente = context.getAttribute(sessionId);
+        if(utente != null){
+            return true;
+        }
+        return false;
+    }
 
 
 

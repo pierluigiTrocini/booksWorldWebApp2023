@@ -16,6 +16,10 @@ public class Segnalazione {
 	
 	private Long voti_sfavorevoli_eliminazione;
 	
+	
+	
+
+
 
 	public Long getRecensione() {
 		return recensione;

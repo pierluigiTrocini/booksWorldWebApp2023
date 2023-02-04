@@ -3,13 +3,13 @@ package it.books_world.persistenza.model;
 import java.util.Date;
 
 public class Utente {
-	public String username;
-	public String nome;
-	public String cognome;
-	public String password;
-	public Date data_di_nascita;
-	public Boolean moderatore;
-	public String email;
+	String username;
+	String nome;
+	String cognome;
+	String password;
+	Date data_di_nascita;
+	Boolean moderatore;
+	String email;
 
 
 	public Utente() {

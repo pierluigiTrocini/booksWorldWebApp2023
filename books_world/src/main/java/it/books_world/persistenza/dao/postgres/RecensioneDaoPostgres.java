@@ -69,15 +69,17 @@ public class RecensioneDaoPostgres implements RecensioneDao{
 	}
 
 	@Override
-	public void Delete(Recensione recensione) {
+	public boolean Delete(Recensione recensione) {
 		String query = "DELETE FROM recensione WHERE id = ?";
 		try {
 			PreparedStatement st = conn.prepareStatement(query);
 			st.setLong(1, recensione.getId());
 			st.executeUpdate();
+			return true;
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		return false;
 	}
 
 
@@ -169,6 +171,26 @@ public class RecensioneDaoPostgres implements RecensioneDao{
 			e.printStackTrace();
 		}
 		return rec;
+	}
+	
+	@Override
+	public boolean WrittenReview(String username,String ISBN) {
+		String query = "select * from recensione where isbn_libro = ? and scrittore=?";
+		try {
+			PreparedStatement st = conn.prepareStatement(query);
+			st.setString(1,ISBN);
+			st.setString(2, username);
+			ResultSet rs = st.executeQuery();
+			if (rs.next()) {
+				return true;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return false;
+		
+		
+		
 	}
 
 }
