@@ -33,18 +33,18 @@ private static DBManager instance = null;
 	public Connection getConnection() {
 		if (conn == null) {
 			try {
-				conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/", "postgres", "pasPOS99");
+				conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/libri", "postgres", "1234");
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
 		}
 		return conn;
 	}
-	
+
 	public UtenteDao getUtenteDao() {
 		return new UtenteDaoPostgres(getConnection());
 	}
-	
+
 	public OrdineDao getOrdineDao() {
 		return new OrdineDaoPostgres(getConnection());
 	}

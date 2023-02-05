@@ -1,9 +1,12 @@
 package it.books_world.controller;
 
 import java.io.IOException;
+import java.util.Date;
 import java.util.Map;
 
 import it.books_world.persistenza.DBManager;
+import it.books_world.persistenza.dao.OrdineDao;
+import it.books_world.persistenza.model.Ordine;
 import it.books_world.persistenza.model.Utente;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
@@ -28,6 +31,12 @@ public class AcquistaServlet extends HttpServlet {
             for (int i = 0; i < libri.get(isbn); ++i) {
                 DBManager.getInstance().getCarrelloDao().DeleteorUpdate(username, isbn);
             }
+            OrdineDao ordineDao = DBManager.getInstance().getOrdineDao();
+            Ordine ordine = new Ordine();
+            ordine.setData(new Date(System.currentTimeMillis()));
+            ordine.setIsbn_libro(isbn);
+            ordine.setUtente(utente.getUsername());
+            ordineDao.save(ordine);
         }
         req.setAttribute("sessionid", session.getId());
         req.setAttribute("username", username);
