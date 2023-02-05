@@ -19,9 +19,9 @@ export class AppComponent {
   ngOnInit():void{
 
     const urlParams=new URLSearchParams(window.location.search);
-    let session=urlParams.get("jsessionid");
+    let session=urlParams.get('jsessionid');
     if(session!=null && session != ""){
-      this.service.checkisLogged(session).subscribe(isLogged=>this.isLogged=this.isLogged).add(()=>{
+      this.service.checkisLogged(session).subscribe(isLogged=>this.isLogged=isLogged).add(()=>{
         if(this.isLogged && session!=null && session!=""){
           this.service.getUserBySession(session).subscribe(utente=>this.utente=utente).add(()=>{
             if(this.isLogged && session!=null && session!=""){
