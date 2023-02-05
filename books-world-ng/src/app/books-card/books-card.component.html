@@ -1,6 +1,5 @@
 <div class="card border-dark m-2">
     <br>
-    <span class="text-light">{{libro?.volumeInfo?.industryIdentifiers?.at(0)?.identifier}}</span>
     <ng-container *ngIf="libro?.accessInfo?.epub?.isAvailable; then showPremiumMessage"></ng-container>
     <ng-template #showPremiumMessage>
         <a href="{{libro?.accessInfo?.webReaderLink}}" target="_blank">
