@@ -5,6 +5,7 @@
             <br>
             <br>
             <h3><i class="bi bi-person-fill" style="color:rgb(42,167,223);"></i> Username: {{utente.username}} </h3>
+            <a href="http://localhost:8080/Logout"><button type="button" class="btn btn-info mt-2">Logout</button></a>
         </div>
 
         <div class="col-sm-7 mt-5">
@@ -16,7 +17,7 @@
         <ng-container *ngIf="utente.moderatore === true; then showMod; else showNonMod"></ng-container>
         <ng-template #showMod>
             <h4 class="fw-normal mt-5"><i class="bi bi-wrench-adjustable" style="color:rgb(216, 67, 21);"></i> Privilegi da moderatore: Sì </h4>
-            <a href="localhost:8080/segnalazioni"><button type="button" class="btn btn-danger">Visualizza segnalazioni</button></a>
+            <a href="http://localhost:8080/segnalazioni"><button type="button" class="btn btn-danger">Visualizza segnalazioni</button></a>
         </ng-template>
 
         <ng-template #showNonMod>

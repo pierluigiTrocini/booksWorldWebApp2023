@@ -27,7 +27,4 @@ export class ProfiloComponent implements OnInit{
 
     }
 
-
-
-
 }
