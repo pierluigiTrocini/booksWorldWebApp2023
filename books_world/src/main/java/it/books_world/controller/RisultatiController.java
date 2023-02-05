@@ -28,7 +28,7 @@ public class RisultatiController {
 
         ArrayList<Volume> list = new ArrayList<Volume>();
 
-        for( long i = 0; i <= 160; i += 40 ){
+        for( long i = 0; i < 80; i += 40 ){
             List resultList = service.volumes().list(content).setStartIndex(i + 1).setMaxResults((long)40);
             Volumes volumes = resultList.execute();
 
@@ -49,17 +49,21 @@ public class RisultatiController {
     @GetMapping("/risultati")
     @CrossOrigin("http://localhost:4200/")
     public void risultatiRedirect(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException{
+        if( req.getParameter("searchText") == null || req.getParameter("searchText").trim().isEmpty() ){
+            res.sendRedirect("http://localhost:8080/");
+        }
+        else{
+            ArrayList<Volume> volumes = getVolumes(req.getParameter("searchText"));
 
-        ArrayList<Volume> volumes = getVolumes(req.getParameter("searchText"));
+            req.setAttribute("volumes", volumes);
+            if(volumes == null)
+                req.setAttribute("lenght", 0);
+            else
+                req.setAttribute("lenght", volumes.size());
 
-        req.setAttribute("volumes", volumes);
-        if(volumes == null)
-            req.setAttribute("lenght", 0);
-        else
-            req.setAttribute("lenght", volumes.size());
-
-        req.setAttribute("searchText", req.getParameter("searchText"));
-        RequestDispatcher dispatcher = req.getRequestDispatcher("views/risultatiRicerca.html");
-        dispatcher.forward(req, res);
+            req.setAttribute("searchText", req.getParameter("searchText"));
+            RequestDispatcher dispatcher = req.getRequestDispatcher("views/risultatiRicerca.html");
+            dispatcher.forward(req, res);
+        }
     }
 }
