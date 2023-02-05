@@ -24,6 +24,7 @@ export class AppComponent {
       this.service.checkisLogged(session).subscribe(isLogged=>this.isLogged=isLogged).add(()=>{
         if(this.isLogged && session!=null && session!=""){
           this.service.getUserBySession(session).subscribe(utente=>this.utente=utente).add(()=>{
+            console.log(this.utente.username);
             if(this.isLogged && session!=null && session!=""){
               this.sessionId=session;
               if(this.utente.username == undefined){

@@ -18,8 +18,9 @@ export class ProfiloComponent implements OnInit{
 
     ngOnInit(): void {
         const url=new URL(window.location.href);
-        let sessionId = url.searchParams.get("jsessionid");
+        let sessionId = url.searchParams.get('jsessionid');
     if (sessionId != null){
+      console.log("ciao");
       this.sessionId = sessionId;
       this.service.getUserBySession(this.sessionId).subscribe( Utente => {
         this.utente = Utente;});
