@@ -17,6 +17,7 @@ export class DettagliLibriComponent implements OnInit {
 
 
   isbn: string = "";
+  lunghezzaIsbn?: number;
 
   sessionId: string = "";
 
@@ -46,6 +47,8 @@ export class DettagliLibriComponent implements OnInit {
     const url = new URL(window.location.href);
     this.url = url.href;
     this.isbn = url.pathname.split("/")[2];
+
+    this.lunghezzaIsbn = this.isbn.length;
 
 
     let sessionId = url.searchParams.get("jsessionid");
