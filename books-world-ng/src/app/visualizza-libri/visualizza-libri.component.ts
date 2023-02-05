@@ -34,16 +34,25 @@ export class VisualizzaLibriComponent implements OnInit, OnChanges {
     this.ricercaAvanzata();
   }
 
+  applyFilter(array: Libro[]): Libro[]{
+    return array.filter( it => 
+      it.volumeInfo.industryIdentifiers != undefined &&
+      it.volumeInfo.industryIdentifiers != null &&
+      it.volumeInfo.industryIdentifiers.at(0)?.type.includes("ISBN")
+    );
+  }
+
   ricercaAvanzata(): void {
     this.api.cercaLibriRicercaAvanzata(this.autore, this.editore, this.genere)
-              .subscribe(response => this.libri = response);
+              .subscribe(response => this.libri = this.applyFilter(response))
+
   }
 
   ngOnInit(): void {
     if( this.libri.splice(0) )
-      this.api.initialize().subscribe(response => this.libri = response);
+      this.api.initialize().subscribe(response => this.libri = this.applyFilter(response))
+    
+
   }
-
-
 
 }
