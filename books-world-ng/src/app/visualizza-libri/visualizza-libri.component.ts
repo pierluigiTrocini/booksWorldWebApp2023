@@ -12,6 +12,8 @@ export class VisualizzaLibriComponent implements OnInit, OnChanges {
 
   libri: Libro[] = [];
 
+  startIndex: number = 0;
+
   @Input() autore: string = "";
   @Input() editore: string = "";
   @Input() genere: string = "";
@@ -50,9 +52,11 @@ export class VisualizzaLibriComponent implements OnInit, OnChanges {
 
   ngOnInit(): void {
     if( this.libri.splice(0) )
-      this.api.initialize().subscribe(response => this.libri = this.applyFilter(response))
-    
+      this.api.initialize(this.startIndex).subscribe(response => this.libri = this.applyFilter(response))
+  }
 
+  addMoreItems(): void{
+    this.api.initialize(this.startIndex += 40).subscribe(response => this.libri = this.libri.concat((this.applyFilter(response))));
   }
 
 }

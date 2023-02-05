@@ -11,9 +11,10 @@ export class ApiUtilsService {
 
   constructor(private http: HttpClient) { }
 
-  initialize(): Observable<Libro[]> {
+  initialize(startIndex: number): Observable<Libro[]> {
     let builder = new UrlBuilder();
     builder.maxResults(40);
+    builder.startIndex(startIndex);
     builder.relevance();
     builder.paidBooks();
     return this.http.get<GoogleBooksApis> (builder.build()).pipe(map((data: GoogleBooksApis) => data.items));

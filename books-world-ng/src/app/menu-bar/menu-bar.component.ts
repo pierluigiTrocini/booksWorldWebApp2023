@@ -28,6 +28,8 @@ export class MenuBarComponent implements OnInit {
     this.infoChecked = !this.infoChecked;
   }
 
+
+
   ngOnInit(): void {
 
   }
