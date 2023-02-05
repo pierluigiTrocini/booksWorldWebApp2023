@@ -22,30 +22,6 @@ import jakarta.servlet.http.HttpServletResponse;
 
 @RestController
 public class RisultatiController {
-
-    private ArrayList<Volume> getVolumes(String content) throws IOException{
-        Books service = new Books.Builder(new NetHttpTransport(), new GsonFactory(), null).build();
-
-        ArrayList<Volume> list = new ArrayList<Volume>();
-
-        for( long i = 0; i < 80; i += 40 ){
-            List resultList = service.volumes().list(content).setStartIndex(i + 1).setMaxResults((long)40);
-            Volumes volumes = resultList.execute();
-
-            if( volumes.getItems() != null ){
-                ArrayList<Volume> vol = (ArrayList<Volume>) volumes.getItems();
-                vol.removeIf((v) -> {
-                    return v.getVolumeInfo().getIndustryIdentifiers() == null ||
-                        !v.getVolumeInfo().getIndustryIdentifiers().get(0).getType().contains("ISBN");
-                });
-
-                list.addAll(vol);
-            }
-        }
-
-        return list;
-    }
-
     @GetMapping("/risultati")
     @CrossOrigin("http://localhost:4200/")
     public void risultatiRedirect(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException{
@@ -53,14 +29,24 @@ public class RisultatiController {
             res.sendRedirect("http://localhost:8080/");
         }
         else{
-            ArrayList<Volume> volumes = getVolumes(req.getParameter("searchText"));
+            long startIndex = (( req.getParameter("startIndex") == null || req.getParameter("startIndex").trim().isEmpty()) ? 0 : Long.parseLong(req.getParameter("startIndex")));
 
-            req.setAttribute("volumes", volumes);
-            if(volumes == null)
-                req.setAttribute("lenght", 0);
-            else
-                req.setAttribute("lenght", volumes.size());
+            Books service = new Books.Builder(new NetHttpTransport(), new GsonFactory(), null).build();
+            List resultList = service.volumes().list(req.getParameter("searchText")).setStartIndex(startIndex * 10).setMaxResults((long) 10);
+            Volumes volumes = resultList.execute();
+            if(volumes.getItems() != null){
+                volumes.getItems().removeIf((v) -> {
+                    return v.getVolumeInfo().getIndustryIdentifiers() == null ||
+                        !v.getVolumeInfo().getIndustryIdentifiers().get(0).getType().contains("ISBN");
+                });
+                req.setAttribute("volumes", volumes.getItems());
+            }
 
+
+            int lenght = (volumes.getItems() == null) ? 0 : volumes.getItems().size();
+
+            req.setAttribute("lenght", lenght);
+            req.setAttribute("startIndex", startIndex);
             req.setAttribute("searchText", req.getParameter("searchText"));
             RequestDispatcher dispatcher = req.getRequestDispatcher("views/risultatiRicerca.html");
             dispatcher.forward(req, res);
