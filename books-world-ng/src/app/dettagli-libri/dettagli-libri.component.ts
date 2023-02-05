@@ -78,10 +78,6 @@ export class DettagliLibriComponent implements OnInit {
               .subscribe(response => this.libri = response);
               console.log(this.libri.length);
 
-
-
-
-
   }
 
 

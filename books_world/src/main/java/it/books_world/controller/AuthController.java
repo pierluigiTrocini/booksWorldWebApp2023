@@ -26,8 +26,6 @@ public class AuthController {
     public void loginOrRedirect(HttpServletRequest req,HttpServletResponse resp) throws IOException{
         if( req.getSession().getAttribute("user") == null )
             resp.sendRedirect("login.html");
-        else
-            resp.sendRedirect("http://localhost:4200/profilo");
     }
 
     @GetMapping("/signin")
