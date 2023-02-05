@@ -10,25 +10,25 @@
         </a>
     </ng-template>
 
-    <a href="/book/{{libro?.volumeInfo?.industryIdentifiers?.at(0)?.identifier}}?sessionId={{getSessionId()}}" (click)="NascondiRisultati()" > 
+    <a href="/book/{{libro?.volumeInfo?.industryIdentifiers?.at(0)?.identifier}}?sessionId={{getSessionId()}}" (click)="NascondiRisultati()" >
         <img src="{{libro?.volumeInfo?.imageLinks?.smallThumbnail}}" class="rounded mx-auto d-block"
             width="75%" height="75%"
         alt="Anteprima non disponibile"/>
     </a>
     <div class="card-body" >
         <h5  class="card-title text-sm-center text-light fs-7" (click)="NascondiRisultati()">
-            <a href="/book/{{libro?.volumeInfo?.industryIdentifiers?.at(0)?.identifier}}?sessionId={{getSessionId()}}" >  
-            {{libro?.volumeInfo?.title}}  
-            
-          </a> 
+            <a href="/book/{{libro?.volumeInfo?.industryIdentifiers?.at(0)?.identifier}}?sessionId={{getSessionId()}}" >
+            {{libro?.volumeInfo?.title}}
+
+          </a>
         </h5>
         <p class="card-text text-sm-center">
-            <a href="http://localhost:8080/visualizzaPerEditore">
+            <a href="http://localhost:8080/risultati?searchText={{libro?.volumeInfo?.publisher}}">
                 {{libro?.volumeInfo?.publisher}}
             </a>
         </p>
         <p *ngFor="let a of libro?.volumeInfo?.authors" class=" text-sm-center fs-6">
-            <a href="http://localhost:8080/visualizzaPerAutore">
+            <a href="http://localhost:8080/risultati?searchText={{a}}">
               <font [size]="-1">
                 {{a}}
               </font>
