@@ -20,13 +20,16 @@ export class AppComponent {
 
     const urlParams=new URLSearchParams(window.location.search);
     let session=urlParams.get('jsessionid');
+    console.log(session);
     if(session!=null && session != ""){
       this.service.checkisLogged(session).subscribe(isLogged=>this.isLogged=isLogged).add(()=>{
+        console.log(this.isLogged);
         if(this.isLogged && session!=null && session!=""){
           this.service.getUserBySession(session).subscribe(utente=>this.utente=utente).add(()=>{
             console.log(this.utente.username);
             if(this.isLogged && session!=null && session!=""){
               this.sessionId=session;
+              console.log(session);
               if(this.utente.username == undefined){
                 this.isLogged=false;
                 window.location.replace("http://localhost4200/");
@@ -37,8 +40,8 @@ export class AppComponent {
         }
       });
     }
-
   }
+
 
  public getSessionId():string{
     return this.sessionId;

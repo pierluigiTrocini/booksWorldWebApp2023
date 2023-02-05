@@ -95,8 +95,7 @@ public class AuthController {
     public boolean checkLoggedIn(HttpServletRequest req, HttpServletResponse resp, @RequestParam String sessionId){
         ServletContext context = req.getServletContext();
         HttpSession session = (HttpSession) context.getAttribute(sessionId);
-        Utente utente = (Utente) session.getAttribute("user");
-        if(utente != null){
+        if(session != null){
             return true;
         }
         return false;

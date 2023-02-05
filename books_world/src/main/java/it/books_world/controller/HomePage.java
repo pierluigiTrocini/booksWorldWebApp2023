@@ -15,6 +15,9 @@ public class HomePage extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession();
+        session.setAttribute("sessionId", session.getId());
+        session.setAttribute("user", null);
+        req.getServletContext().setAttribute(session.getId(), session);
         resp.sendRedirect("http://localhost:4200?jsessionid="+session.getId());
     }
 

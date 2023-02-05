@@ -13,8 +13,6 @@ import { HttpClient} from '@angular/common/http';
 })
 export class DettagliLibriComponent implements OnInit {
 
-  url : string = "";
-
 
   isbn: string = "";
   lunghezzaIsbn?: number;
@@ -45,18 +43,18 @@ export class DettagliLibriComponent implements OnInit {
   ngOnInit(): void {
 
     const url = new URL(window.location.href);
-    this.url = url.href;
     this.isbn = url.pathname.split("/")[2];
 
     this.lunghezzaIsbn = this.isbn.length;
 
 
-    let sessionId = url.searchParams.get("jsessionid");
+    let sessionId = url.searchParams.get('jsessionid');
     if (sessionId != null){
       this.sessionId = sessionId;
       this.service.getUserBySession(this.sessionId).subscribe( Utente => {
         this.utente = Utente;});
       }
+      console.log(sessionId);
 
 
 
