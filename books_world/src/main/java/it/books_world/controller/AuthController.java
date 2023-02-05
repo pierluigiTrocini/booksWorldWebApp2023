@@ -24,7 +24,7 @@ import jakarta.servlet.http.HttpSession;
 public class AuthController {
     @GetMapping("/login")
     public void loginOrRedirect(HttpServletRequest req,HttpServletResponse resp) throws IOException{
-        if( req.getAttribute("user") == null )
+        if( req.getSession().getAttribute("user") == null )
             resp.sendRedirect("login.html");
         else
             resp.sendRedirect("http://localhost:4200/profilo");
@@ -39,6 +39,15 @@ public class AuthController {
     public String accountRegistration( @RequestBody Utente utente ){
         //preliminarmente: controllare se postgres è connesso
         if( DBManager.getInstance().getConnection() == null ) return "SERVICE_UNAVAILABLE";
+
+        //controllo di eventuali campi nulli
+        if( utente.getNome() == null || utente.getNome().trim().isEmpty() ) return "EMPTY_ATTR";
+        if( utente.getCognome() == null || utente.getCognome().trim().isEmpty() ) return "EMPTY_ATTR";
+        if( utente.getData_di_nascita() == null ) return "EMPTY_ATTR";
+        if( utente.getUsername() == null || utente.getUsername().trim().isEmpty() ) return "EMPTY_ATTR";
+        if( utente.getEmail() == null || utente.getEmail().trim().isEmpty() ) return "EMPTY_ATTR";
+        if( utente.getPassword() == null || utente.getPassword().trim().isEmpty() ) return "EMPTY_ATTR";
+
         //controllare se la mail è già stata usata
         if( DBManager.getInstance().getUtenteDao().findByEmail(utente.getEmail()) != null ) return "USED_EMAIL";
         // //controllare se lo username è già stato usato

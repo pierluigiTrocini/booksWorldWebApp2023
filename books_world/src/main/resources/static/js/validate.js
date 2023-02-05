@@ -1,6 +1,8 @@
 window.addEventListener("load", function(){
     var submit = this.document.querySelector(".btn.btn-primary");
 
+    var error = this.document.getElementById("errorText");
+
     submit.addEventListener("click", (event) => {
         event.preventDefault();
 
@@ -23,25 +25,26 @@ window.addEventListener("load", function(){
             success: function(response){
                 switch (response) {
                     case "USED_EMAIL":
-                        alert("indirizzo email già utilizzato");
-                        document.getElementById("email").classList.add("is-invalid");
+                        error.innerHTML = "L'email inserita è stata già utilizzata";
+                        document.getElementById("username").classList.add("is-invalid");
                         break;
                     case "USED_USERNAME":
-                        alert("username già utilizzato");
+                        error.innerHTML = "Il nome utente inserito è già utilizzato";
                         document.getElementById("email").classList.add("is-invalid");
                         break;
                     case "SERVICE_UNAVAILABLE":
-                        alert("Servizio al momento non disponibile");
+                        window.location.href = "error.html";
                         break;
                     case "USER_SAVED":
-                        alert("Registrato con successo");
-                        window.location.href = "login.html";
+                        window.location.href = "signinSuccess.html";
+                        break;
+                    case "EMPTY_ATTR":
+                        error.innerHTML = "Alcuni campi obbligatori potrebbero essere vuoti"; 
                         break;
 
                     default:
                         break;
                 }
-
             }
         })
     })
