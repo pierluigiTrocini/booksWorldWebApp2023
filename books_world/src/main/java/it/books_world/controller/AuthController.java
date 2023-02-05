@@ -75,6 +75,9 @@ public class AuthController {
             if( BCrypt.checkpw(password, utente.getPassword() ) ){
                 login = true;
                 session.setAttribute("user", utente);
+                session.setAttribute("sessionId", session.getId());
+
+                req.getServletContext().setAttribute(session.getId(), session);
             }
             else login = false;
         }
@@ -87,13 +90,14 @@ public class AuthController {
         }
     }
 
-    
+
     @GetMapping("/checkisLogged")
     @ResponseBody
     @CrossOrigin("http://localhost:4200/")
     public boolean checkLoggedIn(HttpServletRequest req, HttpServletResponse resp, @RequestParam String sessionId){
         ServletContext context = req.getServletContext();
-        Object utente = context.getAttribute(sessionId);
+        HttpSession session = (HttpSession) context.getAttribute(sessionId);
+        Utente utente = (Utente) session.getAttribute("user");
         if(utente != null){
             return true;
         }
