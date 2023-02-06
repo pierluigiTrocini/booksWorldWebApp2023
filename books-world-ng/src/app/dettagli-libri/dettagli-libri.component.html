@@ -15,7 +15,7 @@
                 </ng-template>
                 <ng-container *ngIf="libro?.saleInfo?.saleability === 'FOR_SALE' && (utente.username != '' && utente.username != null); then showButtonToCart"></ng-container>
                 <ng-template #showButtonToCart>
-                    <a href="http://localhost:8080/visualizzaCarrello?username={{utente.username}}"><button type="button" class="btn btn-success mt-1" (click)="aggiungiAlCarrello()">Aggiungi al carrello</button></a>
+                    <button type="button" class="btn btn-success mt-1" (click)="aggiungiAlCarrello()">Aggiungi al carrello</button>
                 </ng-template>
                 <ng-container *ngIf="libro?.saleInfo?.saleability === 'FOR_SALE' && (utente.username === '' || utente.username == null); then showButtonToLogin"></ng-container>
                 <ng-template #showButtonToLogin>
