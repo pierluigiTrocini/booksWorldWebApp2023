@@ -42,6 +42,9 @@ public class RisultatiController {
 
             int lenght = (volumes.getItems() == null) ? 0 : volumes.getItems().size();
 
+            if( req.getSession().getAttribute("user") != null ) req.setAttribute("jsessionid", req.getSession().getId());
+            else req.setAttribute("jsessionid", "");
+
             req.setAttribute("lenght", lenght);
             req.setAttribute("startIndex", startIndex);
             req.setAttribute("searchText", req.getParameter("searchText"));

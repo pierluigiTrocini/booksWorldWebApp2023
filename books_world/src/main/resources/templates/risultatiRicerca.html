@@ -71,7 +71,7 @@
                                             <span th:text="${book.volumeInfo.language}"></span>
                                         </div>
                                         <footer>
-                                            <a class="btn btn-sm btn-warning fw-bold mt-5" th:href="|http://localhost:4200/book/${book.volumeInfo.industryIdentifiers[0].identifier}|">Dettagli</a>
+                                            <a class="btn btn-sm btn-warning fw-bold mt-5" th:href="|http://localhost:4200/book/${book.volumeInfo.industryIdentifiers[0].identifier}?jsessionid=${jsessionid}|">Dettagli</a>
                                         </footer>
                                     </div>
                                 </div>
