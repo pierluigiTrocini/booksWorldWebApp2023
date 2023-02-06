@@ -15,7 +15,7 @@ export class BooksCardComponent {
   autore: string = "";
   editore: string = "";
   constructor(private app:AppComponent,private router:Router){}
-
+ 
   public getSessionId():string{
     return this.app.getSessionId();
   }

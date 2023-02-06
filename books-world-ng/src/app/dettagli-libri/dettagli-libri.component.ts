@@ -52,7 +52,7 @@ export class DettagliLibriComponent implements OnInit {
 
 
     let sessionId = url.searchParams.get("jsessionid");
-    if (sessionId != null){
+    if (sessionId){
       this.sessionId = sessionId;
       this.service.getUserBySession(this.sessionId).subscribe( Utente => {
         this.utente = Utente;});
