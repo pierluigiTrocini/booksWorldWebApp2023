@@ -80,7 +80,7 @@ export class Recensione {
   numeroMiPiace!:number;
   numeroNonMiPiace!:number;
   scrittaDa!: Utente;
-  ISBN!: string;
-  NumeroStelle!: number;
-  Segnalabile!:boolean;
+  isbn!: string;
+  numeroStelle!: number;
+  segnalabile!:boolean;
 }

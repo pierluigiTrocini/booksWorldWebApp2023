@@ -3,3 +3,11 @@
     color: yellow;
     text-shadow: 0 0 3px black;
  }
+
+.testo{
+    overflow-wrap: break-word;
+}
+
+.titolo{
+    overflow-wrap: break-word;
+}

@@ -8,14 +8,16 @@ public class Recensione {
 	 Integer numeroMiPiace;
 	 Integer numeroNonMiPiace;
 	 Utente scrittaDa;
-	 String IBSN;
-	 Integer NumeroStelle;
-	 Boolean Segnalabile;
+	 String isbn;
+	 Integer numeroStelle;
+	 Boolean segnalabile;
+	 
 	public Recensione() {
 		numeroMiPiace=0;
 		numeroNonMiPiace=0;
-		Segnalabile=true;
+		segnalabile=true;
 	}
+	
 	public Long getId() {
 		return id;
 	}
@@ -53,22 +55,22 @@ public class Recensione {
 		this.scrittaDa = scrittaDa;
 	}
 	public String getIBSN() {
-		return IBSN;
+		return isbn;
 	}
 	public void setIBSN(String iBSN) {
-		IBSN = iBSN;
+		this.isbn = iBSN;
 	}
 	public Integer getNumeroStelle() {
-		return NumeroStelle;
+		return numeroStelle;
 	}
 	public void setNumeroStelle(Integer numeroStelle) {
-		NumeroStelle = numeroStelle;
+		this.numeroStelle = numeroStelle;
 	}
 	public Boolean getSegnalabile() {
-		return Segnalabile;
+		return segnalabile;
 	}
 	public void setSegnalabile(Boolean segnalabile) {
-		Segnalabile = segnalabile;
+		this.segnalabile = segnalabile;
 	}
 
 

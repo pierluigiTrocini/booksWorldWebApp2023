@@ -12,7 +12,7 @@ import { Recensione, Utente } from '../util';
 export class RecensioniComponent implements OnInit,OnChanges{
    
   @Input() ISBN: string = "";
-  @Input() aggiorna: boolean = true;
+  @Input() aggiorna: boolean = false;
   @Input() utente: Utente = new Utente();
   
   public recensioni: Recensione[] = [];
@@ -30,13 +30,14 @@ export class RecensioniComponent implements OnInit,OnChanges{
       console.log("giusto");
       console.log(this.media);
       for(let recensione of this.recensioni){
-        console.log(recensione.NumeroStelle);
-        this.media+=recensione.NumeroStelle;
+        console.log(recensione);
+        this.media+=recensione.numeroStelle;
       }
       
       
       if (this.recensioni.length > 0){
           this.media/=this.recensioni.length;
+          this.media=Number((this.media).toFixed(1));
       }
       console.log(this.media);
     });
@@ -45,18 +46,19 @@ export class RecensioniComponent implements OnInit,OnChanges{
   ngOnChanges(changes: SimpleChanges): void {
     //Called before any other lifecycle hook. Use it to inject dependencies, but avoid any serious work here.
     //Add '${implements OnChanges}' to the class.
-    if(this.aggiorna){
+    /*if(this.aggiorna){
+      this.media=0;
       this.service.getRecensioni(this.ISBN).subscribe(recensioni => {
         this.recensioni = recensioni;
-        this.media=0;
         for(let recensione of this.recensioni){
-          this.media+=recensione.NumeroStelle;
+          this.media+=recensione.numeroStelle;
         }
         this.media/=this.recensioni.length;
-
-      })
-  }
-}
+        this.media=Number((this.media).toFixed(1));
+        console.log(this.media);
+      });
+    }*/
+ }
 
   IncrementaLike(id:BigInt):void{
     this.service.incrementaLikes(id).subscribe(result => {
@@ -74,10 +76,10 @@ export class RecensioniComponent implements OnInit,OnChanges{
         this.service.getRecensioni(this.ISBN).subscribe(recensioni => {this.recensioni = recensioni;
         this.media=0;
         for(let recensione of this.recensioni){
-          this.media+=recensione.NumeroStelle;
+          this.media+=recensione.numeroStelle;
         }
         this.media/=this.recensioni.length;
-          
+        this.media=Number((this.media).toFixed(1));
        } );
       }
     })

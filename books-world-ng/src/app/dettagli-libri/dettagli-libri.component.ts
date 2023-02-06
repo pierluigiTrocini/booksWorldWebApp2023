@@ -67,26 +67,6 @@ export class DettagliLibriComponent implements OnInit {
           }
     });
       }
-    
-
-
-
-
-
-
-
-
-
-
-   /* if (this.utente.username ){
-      console.log("ciao");
-        this.service.proprietaLibro(this.isbn, this.utente.username).subscribe( utentePossiedeLibro => {
-          this.utentePossiedeLibro = utentePossiedeLibro;
-        console.log(utentePossiedeLibro);});
-
-        this.service.postataRecensione(this.isbn, this.utente.username).subscribe( utenteHaPostatoRecensione => {
-          this.utenteHaPostatoRecensione = utenteHaPostatoRecensione;});
-    }*/
 
 
 
