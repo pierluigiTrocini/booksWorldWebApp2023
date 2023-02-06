@@ -68,6 +68,7 @@ public class MostraCarrello extends HttpServlet {
                     req.setAttribute("sessionid", session.getId());
                     RequestDispatcher dispatcher = req.getRequestDispatcher("views/carrelloVuoto.html");
                     dispatcher.forward(req, resp);
+                    return;
                 }
                 ArrayList<VolumeQuantita> volumi = new ArrayList<>();
                 for (String isbn : libri.keySet()) {
