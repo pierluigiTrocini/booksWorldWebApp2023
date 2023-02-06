@@ -54,9 +54,20 @@ export class DettagliLibriComponent implements OnInit {
     let sessionId = url.searchParams.get("jsessionid");
     if (sessionId){
       this.sessionId = sessionId;
-      this.service.getUserBySession(this.sessionId).subscribe( Utente => {
-        this.utente = Utente;});
+      this.service.getUserBySession(this.sessionId).subscribe( utente => {
+        this.utente = utente;}).add(()=>{
+          if (this.utente.username ){
+            console.log("ciao");
+              this.service.proprietaLibro(this.isbn, this.utente.username).subscribe( utentePossiedeLibro => {
+                this.utentePossiedeLibro = utentePossiedeLibro;
+              console.log(utentePossiedeLibro);});
+      
+              this.service.postataRecensione(this.isbn, this.utente.username).subscribe( utenteHaPostatoRecensione => {
+                this.utenteHaPostatoRecensione = utenteHaPostatoRecensione;});
+          }
+    });
       }
+    
 
 
 
@@ -66,13 +77,16 @@ export class DettagliLibriComponent implements OnInit {
 
 
 
-    if (this.utente.username !== "" && this.utente.username != null){
+
+   /* if (this.utente.username ){
+      console.log("ciao");
         this.service.proprietaLibro(this.isbn, this.utente.username).subscribe( utentePossiedeLibro => {
-          this.utentePossiedeLibro = utentePossiedeLibro;});
+          this.utentePossiedeLibro = utentePossiedeLibro;
+        console.log(utentePossiedeLibro);});
 
         this.service.postataRecensione(this.isbn, this.utente.username).subscribe( utenteHaPostatoRecensione => {
           this.utenteHaPostatoRecensione = utenteHaPostatoRecensione;});
-    }
+    }*/
 
 
 

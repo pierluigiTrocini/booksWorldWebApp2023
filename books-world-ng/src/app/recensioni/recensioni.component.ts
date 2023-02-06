@@ -24,7 +24,9 @@ export class RecensioniComponent implements OnInit,OnChanges{
 
   ngOnInit(): void {
     console.log(this.ISBN);
+    console.log(this.utente.username);
     this.service.getRecensioni(this.ISBN).subscribe(recensioni => {
+      console.log("giusto");
       this.recensioni = recensioni;
       for(let recensione of this.recensioni){
         this.media+=recensione.NumeroStelle;
