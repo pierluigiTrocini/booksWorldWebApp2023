@@ -26,12 +26,19 @@ export class RecensioniComponent implements OnInit,OnChanges{
     console.log(this.ISBN);
     console.log(this.utente.username);
     this.service.getRecensioni(this.ISBN).subscribe(recensioni => {
-      console.log("giusto");
       this.recensioni = recensioni;
+      console.log("giusto");
+      console.log(this.media);
       for(let recensione of this.recensioni){
+        console.log(recensione.NumeroStelle);
         this.media+=recensione.NumeroStelle;
       }
-      this.media/=this.recensioni.length;
+      
+      
+      if (this.recensioni.length > 0){
+          this.media/=this.recensioni.length;
+      }
+      console.log(this.media);
     });
   }
 
