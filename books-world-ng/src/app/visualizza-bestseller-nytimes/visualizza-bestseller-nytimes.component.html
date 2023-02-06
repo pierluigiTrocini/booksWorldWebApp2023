@@ -1,30 +1,49 @@
-
-<h4 class="text mx-5 my-2">Benvenuto, non perderti la lista dei bestseller di questa settimana</h4>
-<small class="text mx-5">
-    powered by <img src="https://upload.wikimedia.org/wikipedia/commons/7/77/The_New_York_Times_logo.png"
-        width="10%" height="10%">
-</small>
-<div *ngFor="let libro of libri" class="card-group">
-    <div class="card mb-3 mx-5">
-        <div class="row g-0">
-            <div class="col-auto">
-                <img src="{{libro.book_image}}" class="rounded mx-auto d-block">
-            </div>
-            <div class="col">
-                <div class="card-body">
-                    <h5 class="card-title">{{libro.title}}</h5>
-                    <p class="card-text">{{libro.author}}</p>
-                    <p class="card-text">Edited by: <strong>{{libro.publisher}}</strong></p>
-                    <p class="card-text">
-                        <small class="text-muted">{{libro.description}}</small>
-                    </p>
+<ng-container *ngIf="this.libri.length !== 0; then show; else error "></ng-container>
+<ng-template #show>
+    <h4 class="text mx-5 my-2">Benvenuto, non perderti la lista dei bestseller di questa settimana</h4>
+    <small class="text mx-5">
+        powered by <img src="https://upload.wikimedia.org/wikipedia/commons/7/77/The_New_York_Times_logo.png"
+            width="10%" height="10%">
+    </small>
+    <div *ngFor="let libro of libri" class="card-group">
+        <div class="card mb-3 mx-5">
+            <div class="row g-0">
+                <div class="col-auto">
+                    <img src="{{libro.book_image}}" class="rounded mx-auto d-block">
                 </div>
-                <footer>
-                    <a href="http://localhost:8080/risultati?searchText={{libro.title}}" class="btn btn-warning mx-4">
-                        <strong>Cerca nel sito</strong>
-                    </a>
-                </footer>
+                <div class="col">
+                    <div class="card-body">
+                        <h5 class="card-title">{{libro.title}}</h5>
+                        <p class="card-text">{{libro.author}}</p>
+                        <p class="card-text">Edited by: <strong>{{libro.publisher}}</strong></p>
+                        <p class="card-text">
+                            <small class="text-muted">{{libro.description}}</small>
+                        </p>
+                    </div>
+                    <footer>
+                        <a href="http://localhost:8080/risultati?searchText={{libro.title}}" class="btn btn-warning mx-4">
+                            <strong>Cerca nel sito</strong>
+                        </a>
+                    </footer>
+                </div>
             </div>
         </div>
     </div>
-</div>
+</ng-template>
+<ng-template #error>
+    <div>
+        <div class="d-flex align-items-center justify-content-center vh-75 my-5">
+            <div class="text-center">
+                <h1 class="display-1 fw-bold">
+                    <span class="material-icons" style="font-size: 96px;">
+                        warning
+                    </span><br>
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/7/77/The_New_York_Times_logo.png" width="30%" height="30%">
+                </h1>
+                <p class="fs-3"> <span class="text-danger fw-bold">Servizio attualmente non disponibile</span></p>
+                <p class="fs-5"> <span class="text-muted">Il servizio di visualizzazione bestseller non è al momento disponibile</span></p>
+                <p class="fs-6"> <span class="text-muted">Ci scusiamo per il disagio. Le funzionalità offerte da BooksWorld sono comunque a tua disposizione</span></p>
+            </div>
+        </div>
+    </div>
+</ng-template>
