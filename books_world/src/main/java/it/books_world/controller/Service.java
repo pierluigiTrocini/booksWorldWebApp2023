@@ -25,20 +25,28 @@ import jakarta.servlet.http.HttpSession;
 public class Service {
 	
 	@GetMapping("/IncrementaLikes")
-	public boolean IncrementaLikes(@RequestParam String Id) {
+	public boolean IncrementaLikes(@RequestParam String id) {
 		RecensioneDao dao=DBManager.getInstance().getRecensioneDao();
-		Recensione recensione=dao.FindByPrimaryKey(Long.parseLong(Id));
-		dao.IncrementLikes(recensione);
+		Recensione recensione=dao.FindByPrimaryKey(Long.parseLong(id));
+		try {
+			dao.IncrementLikes(recensione);
+		} catch (Exception e) {
+			return false;
+		}
 		return true;
 		
 		
 		
 	}
 	@GetMapping("/IncrementaDislikes")
-	public boolean IncrementaDislikes(@RequestParam String Id) {
+	public boolean IncrementaDislikes(@RequestParam String id) {
 		RecensioneDao dao=DBManager.getInstance().getRecensioneDao();
-		Recensione recensione=dao.FindByPrimaryKey(Long.parseLong(Id));
-		dao.IncrementDislikes(recensione);
+		Recensione recensione=dao.FindByPrimaryKey(Long.parseLong(id));
+		try {
+			dao.IncrementDislikes(recensione);
+		} catch (Exception e) {
+			return false;
+		}
 		return true;
 		
 		
@@ -51,19 +59,19 @@ public class Service {
 	}
 	
 	@GetMapping("/removeReview")
-	public boolean rimuoviRecensione(@RequestParam String Id){
+	public boolean rimuoviRecensione(@RequestParam String id){
 		RecensioneDao dao=DBManager.getInstance().getRecensioneDao();
-		Recensione recensione=dao.FindByPrimaryKey(Long.parseLong(Id));
+		Recensione recensione=dao.FindByPrimaryKey(Long.parseLong(id));
 		return dao.Delete(recensione);
 		
 	}
 	
 	@GetMapping("/segnalaRecensione")
-	public boolean segnalaRecensione(@RequestParam String Id){
+	public boolean segnalaRecensione(@RequestParam String id){
 		RecensioneDao rdao=DBManager.getInstance().getRecensioneDao();
-		Recensione recensione=rdao.FindByPrimaryKey(Long.parseLong(Id));
+		Recensione recensione=rdao.FindByPrimaryKey(Long.parseLong(id));
 		SegnalazioneDao sdao=DBManager.getInstance().getSegnalazioneDao();
-		Segnalazione segnalazione=sdao.FindByPrimaryKey(Long.parseLong(Id));
+		Segnalazione segnalazione=sdao.FindByPrimaryKey(Long.parseLong(id));
 		if(segnalazione==null) {
 			segnalazione=new Segnalazione();
 			segnalazione.setNum_segnalazioni((long) 1);
@@ -77,7 +85,11 @@ public class Service {
 			
 			
 		}
-		sdao.saveOrUpdate(segnalazione);
+		try {
+			sdao.saveOrUpdate(segnalazione);
+		} catch (Exception e) {
+			return false;
+		}
 		return true;
 		
 		
@@ -86,38 +98,51 @@ public class Service {
 	}
 	
 	@GetMapping("/addToCart")
-	public boolean aggiungiAlCarrello(@RequestParam String username,@RequestParam String ISBN){
+	public boolean aggiungiAlCarrello(@RequestParam String username,@RequestParam String isbn){
 		CarrelloDao dao=DBManager.getInstance().getCarrelloDao();
-		dao.InsertorUpdate(username, ISBN);
+		try {
+		dao.InsertorUpdate(username, isbn);}
+		catch(Exception e){
+			return false;
+		}
 		return true;
 		
 	}
 	
 	@GetMapping("/proprietaLibro")
-	public boolean proprietaLibro(@RequestParam String ISBN,@RequestParam String username){
+	public boolean proprietaLibro(@RequestParam String isbn,@RequestParam String username){
 		OrdineDao dao = DBManager.getInstance().getOrdineDao();
-		return dao.userOwnsBook(username, ISBN);
+		return dao.userOwnsBook(username, isbn);
 	}
 	
 	
 	@GetMapping("/postataRecensione")
-	public boolean postataRecensione(@RequestParam String ISBN,@RequestParam String username){
+	public boolean postataRecensione(@RequestParam String isbn,@RequestParam String username){
 		RecensioneDao dao=DBManager.getInstance().getRecensioneDao();
-		return dao.WrittenReview(username, ISBN);
+		
+		return dao.WrittenReview(username, isbn);
+		
 	}
 	
 	@GetMapping("/addToReviews")
-	public boolean aggiungiRecensione(HttpServletRequest req,@RequestParam String ISBN,@RequestParam String username,@RequestParam String titolo,@RequestParam String testo,@RequestParam String numStelle){
+	public boolean aggiungiRecensione(HttpServletRequest req,@RequestParam String isbn,@RequestParam String username,@RequestParam String titolo,@RequestParam String testo,@RequestParam String numStelle){
 		RecensioneDao dao=DBManager.getInstance().getRecensioneDao();
 		UtenteDao udao=DBManager.getInstance().getUtenteDao();
 		Recensione recensione=new Recensione();
-		recensione.setIBSN(ISBN);
+		recensione.setIBSN(isbn);
 		recensione.setScrittaDa(udao.FindByUsername(username));
 		recensione.setTitolo(titolo);
 		recensione.setTesto(testo);
 		recensione.setNumeroStelle(Integer.parseInt(numStelle));
-		dao.Save(recensione);
+		
+		try {
+			dao.Save(recensione);
+		} catch (Exception e) {
+			
+			return false;
+		}
 		return true;
+		
 		
 	}
 	
