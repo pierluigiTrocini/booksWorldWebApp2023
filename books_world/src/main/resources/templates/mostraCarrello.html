@@ -42,7 +42,7 @@
                 </div>
 
                 <div class="card mb-3" th:each="vq : ${vQuantita}">
-                  <div class="card-body libro" th:value="|${vq.isbn}|">
+                  <div class="card-body libro" th:value="${vq.isbn}" th:id="|libro_${vq.isbn}|">
                     <div class="d-flex justify-content-between">
                       <div class="d-flex flex-row align-items-center">
                         <div>

@@ -34,12 +34,18 @@ window.addEventListener('load', function(e) {
                 url: "/diminuisciQuantita",
                 data: {"isbn": isbnLibro},
                 success: function(risposta) {
-                    document.getElementById("quantita_"+isbnLibro).innerHTML = risposta;
-                    var quantita = parseInt(risposta);
-                    var prezzo = parseFloat(document.getElementById("prezzo_"+isbnLibro).innerHTML);
-                    document.getElementById("prezzo_"+isbnLibro).innerHTML =
-                                parseFloat((prezzo/(quantita+1))*quantita).toFixed(2)+"€";
-                    calcolaTotale();
+                    if (risposta >= 1) {
+                        document.getElementById("quantita_"+isbnLibro).innerHTML = risposta;
+                        var quantita = parseInt(risposta);
+                        var prezzo = parseFloat(document.getElementById("prezzo_"+isbnLibro).innerHTML);
+                        document.getElementById("prezzo_"+isbnLibro).innerHTML =
+                                    parseFloat((prezzo/(quantita+1))*quantita).toFixed(2)+"€";
+                        calcolaTotale();
+                    }
+                    else {
+                        document.getElementById("libro_"+isbnLibro).parentNode.remove();
+                        calcolaTotale();
+                    }
                 }
             });
         });
