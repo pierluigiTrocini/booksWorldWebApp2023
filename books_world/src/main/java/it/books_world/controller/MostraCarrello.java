@@ -77,16 +77,13 @@ public class MostraCarrello extends HttpServlet {
                     VolumeQuantita vq = new VolumeQuantita();
                     vq.setVolume(volume);
                     vq.setQuantita(libri.get(isbn));
-                    for (var id : volume.getVolumeInfo().getIndustryIdentifiers()) {
-                        if (id.getType().startsWith("ISBN"))
-                            vq.setIsbn(id.getIdentifier());
-                    }
+                    vq.setIsbn(isbn);
                     volumi.add(vq);
-                    req.setAttribute("sessionid", req.getSession().getId());
-                    req.setAttribute("vQuantita", volumi);
-                    RequestDispatcher dispatcher = req.getRequestDispatcher("views/mostraCarrello.html");
-                    dispatcher.forward(req, resp);
                 }
+                req.setAttribute("sessionid", req.getSession().getId());
+                req.setAttribute("vQuantita", volumi);
+                RequestDispatcher dispatcher = req.getRequestDispatcher("views/mostraCarrello.html");
+                dispatcher.forward(req, resp);
             }
             else {
                 resp.sendRedirect("/login.html");
