@@ -56,5 +56,5 @@ function calcolaTotale() {
         var isbn = libro.getAttribute("value");
         totale += parseFloat(document.getElementById("prezzo_"+isbn).innerHTML.valueOf());
     });
-    this.document.querySelector("#totale").innerHTML = "Totale: " + totale + "€";
+    this.document.querySelector("#totale").innerHTML = "Totale: " + totale.toFixed(2) + "€";
 }
