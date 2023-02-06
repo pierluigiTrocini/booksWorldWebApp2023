@@ -2,8 +2,8 @@ window.addEventListener("load", function() {
     var butAcquista = document.querySelector("#butAcquista");
 
 
+    var canSubmit = false;
     butAcquista.addEventListener("click", function(e) {
-        var canSubmit = false;
         var txtNome = document.getElementById("fname").value;
         var txtEmail = document.getElementById("email").value;
         var txtAdr = document.getElementById("adr").value;
@@ -20,11 +20,11 @@ window.addEventListener("load", function() {
                     || txtCap === "" || txtCname === "" || txtCcnum === "" || txtScadenza === "" || txtCvv === "")
             canSubmit = false;
 
+
+        });
+
         if (canSubmit)
             document.querySelector("#form").submit();
         else
             alert("Assicurati che tutti i campi siano stati compilati");
-
-    });
-
 });

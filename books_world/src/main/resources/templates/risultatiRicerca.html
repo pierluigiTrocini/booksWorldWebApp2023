@@ -14,7 +14,7 @@
                   <input type="text" class="form-control mt-2 mx-2" th:value="${searchText}" aria-label="Search" id="searchText" name="searchText">
                   <button class="btn btn-outline-success mt-2" type="submit">Cerca</button>
                 </form>
-                <a class="navbar-brand active fw-bold fs-3" aria-current="page" href="http://localhost:8080/">
+                <a class="navbar-brand active fw-bold fs-3" aria-current="page" th:href="|http://localhost:4200/?jsessionid=${jsessionid}|">
                     Books World
                 </a>
             </nav>
@@ -23,7 +23,7 @@
         <div th:if="${lenght != 0}">
             <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
                 <span class="navbar-brand fw-bold mx-3">Risultati per: </span>
-                <span th:text="${searchText}" class="text-light fs-5 fst-italic" id="searchContent" th:value="${searchText}"></span>                
+                <span th:text="${searchText}" class="text-light fs-5 fst-italic" id="searchContent" th:value="${searchText}"></span>
             </nav>
             <div id = "container">
                 <ul class="list-group">
@@ -38,9 +38,9 @@
                                         <div class="flex-row">
                                             <span class="text-start fs-5 fw-bold" th:text="${book.volumeInfo.title}"></span>
                                             <span class="text-start fs-5 fw-bold" th:if="${book.volumeInfo.publishedDate != null}">[
-                                                <span th:text="${book.volumeInfo.publishedDate}"></span>    
+                                                <span th:text="${book.volumeInfo.publishedDate}"></span>
                                             ]</span>
-                                            
+
                                         </div>
                                         <div class="flex-row">
                                             <span class="text-start fs-6 fst-italic" th:text="${book.volumeInfo.subtitle} ? ${book.volumeInfo.subtitle}"></span>
