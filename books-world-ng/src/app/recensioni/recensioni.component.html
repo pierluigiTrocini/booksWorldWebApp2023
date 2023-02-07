@@ -1,7 +1,7 @@
   <div *ngIf="media!=0 && media>=3">
     <h1><span style="color:darkgreen" class="fw-bold">{{media}}/5</span></h1>
     <div style="padding-bottom: 10px " class="text-center">
-      <div style="margin-top: 4px;">{{recensioni.length}} Recensioni totali </div>
+      <div class="fw-bold"style="margin-top: 4px;font-size:large;">{{recensioni.length}} Recensioni totali </div>
     </div>
   </div>
 
@@ -14,7 +14,7 @@
   <div *ngIf="media!=0 && media<3">
     <h1><span style="color:rgb(179, 38, 38)"class="fw-bold">{{media}}/5</span></h1>
     <div style="padding-bottom: 10px " class="text-center">
-      <div style="margin-top: 4px;">{{recensioni.length}} Recensioni totali </div>
+      <div class="fw-bold" style="margin-top: 4px;">{{recensioni.length}} Recensioni totali </div>
     </div>
   </div>
   
@@ -24,18 +24,16 @@
   
   <div *ngFor="let recensione of recensioni" class="container-fluid m-3 p-3">
     <div>
-      <div *ngIf=" utente.username === recensione.scrittaDa.username" class="float-sm-right">
-        <button class="btn btn-danger" (click)="eliminaRecensione(recensione.id)">Elimina la tua recensione</button>
-      </div>
+      
       <div>
-        <h4 *ngIf="utente.username!=undefined && utente.username === recensione.scrittaDa.username"><i class="fa fa-user" >Tu</i>  </h4>
-        <h4 *ngIf="utente.username==undefined || utente.username != recensione.scrittaDa.username"><i class="fa fa-user">{{recensione.scrittaDa.username}}</i>  </h4>
+        <h4 *ngIf="utente.username!=undefined && utente.username === recensione.scrittaDa.username" style="color: rgb(100, 98, 93);font-size: x-large;padding-bottom:4px;"><i class="fa fa-user fa-lg" ></i> Tu </h4>
+        <h4 *ngIf="utente.username==undefined || utente.username != recensione.scrittaDa.username" style="color:rgb(14, 96, 110);padding-bottom:4px;"><i class="fa fa-user fa-lg"></i> {{recensione.scrittaDa.username}} </h4>
       </div>
 
       <!--corpo recensione -->
 
 
-      <div style="margin-left: 10px;">
+      <div style="margin-left: 10px; width:88%">
   
         <span *ngIf="recensione.numeroStelle ==5"><i class="fa fa-star checked"></i><i class="fa fa-star checked"></i><i class="fa fa-star checked"></i><i class="fa fa-star checked"></i><i class="fa fa-star checked"></i></span>
         <span *ngIf="recensione.numeroStelle ==4"><i class="fa fa-star checked"></i><i class="fa fa-star checked"></i><i class="fa fa-star checked"></i><i class="fa fa-star checked"></i><i class="fa fa-star" style="color:rgb(84, 88, 110)"></i></span>
@@ -46,28 +44,31 @@
        <ng-container *ngIf="utente.username  &&  utente.username != recensione.scrittaDa.username && recensione.segnalabile; then showReport; else showNoReport"></ng-container> 
        <ng-template #showReport>
         <div>
-        <strong  class="titolo" style="margin-left: 5px;" >{{recensione.titolo}}</strong>
-        <button  class="btn btn-danger bottone-segnalazione" (click)="segnalaRecensione(recensione.id)"> Segnala </button>
+        <strong  class="titolo" style="margin-left: 3px; font-family:sans-serif;font-size: x-large;padding-right:30px;padding-bottom: 7px;" >{{recensione.titolo}}</strong>
+        <button  class="btn btn-warning bottone-segnalazione " style="background-color: rgb(183, 107, 0);color: aliceblue;"(click)="segnalaRecensione(recensione.id)"> Segnala </button>
         </div>
       </ng-template>
       <ng-template #showNoReport>
         <div>
-        <strong  class="titolo" style="margin-left: 5px;" >{{recensione.titolo}}</strong>
+        <strong  class="titolo" style="margin-left: 3px;font-family:sans-serif;font-size: x-large;padding-bottom: 7px;" >{{recensione.titolo}}</strong>
         </div>
       </ng-template>
 
 
         
-        <span><p class="testo">{{recensione.testo}}</p></span>
+        <span><p class="testo"style="margin-left:6px;font-family:sans-serif;">{{recensione.testo}}</p></span>
       </div>
 
-      <div *ngIf="utente.username!=undefined &&  utente.username != recensione.scrittaDa.username">
+      <div *ngIf="utente.username!=undefined &&  utente.username != recensione.scrittaDa.username" style="padding-right:10px;">
         
-        <button  style="margin-left:10px padding-right-4px ;display:inline-block "class="btn btn-success " (click)="IncrementaLike(recensione.id)">{{recensione.numeroMiPiace}} Mi Piace</button>
-        <button  class="btn btn-danger" (click)="IncrementaDislike(recensione.id)">{{recensione.numeroNonMiPiace}} Non Mi Piace</button>
+        <button    class="btn btn-success "style="margin-left:10px padding-right-30px" (click)="IncrementaLike(recensione.id)">{{recensione.numeroMiPiace}} Mi Piace</button>
+        <button  class="btn btn-danger"style="margin-left: 10px;" (click)="IncrementaDislike(recensione.id)">{{recensione.numeroNonMiPiace}} Non Mi Piace</button>
 
 
 
+      </div>
+      <div *ngIf=" utente.username === recensione.scrittaDa.username" class="float-sm-right">
+        <button class="btn btn-danger" (click)="eliminaRecensione(recensione.id)">Elimina la tua recensione</button>
       </div>
 
     </div>

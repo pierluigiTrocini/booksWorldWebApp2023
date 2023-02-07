@@ -1,7 +1,10 @@
 
 .fa-star{
     color: yellow;
-    text-shadow: 0 0 3px black;
+    text-shadow: 0 0 8px black;
+    padding-right: 5px;
+    height: 19px;
+    font-size:x-large;
  }
 
 .testo{
@@ -11,3 +14,12 @@
 .titolo{
     overflow-wrap: break-word;
 }
+
+.fa fa-user{font-size:xx-large;
+padding-right: 10px;}
+
+.bottone-segnalazione:hover{
+    background-color: rgb(228, 143, 40);
+    
+}
+

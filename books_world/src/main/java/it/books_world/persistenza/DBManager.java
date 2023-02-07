@@ -33,7 +33,7 @@ private static DBManager instance = null;
 	public Connection getConnection() {
 		if (conn == null) {
 			try {
-				conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/booksworld", "postgres", "massimo2001");
+				conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/", "postgres", "pasPOS99");
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
