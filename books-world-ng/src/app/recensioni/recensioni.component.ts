@@ -65,7 +65,10 @@ export class RecensioniComponent implements OnInit,OnChanges{
       if(result){
     this.recensioni.forEach(recensione=>{ if(recensione.id==id){recensione.numeroMiPiace++;}});
         //oppure recensioni lo cambio dal db
+        (document.getElementById("dislike-"+id) as HTMLButtonElement).disabled=true;
+        (document.getElementById("like-"+id) as HTMLButtonElement).disabled=true;
       }
+      
         
       })
   }
@@ -91,6 +94,10 @@ IncrementaDislike(id:BigInt):void{
   this.service.incrementaDislikes(id).subscribe(result => {
     if(result){
       this.recensioni.forEach(recensione=>{ if(recensione.id==id){recensione.numeroNonMiPiace++;}});
+      (document.getElementById("dislike-"+id) as HTMLButtonElement).disabled=true;
+      (document.getElementById("like-"+id) as HTMLButtonElement).disabled=true;
+
+
   
 
 }})
@@ -101,9 +108,12 @@ getMedia(): number{
 }
 
 segnalaRecensione(id:BigInt):void{
+  
   this.service.SegnalaRecensione(id).subscribe(result => {
     if(result){
       console.log("Segnalata");
+      (document.getElementById("segnala-"+id) as HTMLButtonElement).disabled=true;
+      
       
 
   }})
