@@ -11,7 +11,7 @@ export class VisualizzaBestsellerNytimesComponent implements OnInit {
 
   libri: NyBook[] = [];
 
-  private nytApiUrl: string = "https://api.nytimes.com/svc/books/v3/lists/current/hardcover-fiction.json?api-key=WQNAgwAdE6Ar7h4FPB5VB9bGs7ybf7Pe";
+  private nytApiUrl: string = "https://api.nytimes.com/svc/books/v3/lists/current/hardcover-fiction.json?api-key=";
 
   constructor(
     private api: ApiUtilsService
